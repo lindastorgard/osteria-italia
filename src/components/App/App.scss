@@ -1,5 +1,17 @@
+@import '../../sass/abstracts/mixins';
+@import '../../sass/abstracts/variables';
+@import '../../sass/base/reset';
+@import '../../sass/base/typography';
+@import '../../sass/componentsSass/buttons';
+@import '../../sass/layout/navigation';
+@import '../../sass/layout/footer';
+
 .App {
   text-align: center;
+}
+
+h1{
+  color: $base-color;
 }
 
 .App-logo {
