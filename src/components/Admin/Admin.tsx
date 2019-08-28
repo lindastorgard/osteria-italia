@@ -1,10 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 
-class Admin extends React.Component {
+type AdminState = {
+    bookings: any;
+}
+
+class Admin extends React.Component<{}, AdminState> {
+
+    state = {
+        bookings: []
+    };
 
     constructor(props: any) {
-        super(props)
+        super(props);
         this.getBookings();
     }
 
@@ -13,13 +21,23 @@ class Admin extends React.Component {
             .then(response => {
                     console.log('Got response from server');
                     console.log(response.data);
+                    this.setState({ bookings: response.data.data })
             })
             .catch(error => console.log(error));
-    }
+    };
+
+    listBookings = () => {
+        return this.state.bookings.map( (booking: any) => {
+        return <li>Reservation made by {booking.name} on {booking.date} for {booking.guest_nr} guests</li>
+        });
+    };
+
     render() {
         return (
             <div>
-                <p>Hello Admin World!</p>
+                <ul>
+                    {this.listBookings()}
+                </ul>
             </div>
         )
     }
