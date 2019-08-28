@@ -1,5 +1,6 @@
-import React from 'react';
-class Date extends React.Component {
+import React, { Component } from 'react';
+
+class Date extends Component <{}, {}> {
     render() {
         return (
             <div>

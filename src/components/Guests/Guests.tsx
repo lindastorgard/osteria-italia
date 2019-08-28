@@ -1,5 +1,6 @@
-import React from 'react';
-class Guests extends React.Component {
+import React, { Component } from 'react';
+
+class Guests extends Component <{},{}> {
     render() {
         return (
             <div>

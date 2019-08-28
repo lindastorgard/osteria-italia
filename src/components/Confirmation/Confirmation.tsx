@@ -1,5 +1,6 @@
-import React from 'react';
-class Confirmation extends React.Component {
+import React, { Component } from 'react';
+
+class Confirmation extends Component <{}, {}> {
     render() {
         return (
             <div>

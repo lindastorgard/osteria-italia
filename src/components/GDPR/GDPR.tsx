@@ -1,5 +1,6 @@
-import React from 'react';
-class GDPR extends React.Component {
+import React, { Component } from 'react';
+
+class GDPR extends Component <{}, {}>{
     render() {
         return (
             <div>
