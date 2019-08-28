@@ -17,7 +17,7 @@ class Admin extends React.Component<{}, AdminState> {
     }
 
     getBookings = () => {
-        axios.get('http://localhost:8888/api/bookings/read.php')
+        axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
             .then(response => {
                     console.log('Got response from server');
                     console.log(response.data);
