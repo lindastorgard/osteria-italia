@@ -1,0 +1,49 @@
+nav{
+  background-color: black;
+}
+
+.navbar{
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-brand{
+  align-self: center;
+}
+
+//Toggler
+
+.navbar-toggler{
+  width: 60px;
+  height: 45px;
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar-toggler span{
+  display: block;
+  position: absolute;
+  height: 3px;
+  background: white;
+  border-radius: 9px;
+  opacity: 1;
+  right: 0;
+}
+
+.navbar-toggler span:nth-child(1) {
+  top: 0px;
+  width: 40px;
+  margin-right: auto;
+}
+
+.navbar-toggler span:nth-child(2) {
+  top: 12px;
+  width: 30px;
+}
+
+.navbar-toggler span:nth-child(3) {
+  top: 24px;
+  width: 15px;
+}
+
+

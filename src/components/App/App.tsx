@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import './App.scss';
 import Nav from '../Nav/Nav';
 import Booking from '../Booking/Booking';
 import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/scss/bootstrap.scss';
+import './App.scss';
+
 class App extends Component<{}, {}> {
   constructor(props: any) {
     super(props);
