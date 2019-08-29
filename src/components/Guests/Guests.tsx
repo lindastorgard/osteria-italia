@@ -1,11 +1,42 @@
 import React, { Component } from 'react';
+import './Guests.scss';
 
-class Guests extends Component <{},{}> {
+export interface IAddGuestProps{
+    onClick: (event: any) => void,
+}
+
+class Guests extends React.Component <IAddGuestProps,{}> {
+    constructor(props:any){
+        super(props);
+        
+        this.handleInput = this.handleInput.bind(this);
+    }
+
+    handleInput = (event: any) => { 
+        this.props.onClick(event.target.value);
+    }
+
     render() {
+
         return (
-            <div>
-                <p>Hello Guests World!</p>
-            </div>
+            <main className="pageContainer">
+                <div className="parent">
+                <h1>Select guests</h1>
+                <section className="child">
+                    <button onClick={this.handleInput} className="guestbox" value="1">1</button>
+                    <button onClick={this.handleInput} className="guestbox" value="2">2</button>
+                    <button onClick={this.handleInput} className="guestbox" value="3">3</button>
+                    <button onClick={this.handleInput} className="guestbox" value="4">4</button>
+                    <button onClick={this.handleInput} className="guestbox" value="5">5</button>
+                    <button onClick={this.handleInput} className="guestbox" value="6">6</button>
+                    <button onClick={this.handleInput} className="guestbox" value="7">7</button>
+                    <button onClick={this.handleInput} className="guestbox" value="8">8</button>
+                    <button onClick={this.handleInput} className="guestbox" value="9">9</button>
+                    <button onClick={this.handleInput} className="guestbox" value="10">10</button>    
+                </section>
+                <p>Donut chocolate cake I love jelly marzipan gummi bears I love ice cream. Chocolate cake pie toffee chocolate cake topping candy canes apple pie. I love pie powder.</p>
+                </div>
+            </main>
         )
     }
 }
