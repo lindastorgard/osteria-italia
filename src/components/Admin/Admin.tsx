@@ -26,9 +26,27 @@ class Admin extends React.Component<{}, AdminState> {
             .catch(error => console.log(error));
     };
 
+    deleteBooking = (id: number) => {
+        console.log('Removing booking with id ' + id)
+        axios.delete('http://localhost:8888/booking_api/api/bookings/deleteBooking.php', {
+           "data": {
+               "id": id
+           }
+        })
+            .then(response => {
+                window.location.reload();
+                console.log(response.data);
+            })
+            .catch(error => console.error('Something went wrong'))
+    }
+
     listBookings = () => {
         return this.state.bookings.map( (booking: any) => {
-        return <li>Reservation made by {booking.name} on {booking.date} for {booking.guest_nr} guests</li>
+        return (
+            <li key={"booking_" + booking.id }>Reservation made by {booking.name} on {booking.date} for {booking.guest_nr} guests
+                <button onClick={(event) => this.deleteBooking(booking.id)}>X</button>
+            </li>
+        )
         });
     };
 
