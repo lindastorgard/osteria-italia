@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import Profile from '../Profile/Profile'
 import Guests from '../Guests/Guests'
+import Time from '../Time/Time';
 // import Date from '../Date/Date'
-// import Time from '../Time/Time'
 // import Summary from '../Summary/Summary'
 // import Confirmation from '../Confirmation/Confirmation';
 
@@ -58,6 +58,7 @@ class Booking extends Component <{}, IBookingState> {
               return(
                   <div>
                       <Guests onclick={this.updateState} theBooking={this.state.booking}/>
+                      <Time onclick={this.updateState} theBooking={this.state.booking}/>
                   </div>
               )
     //       case 2:

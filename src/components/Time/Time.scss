@@ -1,0 +1,45 @@
+.timePageContainer{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+h1{
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+}
+
+.timeParent{
+    width: 305px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 1em;
+    padding-left: 1em;
+    // border: 1px solid green;
+
+    .timeChild{
+        display: flex;
+        width: 303px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        
+    
+        .timebox{
+            display: flex;
+            width: 54px;
+            height: 54px;
+            border: 0.5px solid lightgrey;
+            justify-content: center;
+            background-color: white;
+            margin: 5px;
+
+            .timeboxNumber{
+                align-self: center;
+            }
+        }
+    }
+
+    p{
+        padding-top: 2em;
+    }
+}
