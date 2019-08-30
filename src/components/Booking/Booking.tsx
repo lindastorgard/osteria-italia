@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Profile from '../Profile/Profile'
+import Profile from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 // import Date from '../Date/Date'
@@ -10,7 +10,8 @@ export interface IBooking{
     // step: string,
     guests: number,
     date: string,
-    time: string
+    time: string,
+    profile: string
 }
 
 interface IBookingState {
@@ -32,7 +33,8 @@ class Booking extends Component <{}, IBookingState> {
             booking: {
                 guests: 0,
                 date: '',
-                time: ''
+                time: '',
+                profile: ''
             }
             
         };
@@ -59,6 +61,7 @@ class Booking extends Component <{}, IBookingState> {
                   <div>
                       <Guests onclick={this.updateState} theBooking={this.state.booking}/>
                       <Time onclick={this.updateState} theBooking={this.state.booking}/>
+                      <Profile onchange={this.updateState} theBooking={this.state.booking}/>
                   </div>
               )
     //       case 2:
