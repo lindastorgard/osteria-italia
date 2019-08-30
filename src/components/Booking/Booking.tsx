@@ -8,13 +8,17 @@ import Guests from '../Guests/Guests'
 
 export interface IBooking{
     // step: string,
-    guests: string,
+    guests: number,
     date: string,
     time: string
 }
 
 interface IBookingState {
-    booking: IBooking[];
+    
+    booking: IBooking;
+    // showDate: boolean;
+    // showTime: boolean;
+    // showDetails: boolean;
 }
 
 class Booking extends Component <{}, IBookingState> {
@@ -24,9 +28,13 @@ class Booking extends Component <{}, IBookingState> {
 
         // set booking state
         this.state = { 
-            booking: [
-                { guests: '', date: '', time: ''}
-            ]
+            
+            booking: {
+                guests: 0,
+                date: '',
+                time: ''
+            }
+            
         };
         this.updateState = this.updateState.bind(this);
         // this.nextStep = this.nextStep.bind(this);
@@ -35,10 +43,10 @@ class Booking extends Component <{}, IBookingState> {
 
 
     // Handle fields chenge
-    updateState (newGuest: string) {
+    updateState(updatedBooking: IBooking) {
         this.setState({
-            booking:[...this.state.booking, { guests: newGuest, date: '', time: ''}]
-    });
+            booking: updatedBooking
+        });
     }
 
   
@@ -49,7 +57,7 @@ class Booking extends Component <{}, IBookingState> {
     //       case 1:
               return(
                   <div>
-                      <Guests onClick={this.updateState}/>
+                      <Guests onclick={this.updateState} theBooking={this.state.booking}/>
                   </div>
               )
     //       case 2:
