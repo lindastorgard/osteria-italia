@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Profile from '../Profile/Profile'
+import Profile, { IAddProfileState } from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
+import { any } from 'prop-types';
 // import Date from '../Date/Date'
 // import Summary from '../Summary/Summary'
 // import Confirmation from '../Confirmation/Confirmation';
@@ -11,7 +12,7 @@ export interface IBooking{
     guests: number,
     date: string,
     time: string,
-    profile: string
+    profile: IAddProfileState
 }
 
 interface IBookingState {
@@ -28,13 +29,19 @@ class Booking extends Component <{}, IBookingState> {
         super(props);
 
         // set booking state
+
         this.state = { 
             
             booking: {
                 guests: 0,
                 date: '',
                 time: '',
-                profile: ''
+                profile: {
+                    firstName:'',
+                    lastName: '',
+                    email: '',
+                    phone: ''
+                }
             }
             
         };
@@ -61,7 +68,7 @@ class Booking extends Component <{}, IBookingState> {
                   <div>
                       <Guests onclick={this.updateState} theBooking={this.state.booking}/>
                       <Time onclick={this.updateState} theBooking={this.state.booking}/>
-                      <Profile onchange={this.updateState} theBooking={this.state.booking}/>
+                      <Profile onsubmit={this.updateState} theBooking={this.state.booking}/>
                   </div>
               )
     //       case 2:
