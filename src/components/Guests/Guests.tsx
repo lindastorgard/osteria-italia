@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './Guests.scss';
+import { IBooking } from '../Booking/Booking';
 
 export interface IAddGuestProps{
-    onClick: (event: any) => void,
+    theBooking: IBooking;
+    onclick(updatedBooking: IBooking): void,
 }
 
 class Guests extends React.Component <IAddGuestProps,{}> {
@@ -13,7 +15,10 @@ class Guests extends React.Component <IAddGuestProps,{}> {
     }
 
     handleInput = (event: any) => { 
-        this.props.onClick(event.target.value);
+        let booking = this.props.theBooking;
+        booking.guests = event.target.value;
+
+        this.props.onclick(booking);
     }
 
     render() {
