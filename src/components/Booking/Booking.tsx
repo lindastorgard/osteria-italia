@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 // import Date from '../Date/Date'
-// import Time from '../Time/Time'
 // import Summary from '../Summary/Summary'
 // import Confirmation from '../Confirmation/Confirmation';
 
