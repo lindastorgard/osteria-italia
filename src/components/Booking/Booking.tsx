@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
-import Guests from '../Guests/Guests'
-import Time from '../Time/Time';
+
 import { bool } from 'prop-types';
 import Date from '../Date/Date'
-import Profile from '../Profile/Profile'
 import Summary from '../Summary/Summary'
 import Confirmation from '../Confirmation/Confirmation';
+import Profile, { IAddProfileState } from '../Profile/Profile'
+import Guests from '../Guests/Guests'
+import Time from '../Time/Time';
+import { any } from 'prop-types';
+
 
 export interface IBooking{
     view: number,
     guests: number,
     date: string,
     time: string,
+
+    profile: IAddProfileState
+
 }
 
 interface IBookingState {
@@ -25,13 +31,20 @@ class Booking extends Component <{}, IBookingState> {
         super(props);
 
         // set booking state
+
         this.state = { 
             
             booking: {
                 view: 1,
                 guests: 0,
                 date: '',
-                time: ''
+                time: '',
+                profile: {
+                    firstName:'',
+                    lastName: '',
+                    email: '',
+                    phone: ''
+                }
             }
             
         };
@@ -93,21 +106,6 @@ class Booking extends Component <{}, IBookingState> {
                 )
 
     }
-    
-      
-            //   return(
-            //       <div>
-            //            {this.state.booking.view};
-            //           <Guests onclick={this.updateState} theBooking={this.state.booking}/>
-            //           <Time onclick={this.updateState} theBooking={this.state.booking}/>
-            //       </div>
-            //   )
-    //       case 2:
-    //           return(
-    //               <h1>Date</h1>
-    //             //   <Date/>
-    //           )
-    //   }
   }
 }
 export default Booking;
