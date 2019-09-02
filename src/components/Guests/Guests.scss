@@ -1,7 +1,8 @@
 .pageContainer{
     display: flex;
     width: 100%;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     // border: 1px solid black;
 }
 
@@ -17,6 +18,10 @@ h1{
     padding-right: 1em;
     padding-left: 1em;
     // border: 1px solid green;
+
+    p{
+        padding-top: 2em;
+    }
 
     .child{
         display: flex;
@@ -37,9 +42,29 @@ h1{
             }
         }
     }
+}
 
-    p{
-        padding-top: 2em;
+.parentTopSection{
+    width: 305px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3rem 1rem 1em 1em;
+    // border: 1px solid green;
+
+    .childTopSection{
+        display: flex;
+        width: 303px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 0.5px solid lightgray;
+        // border: 1px solid green;
+
+        .topSection{
+            display: flex;
+            color: burlywood;
+        }
     }
 }
+
 

@@ -17,6 +17,7 @@ class Time extends React.Component <IAddTimeProps,{}> {
     handleInput = (event: any) => { 
         let booking = this.props.theBooking;
         booking.time = event.target.value;
+        booking.view = this.props.theBooking.view + 1;
 
         this.props.onclick(booking);
     }
@@ -25,6 +26,22 @@ class Time extends React.Component <IAddTimeProps,{}> {
 
         return (
             <main className="timePageContainer">
+                <div className="timeParentTopSection">
+                    <section>
+                        <div className="timeChildTopSection">
+                            <p className="timeTopSection">Guests</p>
+                            <p className="timeTopSection">{this.props.theBooking.guests}</p>
+                        </div>
+                        <div className="timeChildTopSection">
+                            <p className="timeTopSection">Date</p>
+                            <p className="timeTopSection">{this.props.theBooking.date}</p>
+                        </div>
+                        <div className="timeChildTopSection">
+                            <p className="timeTopSection">Time</p>
+                            <p className="timeTopSection">{this.props.theBooking.time}</p>
+                        </div>
+                    </section>
+                </div>
                 <div className="timeParent">
                 <h1>Select time</h1>
                 <section className="timeChild">
