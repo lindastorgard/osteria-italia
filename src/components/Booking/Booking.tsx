@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
-// import Profile from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
-// import Date from '../Date/Date'
-// import Summary from '../Summary/Summary'
-// import Confirmation from '../Confirmation/Confirmation';
+import { bool } from 'prop-types';
+import Date from '../Date/Date'
+import Profile from '../Profile/Profile'
+import Summary from '../Summary/Summary'
+import Confirmation from '../Confirmation/Confirmation';
 
 export interface IBooking{
-    // step: string,
+    view: number,
     guests: number,
     date: string,
-    time: string
+    time: string,
 }
 
 interface IBookingState {
     
     booking: IBooking;
-    // showDate: boolean;
-    // showTime: boolean;
-    // showDetails: boolean;
 }
 
 class Booking extends Component <{}, IBookingState> {
@@ -30,6 +28,7 @@ class Booking extends Component <{}, IBookingState> {
         this.state = { 
             
             booking: {
+                view: 1,
                 guests: 0,
                 date: '',
                 time: ''
@@ -37,8 +36,7 @@ class Booking extends Component <{}, IBookingState> {
             
         };
         this.updateState = this.updateState.bind(this);
-        // this.nextStep = this.nextStep.bind(this);
-        // this.previousStep = this.previousStep.bind(this);
+
     }
 
 
@@ -49,18 +47,61 @@ class Booking extends Component <{}, IBookingState> {
         });
     }
 
-  
+   
 
   render() {
+   
+    switch(this.state.booking.view){
+        case 1:
+                return(
+                    <div>
+                         {/* {this.state.booking.view}; */}
+                        <Guests onclick={this.updateState} theBooking={this.state.booking}/>
+                    </div>
+                )
+        
+        // case 2:
+        //         return(
+        //             <div>
+        //                 <Date/>
+        //                 {/* <Date onclick={this.updateState} theBooking={this.state.booking}/> */}
+        //             </div>
+        //         )
+
+        case 2:
+                return(
+                    <div>
+                        <Time onclick={this.updateState} theBooking={this.state.booking}/>
+                    </div>
+                )
+        
+        case 3:
+                return(
+                    <div>
+                        <Profile/>
+
+                        {/* <Profile onclick={this.updateState} theBooking={this.state.booking}/> */}
+                    </div>
+                )
+        
+        case 5:
+                return(
+                    <div>
+                        <Summary/>
+                        {/* <Summary onclick={this.updateState} theBooking={this.state.booking}/> */}
+                    </div>
+                )
+
+    }
     
-    //   switch(step){
-    //       case 1:
-              return(
-                  <div>
-                      <Guests onclick={this.updateState} theBooking={this.state.booking}/>
-                      <Time onclick={this.updateState} theBooking={this.state.booking}/>
-                  </div>
-              )
+      
+            //   return(
+            //       <div>
+            //            {this.state.booking.view};
+            //           <Guests onclick={this.updateState} theBooking={this.state.booking}/>
+            //           <Time onclick={this.updateState} theBooking={this.state.booking}/>
+            //       </div>
+            //   )
     //       case 2:
     //           return(
     //               <h1>Date</h1>
