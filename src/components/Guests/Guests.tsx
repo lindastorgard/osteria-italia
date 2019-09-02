@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Guests.scss';
-import { IBooking } from '../Booking/Booking';
+import Booking, { IBooking } from '../Booking/Booking';
 
 export interface IAddGuestProps{
     theBooking: IBooking;
@@ -17,6 +17,7 @@ class Guests extends React.Component <IAddGuestProps,{}> {
     handleInput = (event: any) => { 
         let booking = this.props.theBooking;
         booking.guests = event.target.value;
+        booking.view = this.props.theBooking.view + 1;
 
         this.props.onclick(booking);
     }
@@ -25,6 +26,12 @@ class Guests extends React.Component <IAddGuestProps,{}> {
 
         return (
             <main className="pageContainer">
+                <div className="parentTopSection">
+                <section className="childTopSection">
+                    <p className="topSection">Guests</p>
+                    <p className="topSection">{this.props.theBooking.guests}</p>
+                </section>
+                </div>
                 <div className="parent">
                 <h1>Select guests</h1>
                 <section className="child">
