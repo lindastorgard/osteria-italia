@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import { bool } from 'prop-types';
-import Date from '../Date/Date'
-import Summary from '../Summary/Summary'
+import Calender from '../Calender/Calender';
+import Summary from '../Summary/Summary';
 import Confirmation from '../Confirmation/Confirmation';
 import Profile, { IAddProfileState } from '../Profile/Profile'
 import Guests from '../Guests/Guests'
@@ -13,7 +13,7 @@ import { any } from 'prop-types';
 export interface IBooking{
     view: number,
     guests: number,
-    date: string,
+    date: Date,
     time: string,
     profile: IAddProfileState
 }
@@ -34,7 +34,7 @@ class Booking extends Component <{}, IBookingState> {
             booking: {
                 view: 1,
                 guests: 0,
-                date: '',
+                date: new Date(),
                 time: '',
                 profile: {
                     firstName:'',
@@ -65,13 +65,12 @@ class Booking extends Component <{}, IBookingState> {
                     </div>
                 )
         
-        // case 2:
-        //         return(
-        //             <div>
-        //                 <Date/>
-        //                 {/* <Date onclick={this.updateState} theBooking={this.state.booking}/> */}
-        //             </div>
-        //         )
+        case 2:
+                return(
+                    <div>
+                        <Calender onDayClick={this.updateState} theBooking={this.state.booking}/> 
+                    </div>
+                )
 
         case 2:
                 return(
