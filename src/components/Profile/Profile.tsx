@@ -26,6 +26,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         event.preventDefault();
         let booking = this.props.theBooking;
         booking.profile = this.state;
+        booking.view = this.props.theBooking.view + 1;
 
         this.props.onsubmit(booking);
     }
@@ -44,6 +45,25 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
         return (
             <main className="profilePageContainer">
+                 <div className="profileParentTopSection">
+                    <section>
+                    <div className="profileChildTopSection">
+                            <button className="profileTopSection" onClick={this.handleInput} value="1">Guests</button>
+                            <button className="profileTopSection">{this.props.theBooking.guests}</button>
+                        </div>
+
+                        {/* Open for date when ready - change all values!!!! */}
+                        {/* <div className="timeChildTopSection">
+                        <button className="timeTopSection" onClick={this.handleInput} value="2">Date</button>
+                            <button className="timeTopSection">{this.props.theBooking.date}</button>
+                        </div> */}
+
+                        <div className="profileChildTopSection">
+                        <button className="profileTopSection" onClick={this.handleInput} value="2">Time</button>
+                            <button className="profileTopSection">{this.props.theBooking.time}</button>
+                        </div>
+                    </section>
+                </div>
                 <div className="profileParent">
                 <h1>Your details</h1>
                 <form onSubmit={this.handleInput} className="profileChild">
