@@ -28,17 +28,20 @@ class Time extends React.Component <IAddTimeProps,{}> {
             <main className="timePageContainer">
                 <div className="timeParentTopSection">
                     <section>
-                        <div className="timeChildTopSection">
-                            <p className="timeTopSection">Guests</p>
-                            <p className="timeTopSection">{this.props.theBooking.guests}</p>
+                    <div className="timeChildTopSection">
+                            <button className="timeTopSection" onClick={this.handleInput} value="1">Guests</button>
+                            <button className="timeTopSection">{this.props.theBooking.guests}</button>
                         </div>
+
+                        {/* Open for date when ready - change all values!!!! */}
+                        {/* <div className="timeChildTopSection">
+                        <button className="timeTopSection" onClick={this.handleInput} value="2">Date</button>
+                            <button className="timeTopSection">{this.props.theBooking.date}</button>
+                        </div> */}
+
                         <div className="timeChildTopSection">
-                            <p className="timeTopSection">Date</p>
-                            <p className="timeTopSection">{this.props.theBooking.date}</p>
-                        </div>
-                        <div className="timeChildTopSection">
-                            <p className="timeTopSection">Time</p>
-                            <p className="timeTopSection">{this.props.theBooking.time}</p>
+                        <button className="timeTopSection" onClick={this.handleInput} value="2">Time</button>
+                            <button className="timeTopSection">{this.props.theBooking.time}</button>
                         </div>
                     </section>
                 </div>

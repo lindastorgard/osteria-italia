@@ -15,9 +15,7 @@ export interface IBooking{
     guests: number,
     date: string,
     time: string,
-
     profile: IAddProfileState
-
 }
 
 interface IBookingState {
@@ -31,7 +29,6 @@ class Booking extends Component <{}, IBookingState> {
         super(props);
 
         // set booking state
-
         this.state = { 
             
             booking: {
@@ -52,7 +49,6 @@ class Booking extends Component <{}, IBookingState> {
 
     }
 
-
     // Handle fields chenge
     updateState(updatedBooking: IBooking) {
         this.setState({
@@ -60,15 +56,11 @@ class Booking extends Component <{}, IBookingState> {
         });
     }
 
-   
-
   render() {
-   
     switch(this.state.booking.view){
         case 1:
                 return(
                     <div>
-                         {/* {this.state.booking.view}; */}
                         <Guests onclick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
@@ -95,11 +87,10 @@ class Booking extends Component <{}, IBookingState> {
                     </div>
                 )
         
-        case 5:
+        case 4:
                 return(
                     <div>
-                        <Summary/>
-                        {/* <Summary onclick={this.updateState} theBooking={this.state.booking}/> */}
+                        <Summary onclick={this.updateState} theBooking={this.state.booking}/>  
                     </div>
                 )
 
