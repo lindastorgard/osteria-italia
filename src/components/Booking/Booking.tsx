@@ -19,7 +19,7 @@ export interface IBooking{
 }
 
 interface IBookingState {
-    
+
     booking: IBooking;
 }
 
@@ -29,8 +29,8 @@ class Booking extends Component <{}, IBookingState> {
         super(props);
 
         // set booking state
-        this.state = { 
-            
+        this.state = {
+
             booking: {
                 view: 1,
                 guests: 0,
@@ -43,7 +43,7 @@ class Booking extends Component <{}, IBookingState> {
                     phone: ''
                 }
             }
-            
+
         };
         this.updateState = this.updateState.bind(this);
 
@@ -64,32 +64,32 @@ class Booking extends Component <{}, IBookingState> {
                         <Guests onclick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
-        
+
         case 2:
                 return(
                     <div>
-                        <Calender onDayClick={this.updateState} theBooking={this.state.booking}/> 
+                        <Calender onDayClick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
 
-        case 2:
+        case 3:
                 return(
                     <div>
                         <Time onclick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
-        
-        case 3:
+
+        case 4:
                 return(
                     <div>
                         <Profile onsubmit={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
-        
-        case 4:
+
+        case 5:
                 return(
                     <div>
-                        <Summary onclick={this.updateState} theBooking={this.state.booking}/>  
+                        <Summary onclick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
 
