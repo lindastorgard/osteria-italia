@@ -15,13 +15,13 @@ class Summary extends React.Component <ISummaryProps, {}>{
         this.handleInput = this.handleInput.bind(this);
     }
 
-    handleInput = (event: any) => { 
+    handleInput = (event: any) => {
         let booking = this.props.theBooking;
         booking.view = parseInt(event.target.value);
-        
+
         this.props.onclick(booking);
     }
-    
+
     render() {
         return (
                 <main className="timePageContainer">
@@ -33,18 +33,17 @@ class Summary extends React.Component <ISummaryProps, {}>{
                             <button className="timeTopSection">{this.props.theBooking.guests}</button>
                         </div>
 
-                        {/* Open for date when ready - change all values!!!! */}
-                        {/* <div className="timeChildTopSection">
+                        <div className="timeChildTopSection">
                         <button className="timeTopSection" onClick={this.handleInput} value="2">Date</button>
-                            <button className="timeTopSection">{this.props.theBooking.date}</button>
-                        </div> */}
+                            <button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
+                        </div>
 
                         <div className="timeChildTopSection">
-                        <button className="timeTopSection" onClick={this.handleInput} value="2">Time</button>
+                        <button className="timeTopSection" onClick={this.handleInput} value="3">Time</button>
                             <button className="timeTopSection">{this.props.theBooking.time}</button>
                         </div>
                         <div className="timeChildTopSection">
-                        <button className="timeTopSection" onClick={this.handleInput} value="3">Profile</button>
+                        <button className="timeTopSection" onClick={this.handleInput} value="4">Profile</button>
                             <p className="timeTopSection">{this.props.theBooking.profile.firstName}</p>
                             <p className="timeTopSection">{this.props.theBooking.profile.lastName}</p>
                             <p className="timeTopSection">{this.props.theBooking.profile.email}</p>
