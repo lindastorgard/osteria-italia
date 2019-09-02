@@ -13,7 +13,7 @@ export interface ICalenderState{
 interface ICalenderProps{
   theBooking: IBooking,
   onDayClick(updatedBooking: IBooking): void;
-  // selectedDay: any 
+  // selectedDay: any
 }
 
 class Calender extends React.Component <ICalenderProps, ICalenderState> {
@@ -22,11 +22,11 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.handleDayClick = this.handleDayClick.bind(this);
   }
 
-  
-  handleDayClick = (event: any) => { 
+
+  handleDayClick = (day: Date) => {
     let booking = this.props.theBooking;
-    console.log(event.target.value);
-    booking.date = event.target.value;
+    console.log('Selected day: ' + day.toLocaleDateString());
+    booking.date = day;
     booking.view = this.props.theBooking.view + 1;
 
     this.props.onDayClick(booking);
