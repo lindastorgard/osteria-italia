@@ -1,7 +1,8 @@
 .timePageContainer{
     display: flex;
     width: 100%;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1{
@@ -16,6 +17,10 @@ h1{
     padding-right: 1em;
     padding-left: 1em;
     // border: 1px solid green;
+
+    p{
+        padding-top: 2em;
+    }
 
     .timeChild{
         display: flex;
@@ -38,8 +43,27 @@ h1{
             }
         }
     }
+}
 
-    p{
-        padding-top: 2em;
+.timeParentTopSection{
+    width: 305px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3rem 1rem 1em 1em;
+    // border: 1px solid green;
+
+    .timeChildTopSection{
+        display: flex;
+        width: 303px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 0.5px solid lightgray;
+        // border: 1px solid green;
+
+        .timeTopSection{
+            display: flex;
+            color: burlywood;
+        }
     }
 }
