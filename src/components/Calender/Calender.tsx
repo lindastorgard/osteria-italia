@@ -7,34 +7,90 @@ import './Calender.scss';
 
 const axios = require ('axios');
 
+export interface IExistingBoooking{
+  id: number,
+  customer_id: number,
+  guest_nr: number,
+  date: Date
+}
+
 
 export interface ICalenderState{
+  disabledDays: [],
+  existingBookings: IExistingBoooking[],
+  // occupiedTables: number
   
 }
 
 interface ICalenderProps{
   theBooking: IBooking,
   onDayClick(updatedBooking: IBooking): void;
-  // selectedDay: any
 }
 
 class Calender extends React.Component <ICalenderProps, ICalenderState> {
   constructor(props: any) {
     super(props);
+    this.state = {
+      existingBookings : [],
+      disabledDays: [],
+      // occupiedTables: 0
+    }
+
     this.handleDayClick = this.handleDayClick.bind(this);
+    this.getData = this.getData.bind(this);
+    this.fetchBookedTables = this.fetchBookedTables.bind(this);
+
   }
 
+    //Have to get nr of tables occupied selected date
+  //loop through bookings, and if nr of guests is bigger than 6, add 2 tables
+  //if time is 18:00, add number to earlyEvening array
+  //if time is 21:00, add number to lateEvening array
+  //if nr of tabels is > 15 in early evening && nr of tabels is > 15 in late evening
+  // than set state of the day to disabled
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData(){
+    axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
+      .then((response:any) => {
+        this.setState({
+          existingBookings: response.data.data 
+        })
+      console.log(this.state.existingBookings);
+      this.fetchBookedTables();
+    })
+  }
+
+  fetchBookedTables(){
+    let occupiedTables = 0;
+    this.state.existingBookings.map(currentBooking => {
+      if(currentBooking.guest_nr > 6){
+        let tablesPerBooking = 2; 
+        occupiedTables += tablesPerBooking;
+      } else if (currentBooking.guest_nr < 6) {
+        let tablesPerBooking = 1; 
+        occupiedTables += tablesPerBooking;
+      }
+    })  
+    console.log("nr of occupied tables is" + occupiedTables);  
+    return occupiedTables;
+    
+  }
+    
 
   handleDayClick = (day: Date) => {
     let booking = this.props.theBooking;
     console.log('Selected day: ' + day.toLocaleDateString());
     booking.date = day;
     booking.view = this.props.theBooking.view + 1;
-
     this.props.onDayClick(booking);
 }
 
   render() {
+
     return (
       <div className="page-container">
         <section>
@@ -47,7 +103,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         <DayPicker
           onDayClick={this.handleDayClick}
         />
-        <p>Please select the date</p>
       </div>
 
       
