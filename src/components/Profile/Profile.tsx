@@ -45,8 +45,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
         return (
             <main className="profilePageContainer">
-                 <div className="profileParentTopSection">
-                    <section>
+                 <section className="profileParentTopSection">
                     <div className="profileChildTopSection">
                             <button className="profileTopSection" onClick={this.handleInput} value="1">Guests</button>
                             <button className="profileTopSection">{this.props.theBooking.guests}</button>
@@ -62,8 +61,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
                         <button className="profileTopSection" onClick={this.handleInput} value="2">Time</button>
                             <button className="profileTopSection">{this.props.theBooking.time}</button>
                         </div>
-                    </section>
-                </div>
+                </section>
                 <div className="profileParent">
                 <h1>Your details</h1>
                 <form onSubmit={this.handleInput} className="profileChild">
