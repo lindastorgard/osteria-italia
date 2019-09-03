@@ -1,6 +1,7 @@
 import React from 'react';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import moment from 'moment/moment.js' 
 
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
@@ -64,20 +65,53 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     })
   }
 
+  // fetchBookedTables(){
+  //   let occupiedTables = 0;
+  //   this.state.existingBookings.map(currentBooking => {
+  //     let time = moment(currentBooking.date).format('hh:mm');
+  //     if(currentBooking.guest_nr > 6){
+
+  //       if(time == '06:00'){
+  //         console.log('early booking');
+  //       }
+  //       let tablesPerBooking = 2; 
+  //       occupiedTables += tablesPerBooking;
+  //     } else if (currentBooking.guest_nr < 6) {
+  //       console.log("time is " + time);
+  //       let tablesPerBooking = 1; 
+  //       occupiedTables += tablesPerBooking;
+  //     }
+  //   })  
+  //   console.log("nr of occupied tables is" + occupiedTables);  
+  //   return occupiedTables;
+    
+  // }
+
   fetchBookedTables(){
-    let occupiedTables = 0;
+    let earlyOccupiedTables = 0;
+    let lateOccupiedTables = 0;
     this.state.existingBookings.map(currentBooking => {
-      if(currentBooking.guest_nr > 6){
-        let tablesPerBooking = 2; 
-        occupiedTables += tablesPerBooking;
-      } else if (currentBooking.guest_nr < 6) {
-        let tablesPerBooking = 1; 
-        occupiedTables += tablesPerBooking;
+      let time = moment(currentBooking.date).format('hh:mm');
+      if(time == '06:00'){
+        if(currentBooking.guest_nr > 6){
+          let tablesPerBooking = 2; 
+          earlyOccupiedTables += tablesPerBooking;
+        } else{
+          let tablesPerBooking = 1;
+          earlyOccupiedTables += tablesPerBooking;
+        }      
+      } else if (time == '09:00'){
+        if(currentBooking.guest_nr > 6){
+          let tablesPerBooking = 2; 
+          lateOccupiedTables += tablesPerBooking;
+        } else{
+          let tablesPerBooking = 1;
+          lateOccupiedTables += tablesPerBooking;
+        }    
       }
     })  
-    console.log("nr of occupied tables is" + occupiedTables);  
-    return occupiedTables;
-    
+    console.log("nr of occupied tables at 6 pm are " + earlyOccupiedTables);  
+    console.log("nr of occupied tables at 9 pm are " + lateOccupiedTables);   
   }
     
 
