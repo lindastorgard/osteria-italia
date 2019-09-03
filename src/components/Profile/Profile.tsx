@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './Profile.scss';
 import { IBooking } from '../Booking/Booking';
 
+
 export interface IAddProfileState{
     firstName: string;
     lastName: string;
@@ -20,6 +21,7 @@ export interface IAddProfileProps{
 }
 
 class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
+    
     constructor(props:any){
         super(props);
         
@@ -28,16 +30,22 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
     }
 
     handleInput = (event: any) => { 
+        const isValid = this.validate();
         event.preventDefault();
         let booking = this.props.theBooking;
         booking.profile = this.state;
-        
-        const isValid = this.validate();
         if (isValid) {
-        console.log(this.props.theBooking.profile)
-        }  
-
+            console.log(this.props.theBooking.profile)
+            //clear form
+            this.setState({firstNameError: ''})
+            this.setState({lastNameError: ''})
+            this.setState({emailError: ''})
+            this.setState({phoneError: ''})
+            } 
         this.props.onsubmit(booking);
+
+        
+
     };
 
     handleInputChange(event:any) {
@@ -45,23 +53,37 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         const value = target.value;
         const name = target.name;
         
+        
+
         this.setState({
           [name]: value
         } as any);
       }
 
       validate = () => {
-        // let firstNameError = '';
-        // let lastNameError = '';
+        let firstNameError = '';
+        let lastNameError = '';
         let emailError = '';
-        // let phoneError = '';
+        let phoneError = '';
 
-        if (!this.props.theBooking.profile.email.includes('@')) {
+        if (this.props.theBooking.profile.firstName.length < 2 ) {
+            firstNameError = 'Must be 2 letters or more';
+        }
+
+        if (this.props.theBooking.profile.lastName.length < 2 ) {
+            lastNameError = 'Must be 2 letters or more';
+        }
+
+        if (!this.props.theBooking.profile.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
             emailError = 'Invalid Email';
         }
 
-        if (emailError) {
-            this.setState({ emailError });
+        if (this.props.theBooking.profile.phone.length < 5) {
+            phoneError = 'Phonenumber is to short';
+        } 
+
+        if (firstNameError || lastNameError || emailError || phoneError) {
+            this.setState({ firstNameError, lastNameError, emailError, phoneError });
             return false;
         }
 
@@ -127,7 +149,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
                     className="profilebox" 
                     type="name" 
                     placeholder="Firstname" 
-                    onChange={this.handleInputChange}/>
+                    onChange={this.handleInputChange}></input>
                     <div className="errorMessage">{this.props.theBooking.profile.firstNameError}</div>
                     <input 
                     name="lastName" 
