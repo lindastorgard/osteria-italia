@@ -64,7 +64,8 @@ class Booking extends Component <{}, IBookingState> {
                         <Guests onclick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
-        
+
+        // Open when date is done
         // case 2:
         //         return(
         //             <div>

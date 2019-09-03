@@ -26,13 +26,12 @@ class Guests extends React.Component <IAddGuestProps,{}> {
 
         return (
             <main className="pageContainer">
-                {this.props.theBooking.guests}
-                <div className="parentTopSection">
-                <section className="childTopSection">
-                    <p className="topSection">Guests</p>
-                    <p className="topSection">{this.props.theBooking.guests}</p>
+                <section className="parentTopSection">
+                    <div className="childTopSection">
+                        <button className="topSection">Guests</button>
+                        <button className="topSection">{this.props.theBooking.guests}</button>
+                    </div>
                 </section>
-                </div>
                 <div className="parent">
                 <h1>Select guests</h1>
                 <section className="child">

@@ -26,8 +26,7 @@ class Time extends React.Component <IAddTimeProps,{}> {
 
         return (
             <main className="timePageContainer">
-                <div className="timeParentTopSection">
-                    <section>
+                <section className="timeParentTopSection">
                     <div className="timeChildTopSection">
                             <button className="timeTopSection" onClick={this.handleInput} value="1">Guests</button>
                             <button className="timeTopSection">{this.props.theBooking.guests}</button>
@@ -43,8 +42,7 @@ class Time extends React.Component <IAddTimeProps,{}> {
                         <button className="timeTopSection" onClick={this.handleInput} value="2">Time</button>
                             <button className="timeTopSection">{this.props.theBooking.time}</button>
                         </div>
-                    </section>
-                </div>
+                </section>
                 <div className="timeParent">
                 <h1>Select time</h1>
                 <section className="timeChild">
