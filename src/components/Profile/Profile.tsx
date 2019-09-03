@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { FormErrors } from '../FormErrors/FormErrors';
 import './Profile.scss';
 import { IBooking } from '../Booking/Booking';
 
@@ -30,22 +29,22 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
     }
 
     handleInput = (event: any) => { 
-        const isValid = this.validate();
         event.preventDefault();
         let booking = this.props.theBooking;
         booking.profile = this.state;
+        
+        this.props.onsubmit(booking);
+
+        const isValid = this.validate();
         if (isValid) {
             console.log(this.props.theBooking.profile)
-            //clear form
+            // clear form
             this.setState({firstNameError: ''})
             this.setState({lastNameError: ''})
             this.setState({emailError: ''})
             this.setState({phoneError: ''})
             } 
-        this.props.onsubmit(booking);
-
         
-
     };
 
     handleInputChange(event:any) {
@@ -53,11 +52,10 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         const value = target.value;
         const name = target.name;
         
-        
-
         this.setState({
           [name]: value
         } as any);
+
       }
 
       validate = () => {
@@ -68,70 +66,38 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
         if (this.props.theBooking.profile.firstName.length < 2 ) {
             firstNameError = 'Must be 2 letters or more';
+        } else {
+            firstNameError = '';
         }
 
         if (this.props.theBooking.profile.lastName.length < 2 ) {
             lastNameError = 'Must be 2 letters or more';
+        } else {
+            lastNameError = '';
         }
 
         if (!this.props.theBooking.profile.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
             emailError = 'Invalid Email';
+        } else {
+            emailError = '';
         }
 
         if (this.props.theBooking.profile.phone.length < 5) {
             phoneError = 'Phonenumber is to short';
-        } 
+        }  else {
+            phoneError = '';
+        }
 
         if (firstNameError || lastNameError || emailError || phoneError) {
             this.setState({ firstNameError, lastNameError, emailError, phoneError });
             return false;
+        } else {
+            firstNameError = '';
         }
 
         return true;
       }
 
-    //   validateField(fieldName, value) {
-    //     let fieldValidationErrors = this.state.formErrors;
-    //     let firstNameValid = this.state.firstNameValid;
-    //     let lastNameValid = this.state.lastNameValid;
-    //     let emailValid = this.state.emailValid;
-    //     let phoneValid = this.state.phoneValid;
-      
-    //     switch(fieldName) {
-    //         case 'firstName':
-    //         firstNameValid = value.length >= 2;
-    //         fieldValidationErrors.firstName = firstNameValid ? '': ' is too short';
-    //         break;
-    //         case 'lastName':
-    //         lastNameValid = value.length >= 2;
-    //         fieldValidationErrors.lastName = lastNameValid ? '': ' is too short';
-    //         break;
-    //       case 'email':
-    //         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-    //         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-    //         break;
-    //       case 'phone':
-    //         phoneValid = value.length >= 6;
-    //         fieldValidationErrors.phone = phoneValid ? '': ' is too short';
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //     this.setState({formErrors: fieldValidationErrors,
-    //         firstNameValid: firstNameValid,
-    //         lastNameValid: lastNameValid,
-    //         emailValid: emailValid,
-    //         phoneValid: phoneValid
-    //                   }, this.validateForm);
-    //   }
-      
-    //   validateForm() {
-    //     this.setState({formValid: 
-    //         this.state.firstNameValid && 
-    //         this.state.lastNameValid && 
-    //         this.state.emailValid && 
-    //         this.state.phoneValid});
-    //   }
 
     render() {
 
