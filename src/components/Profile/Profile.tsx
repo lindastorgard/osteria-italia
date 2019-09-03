@@ -35,6 +35,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         
         this.props.onsubmit(booking);
 
+        
         const isValid = this.validate();
         if (isValid) {
             console.log(this.props.theBooking.profile)
@@ -66,34 +67,24 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
         if (this.props.theBooking.profile.firstName.length < 2 ) {
             firstNameError = 'Must be 2 letters or more';
-        } else {
-            firstNameError = '';
         }
 
         if (this.props.theBooking.profile.lastName.length < 2 ) {
             lastNameError = 'Must be 2 letters or more';
-        } else {
-            lastNameError = '';
-        }
+        } 
 
         if (!this.props.theBooking.profile.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
             emailError = 'Invalid Email';
-        } else {
-            emailError = '';
-        }
-
+        } 
+           
         if (this.props.theBooking.profile.phone.length < 5) {
             phoneError = 'Phonenumber is to short';
-        }  else {
-            phoneError = '';
-        }
+        }  
 
         if (firstNameError || lastNameError || emailError || phoneError) {
             this.setState({ firstNameError, lastNameError, emailError, phoneError });
             return false;
-        } else {
-            firstNameError = '';
-        }
+        } 
 
         return true;
       }
