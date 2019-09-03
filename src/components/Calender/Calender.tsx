@@ -35,6 +35,12 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
   render() {
     return (
       <div className="page-container">
+        <section>
+          <div className="timeChildTopSection">
+            <button className="timeTopSection" onClick={()=>this.handleDayClick} value="1">Guests</button>
+            <button className="timeTopSection">{this.props.theBooking.guests}</button>
+          </div>
+        </section>
         <h1>Select date</h1>
         <DayPicker
           onDayClick={this.handleDayClick}
