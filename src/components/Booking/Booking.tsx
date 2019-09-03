@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { bool } from 'prop-types';
+import { bool, string } from 'prop-types';
 import Date from '../Date/Date'
 import Summary from '../Summary/Summary'
 import Confirmation from '../Confirmation/Confirmation';
@@ -44,12 +44,10 @@ class Booking extends Component <{}, IBookingState> {
                     lastName: '',
                     email: '',
                     phone: '',
-                    formErrors: {firstName : '', lastName: '',email: '', phone:''},
-                    firstNameValid: false,
-                    lastNameValid: false,
-                    emailValid: false,
-                    phoneValid: false,
-                    formValid: false
+                    firstNameError: '',
+                    lastNameError: '',
+                    emailError: '',
+                    phoneError: ''
                 }
                 
             }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormErrors } from '../FormErrors/FormErrors';
+// import { FormErrors } from '../FormErrors/FormErrors';
 import './Profile.scss';
 import { IBooking } from '../Booking/Booking';
 
@@ -8,12 +8,10 @@ export interface IAddProfileState{
     lastName: string;
     email: string;
     phone: string;
-    formErrors: {firstName: '', lastName:'', email: '', phone: '',},
-    firstNameValid: false,
-    lastNameValid: false,
-    emailValid: false,
-    phoneValid: false,
-    formValid: false
+    firstNameError: string;
+    lastNameError: string;
+    emailError: string;
+    phoneError: string;
 }
 
 export interface IAddProfileProps{
@@ -33,9 +31,14 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         event.preventDefault();
         let booking = this.props.theBooking;
         booking.profile = this.state;
+        
+        const isValid = this.validate();
+        if (isValid) {
+        console.log(this.props.theBooking.profile)
+        }  
 
         this.props.onsubmit(booking);
-    }
+    };
 
     handleInputChange(event:any) {
         const target = event.target;
@@ -43,52 +46,70 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         const name = target.name;
         
         this.setState({
-          [name]: value}, 
-          () => { this.validateField(name, value) });
+          [name]: value
+        } as any);
       }
 
-      validateField(fieldName, value) {
-        let fieldValidationErrors = this.state.formErrors;
-        let firstNameValid = this.state.firstNameValid;
-        let lastNameValid = this.state.lastNameValid;
-        let emailValid = this.state.emailValid;
-        let phoneValid = this.state.phoneValid;
-      
-        switch(fieldName) {
-            case 'firstName':
-            firstNameValid = value.length >= 2;
-            fieldValidationErrors.firstName = firstNameValid ? '': ' is too short';
-            break;
-            case 'lastName':
-            lastNameValid = value.length >= 2;
-            fieldValidationErrors.lastName = lastNameValid ? '': ' is too short';
-            break;
-          case 'email':
-            emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-            fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-            break;
-          case 'phone':
-            phoneValid = value.length >= 6;
-            fieldValidationErrors.phone = phoneValid ? '': ' is too short';
-            break;
-          default:
-            break;
+      validate = () => {
+        // let firstNameError = '';
+        // let lastNameError = '';
+        let emailError = '';
+        // let phoneError = '';
+
+        if (!this.props.theBooking.profile.email.includes('@')) {
+            emailError = 'Invalid Email';
         }
-        this.setState({formErrors: fieldValidationErrors,
-            firstNameValid: firstNameValid,
-            lastNameValid: lastNameValid,
-            emailValid: emailValid,
-            phoneValid: phoneValid
-                      }, this.validateForm);
+
+        if (emailError) {
+            this.setState({ emailError });
+            return false;
+        }
+
+        return true;
       }
+
+    //   validateField(fieldName, value) {
+    //     let fieldValidationErrors = this.state.formErrors;
+    //     let firstNameValid = this.state.firstNameValid;
+    //     let lastNameValid = this.state.lastNameValid;
+    //     let emailValid = this.state.emailValid;
+    //     let phoneValid = this.state.phoneValid;
       
-      validateForm() {
-        this.setState({formValid: 
-            this.state.firstNameValid && 
-            this.state.lastNameValid && 
-            this.state.emailValid && 
-            this.state.phoneValid});
-      }
+    //     switch(fieldName) {
+    //         case 'firstName':
+    //         firstNameValid = value.length >= 2;
+    //         fieldValidationErrors.firstName = firstNameValid ? '': ' is too short';
+    //         break;
+    //         case 'lastName':
+    //         lastNameValid = value.length >= 2;
+    //         fieldValidationErrors.lastName = lastNameValid ? '': ' is too short';
+    //         break;
+    //       case 'email':
+    //         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    //         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+    //         break;
+    //       case 'phone':
+    //         phoneValid = value.length >= 6;
+    //         fieldValidationErrors.phone = phoneValid ? '': ' is too short';
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //     this.setState({formErrors: fieldValidationErrors,
+    //         firstNameValid: firstNameValid,
+    //         lastNameValid: lastNameValid,
+    //         emailValid: emailValid,
+    //         phoneValid: phoneValid
+    //                   }, this.validateForm);
+    //   }
+      
+    //   validateForm() {
+    //     this.setState({formValid: 
+    //         this.state.firstNameValid && 
+    //         this.state.lastNameValid && 
+    //         this.state.emailValid && 
+    //         this.state.phoneValid});
+    //   }
 
     render() {
 
@@ -96,7 +117,6 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
             <main className="profilePageContainer">
 
             <div className="panel panel-default">
-            <FormErrors formErrors={this.state.formErrors} />
             </div>
 
                 <div className="profileParent">
@@ -108,24 +128,28 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
                     type="name" 
                     placeholder="Firstname" 
                     onChange={this.handleInputChange}/>
+                    <div className="errorMessage">{this.props.theBooking.profile.firstNameError}</div>
                     <input 
                     name="lastName" 
                     className="profilebox" 
                     type="lastname" 
                     placeholder="Lastname" 
                     onChange={this.handleInputChange}/>
+                    <div className="errorMessage">{this.props.theBooking.profile.lastNameError}</div>
                     <input 
                     name="email" 
                     className="profilebox" 
-                    type="email" 
+                    type="text" 
                     placeholder="Email" 
                     onChange={this.handleInputChange}/>
+                    <div className="errorMessage">{this.props.theBooking.profile.emailError}</div>
                     <input 
                     name="phone" 
                     className="profilebox" 
                     type="phone" 
                     placeholder="Phone" 
                     onChange={this.handleInputChange}/>
+                    <div className="errorMessage">{this.props.theBooking.profile.phoneError}</div>
                     <button type="submit" value="Submit" className="btn btn-primary">
                     Submit
                     </button>
