@@ -9,6 +9,8 @@ import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
 
+// const axios = require ('axios');
+
 
 export interface IBooking{
     view: number,
@@ -46,6 +48,7 @@ class Booking extends Component <{}, IBookingState> {
             
         };
         this.updateState = this.updateState.bind(this);
+        this.makeBooking = this.makeBooking.bind(this);
 
     }
 
@@ -57,14 +60,14 @@ class Booking extends Component <{}, IBookingState> {
     }
 
     // make booking
-    makeBooking = (booking:IBooking) => {
+    makeBooking = () => {
       axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
         customer_id: 5,
         guest_nr: this.state.booking.guests,
-        date: this.state.booking.date
+        date: "2019-08-05 13:00:55"
       })
           .then(response => {
-                  console.log('Got response from server');
+                  console.log(response.data.message);
           })
           .catch(error => console.log(error));
   };
@@ -104,7 +107,9 @@ class Booking extends Component <{}, IBookingState> {
         case 4:
                 return(
                     <div>
-                        <Summary onclick={this.makeBooking} theBooking={this.state.booking}/>  
+                        <Summary onclick={this.updateState} makesubmit={this.makeBooking} theBooking={this.state.booking}/> 
+                        {/* <Summary makesubmit={this.makeBooking} theBooking={this.state.booking}/>  */}
+                        {/* <button onClick={this.makeBooking}>klick</button> */}
                     </div>
                 )
 
