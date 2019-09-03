@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import { bool } from 'prop-types';
 import Date from '../Date/Date'
 import Summary from '../Summary/Summary'
@@ -56,6 +56,19 @@ class Booking extends Component <{}, IBookingState> {
         });
     }
 
+    // make booking
+    makeBooking = (booking:IBooking) => {
+      axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
+        customer_id: 5,
+        guest_nr: this.state.booking.guests,
+        date: this.state.booking.date
+      })
+          .then(response => {
+                  console.log('Got response from server');
+          })
+          .catch(error => console.log(error));
+  };
+
   render() {
     switch(this.state.booking.view){
         case 1:
@@ -91,7 +104,7 @@ class Booking extends Component <{}, IBookingState> {
         case 4:
                 return(
                     <div>
-                        <Summary onclick={this.updateState} theBooking={this.state.booking}/>  
+                        <Summary onclick={this.makeBooking} theBooking={this.state.booking}/>  
                     </div>
                 )
 

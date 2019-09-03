@@ -38,7 +38,7 @@ class Summary extends React.Component <ISummaryProps, {}>{
                         <div className="summaryTopSection">{this.props.theBooking.guests}</div>
                     </div>
                 </section>
-                <button>CONFIRM RESERVATION</button>
+                <button onClick={this.makeBooking}>CONFIRM RESERVATION</button>
             </main>
         )
     }
