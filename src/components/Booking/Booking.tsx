@@ -64,12 +64,12 @@ class Booking extends Component <{}, IBookingState> {
       axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
         customer_id: 5,
         guest_nr: this.state.booking.guests,
-        date: "2019-08-05 13:00:55"
+        date: "2019-08-05 18.00.00"
       })
           .then(response => {
                   console.log(response.data.message);
           })
-          .catch(error => console.log(error));
+          .catch(error => console.log(error.data.message));
   };
 
   render() {
