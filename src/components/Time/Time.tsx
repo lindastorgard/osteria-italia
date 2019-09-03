@@ -33,14 +33,13 @@ class Time extends React.Component <IAddTimeProps,{}> {
                             <button className="timeTopSection">{this.props.theBooking.guests}</button>
                         </div>
 
-                        {/* Open for date when ready - change all values!!!! */}
-                        {/* <div className="timeChildTopSection">
+                        <div className="timeChildTopSection">
                         <button className="timeTopSection" onClick={this.handleInput} value="2">Date</button>
-                            <button className="timeTopSection">{this.props.theBooking.date}</button>
-                        </div> */}
+                            <button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
+                        </div>
 
                         <div className="timeChildTopSection">
-                        <button className="timeTopSection" onClick={this.handleInput} value="2">Time</button>
+                        <button className="timeTopSection" onClick={this.handleInput} value="3">Time</button>
                             <button className="timeTopSection">{this.props.theBooking.time}</button>
                         </div>
                     </section>
