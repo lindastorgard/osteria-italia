@@ -5,6 +5,8 @@ import 'react-day-picker/lib/style.css';
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
 
+const axios = require ('axios');
+
 
 export interface ICalenderState{
   
