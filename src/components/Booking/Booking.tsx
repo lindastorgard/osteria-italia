@@ -46,7 +46,11 @@ class Booking extends Component <{}, IBookingState> {
                     firstNameError: '',
                     lastNameError: '',
                     emailError: '',
-                    phoneError: ''
+                    phoneError: '',
+                    showFirstNameError: false,
+                    showLastNameError: false,
+                    showEmailError: false,
+                    showPhoneError: false
                 }
                 
             }

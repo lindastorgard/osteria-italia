@@ -8,10 +8,16 @@ export interface IAddProfileState{
     lastName: string;
     email: string;
     phone: string;
+
     firstNameError: string;
     lastNameError: string;
     emailError: string;
     phoneError: string;
+
+    showFirstNameError: boolean;
+    showLastNameError: boolean;
+    showEmailError: boolean;
+    showPhoneError: boolean;
 }
 
 export interface IAddProfileProps{
@@ -23,28 +29,43 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
     
     constructor(props:any){
         super(props);
+
+        this.state = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            firstNameError: 'Must be 2 letters or more',
+            lastNameError: 'Must be 2 letters or more',
+            emailError: 'Invalid Email',
+            phoneError: 'Phonenumber is Too short',
+            showFirstNameError: false,
+            showLastNameError: false,
+            showEmailError: false,
+            showPhoneError: false,
+        };
         
-        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleInput = (event: any) => { 
+    handleSubmit = (event: any) => { 
         event.preventDefault();
         let booking = this.props.theBooking;
         booking.profile = this.state;
         
-        this.props.onsubmit(booking);
-
-        
         const isValid = this.validate();
+        
         if (isValid) {
             console.log(this.props.theBooking.profile)
             // clear form
-            this.setState({firstNameError: ''})
-            this.setState({lastNameError: ''})
-            this.setState({emailError: ''})
-            this.setState({phoneError: ''})
-            } 
+            // this.setState({firstNameError: ''})
+            // this.setState({lastNameError: ''})
+            // this.setState({emailError: ''})
+            // this.setState({phoneError: ''})
+
+            this.props.onsubmit(booking);
+        } 
         
     };
 
@@ -59,31 +80,31 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
       }
 
-      validate = () => {
-        let firstNameError = '';
-        let lastNameError = '';
-        let emailError = '';
-        let phoneError = '';
+      validate() {
+        let showfirstNameError = false;
+        let showlastNameError = false;
+        let showemailError = false;
+        let showphoneError = false;
 
-        if (this.props.theBooking.profile.firstName.length < 2 ) {
-            firstNameError = 'Must be 2 letters or more';
+        if (this.state.firstName.length < 2 ) {
+            showfirstNameError = true;
         }
 
         if (this.props.theBooking.profile.lastName.length < 2 ) {
-            lastNameError = 'Must be 2 letters or more';
+            showlastNameError = true;
         } 
 
         if (!this.props.theBooking.profile.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-            emailError = 'Invalid Email';
+            showemailError = true;
         } 
            
         if (this.props.theBooking.profile.phone.length < 5) {
-            phoneError = 'Phonenumber is to short';
+            showphoneError = true;
         }  
 
-        if (firstNameError || lastNameError || emailError || phoneError) {
-            this.setState({ firstNameError, lastNameError, emailError, phoneError });
-            return false;
+        if (showfirstNameError || showlastNameError || showemailError || showphoneError) {
+            this.setState({ showFirstNameError: showfirstNameError, showLastNameError: showlastNameError, showEmailError: showemailError, showPhoneError: showphoneError });
+            // return false;
         } 
 
         return true;
@@ -91,6 +112,26 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
 
     render() {
+
+        let firstNameError: JSX.Element = (<div className="errorMessage">{this.state.firstNameError}</div>);
+        if(!this.state.showFirstNameError) {
+            firstNameError = (<div></div>);
+        }
+        
+        let lastNameError: JSX.Element = (<div className="errorMessage">{this.state.lastNameError}</div>);
+        if(!this.state.showLastNameError) {
+            lastNameError = (<div></div>);
+        }
+
+        let emailError: JSX.Element = (<div className="errorMessage">{this.state.emailError}</div>);
+        if(!this.state.showEmailError) {
+            emailError = (<div></div>);
+        }
+
+        let phoneError: JSX.Element = (<div className="errorMessage">{this.state.phoneError}</div>);
+        if(!this.state.showPhoneError) {
+            phoneError = (<div></div>);
+        }
 
         return (
             <main className="profilePageContainer">
@@ -100,35 +141,36 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
                 <div className="profileParent">
                 <h1>Your details</h1>
-                <form onSubmit={this.handleInput} className="profileChild">
+                <form onSubmit={this.handleSubmit} className="profileChild">
                     <input 
                     name="firstName" 
                     className="profilebox" 
                     type="name" 
                     placeholder="Firstname" 
                     onChange={this.handleInputChange}></input>
-                    <div className="errorMessage">{this.props.theBooking.profile.firstNameError}</div>
+                    
+                    {firstNameError}
                     <input 
                     name="lastName" 
                     className="profilebox" 
                     type="lastname" 
                     placeholder="Lastname" 
                     onChange={this.handleInputChange}/>
-                    <div className="errorMessage">{this.props.theBooking.profile.lastNameError}</div>
+                    {lastNameError}
                     <input 
                     name="email" 
                     className="profilebox" 
                     type="text" 
                     placeholder="Email" 
                     onChange={this.handleInputChange}/>
-                    <div className="errorMessage">{this.props.theBooking.profile.emailError}</div>
+                    {emailError}
                     <input 
                     name="phone" 
                     className="profilebox" 
                     type="phone" 
                     placeholder="Phone" 
                     onChange={this.handleInputChange}/>
-                    <div className="errorMessage">{this.props.theBooking.profile.phoneError}</div>
+                    {phoneError}
                     <button type="submit" value="Submit" className="btn btn-primary">
                     Submit
                     </button>
