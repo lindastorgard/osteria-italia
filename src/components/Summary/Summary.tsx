@@ -5,6 +5,7 @@ import Booking, { IBooking } from '../Booking/Booking';
 export interface ISummaryProps{
     theBooking: IBooking;
     onclick(updatedBooking: IBooking): void,
+    makesubmit(): void
 }
 
 
@@ -38,7 +39,7 @@ class Summary extends React.Component <ISummaryProps, {}>{
                         <div className="summaryTopSection">{this.props.theBooking.guests}</div>
                     </div>
                 </section>
-                <button>CONFIRM RESERVATION</button>
+                <button onClick={this.props.makesubmit}>CONFIRM RESERVATION</button>
             </main>
         )
     }

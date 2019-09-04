@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import { bool } from 'prop-types';
 import Date from '../Date/Date'
 import Summary from '../Summary/Summary'
@@ -8,6 +8,8 @@ import Profile, { IAddProfileState } from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
+
+// const axios = require ('axios');
 
 
 export interface IBooking{
@@ -46,6 +48,7 @@ class Booking extends Component <{}, IBookingState> {
             
         };
         this.updateState = this.updateState.bind(this);
+        this.makeBooking = this.makeBooking.bind(this);
 
     }
 
@@ -55,6 +58,19 @@ class Booking extends Component <{}, IBookingState> {
             booking: updatedBooking
         });
     }
+
+    // make booking
+    makeBooking = () => {
+      axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
+        customer_id: 5,
+        guest_nr: this.state.booking.guests,
+        date: "2019-08-05 18.00.00"
+      })
+          .then(response => {
+                  console.log(response.data.message);
+          })
+          .catch(error => console.log(error.data.message));
+  };
 
   render() {
     switch(this.state.booking.view){
@@ -91,7 +107,9 @@ class Booking extends Component <{}, IBookingState> {
         case 4:
                 return(
                     <div>
-                        <Summary onclick={this.updateState} theBooking={this.state.booking}/>  
+                        <Summary onclick={this.updateState} makesubmit={this.makeBooking} theBooking={this.state.booking}/> 
+                        {/* <Summary makesubmit={this.makeBooking} theBooking={this.state.booking}/>  */}
+                        {/* <button onClick={this.makeBooking}>klick</button> */}
                     </div>
                 )
 
