@@ -113,7 +113,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
         if (showfirstNameError || showlastNameError || showemailError || showphoneError) {
             this.setState({ showFirstNameError: showfirstNameError, showLastNameError: showlastNameError, showEmailError: showemailError, showPhoneError: showphoneError });
-            // return false;
+            return false;
         } 
 
         return true;
