@@ -23,6 +23,7 @@ export interface IAddProfileState{
 export interface IAddProfileProps{
     theBooking: IBooking;
     onsubmit(updatedBooking: IBooking): void,
+    onclick(updatedBooking: IBooking): void,
 }
 
 class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
@@ -47,13 +48,14 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleView = this.handleView.bind(this);
     }
 
     handleSubmit = (event: any) => { 
         event.preventDefault();
         let booking = this.props.theBooking;
         booking.profile = this.state;
-        
+  
         const isValid = this.validate();
         
         if (isValid) {
@@ -63,8 +65,10 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
             // this.setState({lastNameError: ''})
             // this.setState({emailError: ''})
             // this.setState({phoneError: ''})
-
-            this.props.onsubmit(booking);
+  
+        booking.view = this.props.theBooking.view + 1;
+        
+        this.props.onsubmit(booking);
         } 
         
     };
@@ -77,8 +81,18 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         this.setState({
           [name]: value
         } as any);
-
+      
       }
+
+    
+
+    handleView = (event: any) => {
+      let booking = this.props.theBooking;
+      booking.view = parseInt(event.target.value);
+
+      this.props.onclick(booking);
+    }
+
 
       validate() {
         let showfirstNameError = false;
@@ -136,8 +150,28 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         return (
             <main className="profilePageContainer">
 
+
             <div className="panel panel-default">
             </div>
+
+
+                 <section className="profileParentTopSection">
+                    <div className="profileChildTopSection">
+                            <button className="profileTopSection" onClick={this.handleView} value="1">Guests</button>
+                            <button className="profileTopSection">{this.props.theBooking.guests}</button>
+                        </div>
+
+                        {/* Open for date when ready - change all values!!!! */}
+                        {/* <div className="timeChildTopSection">
+                        <button className="timeTopSection" onClick={this.handleView} value="2">Date</button>
+                            <button className="timeTopSection">{this.props.theBooking.date}</button>
+                        </div> */}
+
+                        <div className="profileChildTopSection">
+                        <button className="profileTopSection" onClick={this.handleView} value="2">Time</button>
+                            <button className="profileTopSection">{this.props.theBooking.time}</button>
+                        </div>
+                </section>
 
                 <div className="profileParent">
                 <h1>Your details</h1>
