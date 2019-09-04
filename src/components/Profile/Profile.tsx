@@ -59,12 +59,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         const isValid = this.validate();
         
         if (isValid) {
-            console.log(this.props.theBooking.profile)
-            // clear form
-            // this.setState({firstNameError: ''})
-            // this.setState({lastNameError: ''})
-            // this.setState({emailError: ''})
-            // this.setState({phoneError: ''})
+        console.log(this.props.theBooking.profile)
   
         booking.view = this.props.theBooking.view + 1;
         
@@ -118,7 +113,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
         if (showfirstNameError || showlastNameError || showemailError || showphoneError) {
             this.setState({ showFirstNameError: showfirstNameError, showLastNameError: showlastNameError, showEmailError: showemailError, showPhoneError: showphoneError });
-            // return false;
+            return false;
         } 
 
         return true;
