@@ -5,6 +5,7 @@ import moment from 'moment/moment.js'
 
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
+import { runInThisContext } from 'vm';
 
 const axios = require ('axios');
 
@@ -15,12 +16,17 @@ export interface IExistingBoooking{
   date: Date
 }
 
+export interface IConfig{
+  setting: string,
+  value: string
+}
+
 
 export interface ICalenderState{
-  disabledDays: [],
+  // disabledDay: string,
+  disabledDays: Date[],
   existingBookings: IExistingBoooking[],
-  // occupiedTables: number
-  
+  configurations: IConfig[] 
 }
 
 interface ICalenderProps{
@@ -32,23 +38,19 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
   constructor(props: any) {
     super(props);
     this.state = {
+      // disabledDay: '',
       existingBookings : [],
       disabledDays: [],
-      // occupiedTables: 0
+      configurations: []
     }
 
     this.handleDayClick = this.handleDayClick.bind(this);
+    this.getConfigData = this.getConfigData.bind(this);
     this.getData = this.getData.bind(this);
     this.fetchBookedTables = this.fetchBookedTables.bind(this);
-
+    this.getDatesWithBookings = this.getDatesWithBookings.bind(this);
+    this.disableDates = this.disableDates.bind(this);
   }
-
-    //Have to get nr of tables occupied selected date
-  //loop through bookings, and if nr of guests is bigger than 6, add 2 tables
-  //if time is 18:00, add number to earlyEvening array
-  //if time is 21:00, add number to lateEvening array
-  //if nr of tabels is > 15 in early evening && nr of tabels is > 15 in late evening
-  // than set state of the day to disabled
 
   componentDidMount() {
     this.getData();
@@ -59,65 +61,77 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
       .then((response:any) => {
         this.setState({
           existingBookings: response.data.data 
-        })
-      console.log(this.state.existingBookings);
-      this.fetchBookedTables();
+        });
+      console.log("Existing from state: ", this.state.existingBookings);
+      this.getConfigData();
+      this.getDatesWithBookings();
+      // this.disableDates();
     })
   }
 
-  // fetchBookedTables(){
-  //   let occupiedTables = 0;
-  //   this.state.existingBookings.map(currentBooking => {
-  //     let time = moment(currentBooking.date).format('hh:mm');
-  //     if(currentBooking.guest_nr > 6){
+  getConfigData(){
+    axios.get('http://localhost:8888/booking_api/api/configs/readConfig.php')
+      .then((response:any) => {
+        this.setState({
+          configurations: response.data.data 
+        });
+        console.log("values from my config table ",this.state.configurations);
+    })
+    this.getDatesWithBookings();
+  }
 
-  //       if(time == '06:00'){
-  //         console.log('early booking');
-  //       }
-  //       let tablesPerBooking = 2; 
-  //       occupiedTables += tablesPerBooking;
-  //     } else if (currentBooking.guest_nr < 6) {
-  //       console.log("time is " + time);
-  //       let tablesPerBooking = 1; 
-  //       occupiedTables += tablesPerBooking;
-  //     }
-  //   })  
-  //   console.log("nr of occupied tables is" + occupiedTables);  
-  //   return occupiedTables;
-    
-  // }
+  //Loop through existing bookings, and get dates with bookings
+  getDatesWithBookings(){
+    this.state.existingBookings.map(currentBooking => {
+      const dayWithBooking = currentBooking.date; 
+      console.log("we have bookings this dates: ", dayWithBooking) 
+    });
+  }
 
   fetchBookedTables(){
-    let earlyOccupiedTables = 0;
-    let lateOccupiedTables = 0;
+    let sittingOne = 0;
+    let sittingTwo = 0;
+
+    let sitting1Time: string = '';
+    this.state.configurations.map(key=>{
+      if(key.setting == 'sitting_1')
+        sitting1Time = key.value;
+    });
+    let sitting2Time: string = '';
+    this.state.configurations.map(key=>{
+      if(key.setting == 'sitting_2')
+        sitting2Time = key.value;
+    });
+  
     this.state.existingBookings.map(currentBooking => {
-      let time = moment(currentBooking.date).format('hh:mm');
-      if(time == '06:00'){
-        if(currentBooking.guest_nr > 6){
-          let tablesPerBooking = 2; 
-          earlyOccupiedTables += tablesPerBooking;
-        } else{
-          let tablesPerBooking = 1;
-          earlyOccupiedTables += tablesPerBooking;
-        }      
-      } else if (time == '09:00'){
-        if(currentBooking.guest_nr > 6){
-          let tablesPerBooking = 2; 
-          lateOccupiedTables += tablesPerBooking;
-        } else{
-          let tablesPerBooking = 1;
-          lateOccupiedTables += tablesPerBooking;
-        }    
-      }
-    })  
-    console.log("nr of occupied tables at 6 pm are " + earlyOccupiedTables);  
-    console.log("nr of occupied tables at 9 pm are " + lateOccupiedTables);   
-  }
+      let time = moment(currentBooking.date).format('HH:mm');
+          if(sitting1Time === time){
+           let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
+            sittingOne += tables;
+          } else if (sitting2Time === time) {
+            let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
+            sittingTwo += tables;
+          }      
+        });
+        console.log("at 1800 u have ", sittingOne,"nr of tables" );  
+        console.log("at 2100 u have ", sittingTwo,"nr of tables" );
+}
+
+disableDates(){
+  this.state.existingBookings.map(currentBooking => {
+    const dayWithBooking = currentBooking.date;
+    this.setState(prevState =>({
+      disabledDays:[...prevState.disabledDays, dayWithBooking]
+    }));
+
+  });
+
+  console.log("Those days have a booking " + this.state.disabledDays);
+}
     
 
   handleDayClick = (day: Date) => {
     let booking = this.props.theBooking;
-    console.log('Selected day: ' + day.toLocaleDateString());
     booking.date = day;
     booking.view = this.props.theBooking.view + 1;
     this.props.onDayClick(booking);
@@ -135,11 +149,15 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         </section>
         <h1>Select date</h1>
         <DayPicker
+          initialMonth={new Date(2019, 8)}
+          disabledDays={this.state.disabledDays.map(currentDate => {
+            let asMoment = moment(currentDate);
+
+            return new Date(asMoment.year(), asMoment.month(), asMoment.date());
+          })}
           onDayClick={this.handleDayClick}
         />
-      </div>
-
-      
+      </div> 
     )
   }
 }
