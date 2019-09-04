@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { bool, string } from 'prop-types';
 import axios from 'axios';
-import { bool } from 'prop-types';
 import Date from '../Date/Date'
 import Summary from '../Summary/Summary'
 import Confirmation from '../Confirmation/Confirmation';
@@ -26,7 +26,6 @@ interface IBookingState {
 }
 
 class Booking extends Component <{}, IBookingState> {
-
     constructor(props:any){
         super(props);
 
@@ -42,8 +41,17 @@ class Booking extends Component <{}, IBookingState> {
                     firstName:'',
                     lastName: '',
                     email: '',
-                    phone: ''
+                    phone: '',
+                    firstNameError: '',
+                    lastNameError: '',
+                    emailError: '',
+                    phoneError: '',
+                    showFirstNameError: false,
+                    showLastNameError: false,
+                    showEmailError: false,
+                    showPhoneError: false
                 }
+                
             }
             
         };
