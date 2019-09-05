@@ -9,8 +9,6 @@ import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
 
-// const axios = require ('axios');
-
 
 export interface IBooking{
     view: number,
@@ -21,7 +19,6 @@ export interface IBooking{
 }
 
 interface IBookingState {
-    
     booking: IBooking;
 }
 
@@ -49,8 +46,17 @@ class Booking extends Component <{}, IBookingState> {
                     showFirstNameError: false,
                     showLastNameError: false,
                     showEmailError: false,
-                    showPhoneError: false
-                }
+                    showPhoneError: false,
+                    myBookings: [{
+                      id: 0, 
+                      customer_id: 0,
+                      guest_nr: 0, 
+                      date: '', 
+                      firstname: '', 
+                      lastname: '', 
+                      email: '', 
+                      phone: ''}]
+                    }
                 
             }
             
@@ -70,7 +76,7 @@ class Booking extends Component <{}, IBookingState> {
     // make booking
     makeBooking = () => {
       axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
-        customer_id: 5,
+        customer_id: "x",
         guest_nr: this.state.booking.guests,
         date: "2019-08-05 18.00.00"
       })

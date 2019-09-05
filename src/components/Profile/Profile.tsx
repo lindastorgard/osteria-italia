@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
 import './Profile.scss';
-import { IBooking } from '../Booking/Booking';
+import Booking, { IBooking } from '../Booking/Booking';
+import axios from 'axios';
 
+interface ICustomerData{
+  id: number, 
+  customer_id: number, 
+  guest_nr: number, 
+  date: string, 
+  firstname: string, 
+  lastname: string, 
+  email: string, 
+  phone: string
+  
+}
 
 export interface IAddProfileState{
     firstName: string;
@@ -18,9 +30,14 @@ export interface IAddProfileState{
     showLastNameError: boolean;
     showEmailError: boolean;
     showPhoneError: boolean;
+
+    myBookings: ICustomerData[];
+
+    // myBookings: {id: number , customer_id: number, guest_nr: number, date: string, firstname: string, lastname: string, email: string, number: string};
 }
 
 export interface IAddProfileProps{
+    // myBookings: ICustomerData;
     theBooking: IBooking;
     onsubmit(updatedBooking: IBooking): void,
     onclick(updatedBooking: IBooking): void,
@@ -44,12 +61,58 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
             showLastNameError: false,
             showEmailError: false,
             showPhoneError: false,
+            myBookings: [{
+              id: 0, 
+              customer_id: 0,
+              guest_nr: 0, 
+              date: '', 
+              firstname: '', 
+              lastname: '', 
+              email: '', 
+              phone: ''}]
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleView = this.handleView.bind(this);
+        this.handleEmail = this.handleEmail.bind(this);
     }
+
+    componentDidMount(){
+      axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
+          .then(response => {
+                  console.log('Got response from server');
+                  // console.log(response.data);
+                  this.setState({ myBookings: response.data.data })
+          })
+          .catch(error => console.log(error));
+    }
+
+    
+    handleEmail(){
+      for (let index = 0; index < this.state.myBookings.length; index++) {
+          if(this.props.theBooking.profile.email === this.state.myBookings[index].email){
+            let old_customer_id = this.state.myBookings[index].customer_id;
+            // to be used in post booking
+            console.log(old_customer_id);
+          }
+        // this.postCustomer();
+      }
+    }
+
+    postCustomer(){
+      axios.post('http://localhost:8888/booking_api/api/customers/createCustomer.php', {
+        name: this.props.theBooking.profile.firstName,
+        lastname: this.props.theBooking.profile.lastName,
+        email: this.props.theBooking.profile.email,
+        phone: this.props.theBooking.profile.phone
+      })
+          .then(response => {
+                  console.log(response.data.message);
+          })
+          .catch(error => console.log(error.data.message));
+    }
+    
 
     handleSubmit = (event: any) => { 
         event.preventDefault();
@@ -59,9 +122,11 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         const isValid = this.validate();
         
         if (isValid) {
-        console.log(this.props.theBooking.profile)
-  
+        // console.log(this.props.theBooking.profile)
         booking.view = this.props.theBooking.view + 1;
+
+        // console.log("det är this.state.myBookings:", this.state.myBookings);
+        this.handleEmail();
         
         this.props.onsubmit(booking);
         } 
@@ -78,8 +143,6 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         } as any);
       
       }
-
-    
 
     handleView = (event: any) => {
       let booking = this.props.theBooking;
