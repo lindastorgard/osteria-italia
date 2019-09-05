@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {EditBooking} from "../EditBooking/EditBooking";
 
 interface IAdminState {
     bookings: any;
@@ -11,12 +10,19 @@ class Admin extends React.Component<{}, IAdminState> {
 
     state = {
         bookings: [],
-        selectedBooking: null
+        selectedBooking: {
+            email: '',
+            guest_nr: '',
+            date: ''
+        }
     };
 
     constructor(props: any) {
         super(props);
         this.getBookings();
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     getBookings = () => {
@@ -65,6 +71,22 @@ class Admin extends React.Component<{}, IAdminState> {
             .catch( error => console.log('Something went wrong'))
     }
 
+    handleInputChange = (event: any) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            selectedBooking: {
+                [name]: value
+            }
+        });
+    }
+
+    handleSubmit = (event: any) => {
+        // code goes here
+    }
+
     listBookings = () => {
         return this.state.bookings.map( (booking: any) => {
         return (
@@ -84,8 +106,29 @@ class Admin extends React.Component<{}, IAdminState> {
                     {this.listBookings()}
                 </ul>
              </div>
-                <br />
-                <EditBooking booking={this.state.selectedBooking}/>
+                <form onSubmit={this.handleSubmit}>
+                    <label>Email</label>
+                    <input
+                        name="email"
+                        type="text"
+                        value={this.state.selectedBooking.email}
+                        onChange={this.handleInputChange}/>
+                    <label>Number of guests</label>
+                    <input
+                        name="numberOfGuests"
+                        type="number"
+                        value={this.state.selectedBooking.guest_nr}
+                        onChange={this.handleInputChange}
+                    />
+                    <label>Date and time</label>
+                    <input
+                        name="date"
+                        type="date"
+                        value={this.state.selectedBooking.date}
+                        onChange={this.handleInputChange}
+                    />
+                    <button type="submit">Submit changes</button>
+                </form>
             </section>
         )
     }
