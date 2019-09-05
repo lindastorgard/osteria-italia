@@ -5,7 +5,7 @@ import moment from 'moment/moment.js'
 
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
-import { runInThisContext } from 'vm';
+import { stripTrailingSlash } from 'history/PathUtils';
 
 const axios = require ('axios');
 
@@ -21,10 +21,17 @@ export interface IConfig{
   value: string
 }
 
+export interface IBookingDay{
+  date: string,
+  sitting1Tables: number,
+  sitting2Tables: number,
+}
 
 export interface ICalenderState{
   // disabledDay: string,
   disabledDays: Date[],
+  dayWithBooking: IBookingDay,
+  daysWithBooking: IBookingDay[],
   existingBookings: IExistingBoooking[],
   configurations: IConfig[] 
 }
@@ -41,6 +48,14 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
       // disabledDay: '',
       existingBookings : [],
       disabledDays: [],
+      dayWithBooking:
+      {
+        date: '',
+        sitting1Tables: 0,
+        sitting2Tables: 0,
+      },
+
+      daysWithBooking: [],
       configurations: []
     }
 
@@ -64,7 +79,8 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         });
       console.log("Existing from state: ", this.state.existingBookings);
       this.getConfigData();
-      this.getDatesWithBookings();
+      this.getDatesWithBookings()
+      // this.getDatesWithBookings();
       // this.disableDates();
     })
   }
@@ -76,57 +92,103 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
           configurations: response.data.data 
         });
         console.log("values from my config table ",this.state.configurations);
+        this.fetchBookedTables();
     })
-    this.getDatesWithBookings();
   }
 
   //Loop through existing bookings, and get dates with bookings
   getDatesWithBookings(){
     this.state.existingBookings.map(currentBooking => {
-      const dayWithBooking = currentBooking.date; 
-      console.log("we have bookings this dates: ", dayWithBooking) 
+      const bookingDate = moment(currentBooking.date).format('YYYY-MM-DD');
+      if(!this.state.daysWithBooking.some(e => e.date == bookingDate)){
+        this.setState(prevState =>({
+          dayWithBooking:{
+            date: bookingDate,
+            sitting1Tables: 10,
+            sitting2Tables: 10
+          },
+          daysWithBooking:[...prevState.daysWithBooking, prevState.dayWithBooking]
+          
+        }))
+
+        console.log(this.state.daysWithBooking[0]);
+
+      }
+
+      // (prevState => ({
+      //   newTask: {
+      //     id: prevState.newTask.id+1,
+      //     todo: "",
+      //     isComplete: false
+      //     },
+      //     //using spread operator to take an existing array, todoList,
+      //     // and add another element, newTask, to it 
+      //     //while still preserving the original array 
+      //     todoList: [...prevState.todoList, prevState.newTask]
+      //   })
+      // )
+
+      // if(!this.state.daysWithBooking.includes(currentBooking.date)){
+      //   this.setState(prevState =>({
+      //     daysWithBooking:[...prevState.daysWithBooking, dayWithBooking],
+      //   }));
+      // }  
+      
     });
+    console.log("Those days have a booking " + this.state.daysWithBooking);
   }
 
   fetchBookedTables(){
-    let sittingOne = 0;
-    let sittingTwo = 0;
-
-    let sitting1Time: string = '';
-    this.state.configurations.map(key=>{
-      if(key.setting == 'sitting_1')
-        sitting1Time = key.value;
-    });
-    let sitting2Time: string = '';
-    this.state.configurations.map(key=>{
-      if(key.setting == 'sitting_2')
-        sitting2Time = key.value;
-    });
+    // this.getDatesWithBookings();
   
-    this.state.existingBookings.map(currentBooking => {
-      let time = moment(currentBooking.date).format('HH:mm');
-          if(sitting1Time === time){
-           let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
-            sittingOne += tables;
-          } else if (sitting2Time === time) {
-            let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
-            sittingTwo += tables;
-          }      
-        });
-        console.log("at 1800 u have ", sittingOne,"nr of tables" );  
-        console.log("at 2100 u have ", sittingTwo,"nr of tables" );
+    // this.state.daysWithBooking.map(day => {
+    //   console.log("Party",day); 
+    // })
+
+    // let sittingOne = 0;
+    // let sittingTwo = 0;
+
+    // let sitting1Time: string = '';
+    // this.state.configurations.map(key=>{
+    //   if(key.setting == 'sitting_1')
+    //     sitting1Time = key.value;
+    // });
+    // let sitting2Time: string = '';
+    // this.state.configurations.map(key=>{
+    //   if(key.setting == 'sitting_2')
+    //     sitting2Time = key.value;
+    // });
+
+    // this.state.existingBookings.map(currentBooking => {
+    //   let time = moment(currentBooking.date).format('HH:mm');
+    //   if(this.state.daysWithBooking.includes(currentBooking.date) && sitting1Time === time){
+    //     console.log("hakuna matata");
+    //     let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
+    //     sittingOne += tables;
+    //   }
+     
+    //       if(sitting1Time === time){
+    //        let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
+    //         sittingOne += tables;
+    //       } else if (sitting2Time === time) {
+    //         let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
+    //         sittingTwo += tables;
+    //       }      
+    //     });
+    //     console.log("at 1800 u have ", sittingOne,"nr of tables" );  
+    //     console.log("at 2100 u have ", sittingTwo,"nr of tables" );
 }
 
 disableDates(){
-  this.state.existingBookings.map(currentBooking => {
-    const dayWithBooking = currentBooking.date;
-    this.setState(prevState =>({
-      disabledDays:[...prevState.disabledDays, dayWithBooking]
-    }));
+  // this.state.existingBookings.map(currentBooking => {
+  //   const dayWithBooking = currentBooking.date;
+  //   this.setState(prevState =>({
+  //     disabledDays:[...prevState.disabledDays, dayWithBooking]
+  //   }));
 
-  });
+  // });
 
-  console.log("Those days have a booking " + this.state.disabledDays);
+  // console.log("Those days have a booking " + this.state.disabledDays);
 }
     
 
