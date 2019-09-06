@@ -15,7 +15,7 @@ import { any } from 'prop-types';
 export interface IBooking{
   view: number,
   guests: number,
-  date: string,
+  date: Date,
   time: string,
   customerId: number,
   profile: IAddProfileState
@@ -36,7 +36,7 @@ class Booking extends Component <{}, IBookingState> {
       booking: {
         view: 1,
         guests: 0,
-        date: '',
+        date: new Date(),
         time: '',
         customerId: 0,
         profile: {
