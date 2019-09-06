@@ -6,34 +6,38 @@ import moment from 'moment/moment.js'
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
 import { stripTrailingSlash } from 'history/PathUtils';
+import { tsImportEqualsDeclaration } from '@babel/types';
 
 const axios = require ('axios');
 
-export interface IExistingBoooking{
+export interface IExistingBoooking {
   id: number,
   customer_id: number,
   guest_nr: number,
   date: Date
 }
 
-export interface IConfig{
+export interface IConfig {
   setting: string,
   value: string
 }
 
-export interface IBookingDay{
-  date: string,
-  sitting1Tables: number,
-  sitting2Tables: number,
+export interface IBookingTimes {
+  sitting1: number,
+  sitting2: number
+}
+
+export interface IBookingDay {
+  bookedDate: string,
+  sittings: IBookingTimes
 }
 
 export interface ICalenderState{
-  // disabledDay: string,
-  disabledDays: Date[],
   dayWithBooking: IBookingDay,
   daysWithBooking: IBookingDay[],
   existingBookings: IExistingBoooking[],
-  configurations: IConfig[] 
+  configurations: IConfig[],
+  disabledDays: Date[],
 }
 
 interface ICalenderProps{
@@ -45,16 +49,15 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      // disabledDay: '',
+      dayWithBooking: {
+        bookedDate: '',
+        sittings: {
+          sitting1: 0,
+          sitting2: 0
+        }  
+      },
       existingBookings : [],
       disabledDays: [],
-      dayWithBooking:
-      {
-        date: '',
-        sitting1Tables: 0,
-        sitting2Tables: 0,
-      },
-
       daysWithBooking: [],
       configurations: []
     }
@@ -64,7 +67,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.getData = this.getData.bind(this);
     this.fetchBookedTables = this.fetchBookedTables.bind(this);
     this.getDatesWithBookings = this.getDatesWithBookings.bind(this);
-    this.disableDates = this.disableDates.bind(this);
   }
 
   componentDidMount() {
@@ -79,9 +81,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         });
       console.log("Existing from state: ", this.state.existingBookings);
       this.getConfigData();
-      this.getDatesWithBookings()
-      // this.getDatesWithBookings();
-      // this.disableDates();
     })
   }
 
@@ -91,106 +90,100 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         this.setState({
           configurations: response.data.data 
         });
-        console.log("values from my config table ",this.state.configurations);
+        // console.log("values from my config table ",this.state.configurations);
         this.fetchBookedTables();
     })
   }
 
-  //Loop through existing bookings, and get dates with bookings
-  getDatesWithBookings(){
-    this.state.existingBookings.map(currentBooking => {
-      const bookingDate = moment(currentBooking.date).format('YYYY-MM-DD');
-      if(!this.state.daysWithBooking.some(e => e.date == bookingDate)){
-        this.setState(prevState =>({
-          dayWithBooking:{
-            date: bookingDate,
-            sitting1Tables: 10,
-            sitting2Tables: 10
-          },
-          daysWithBooking:[...prevState.daysWithBooking, prevState.dayWithBooking]
-          
-        }))
-
-        console.log(this.state.daysWithBooking[0]);
-
-      }
-
-      // (prevState => ({
-      //   newTask: {
-      //     id: prevState.newTask.id+1,
-      //     todo: "",
-      //     isComplete: false
-      //     },
-      //     //using spread operator to take an existing array, todoList,
-      //     // and add another element, newTask, to it 
-      //     //while still preserving the original array 
-      //     todoList: [...prevState.todoList, prevState.newTask]
-      //   })
-      // )
-
-      // if(!this.state.daysWithBooking.includes(currentBooking.date)){
-      //   this.setState(prevState =>({
-      //     daysWithBooking:[...prevState.daysWithBooking, dayWithBooking],
-      //   }));
-      // }  
-      
-    });
-    console.log("Those days have a booking " + this.state.daysWithBooking);
+  increaseSitting2Count(date: string, sittingTime: string){
+    this.setState({
+      dayWithBooking: {
+        bookedDate: date,
+        sittings: {
+          sitting1: this.state.dayWithBooking.sittings.sitting1,
+          sitting2: this.state.dayWithBooking.sittings.sitting2 + 1
+        }
+      },
+    })
   }
 
+  getDatesWithBookings(){
+    //get configuration from DB
+    let sitting1Time: string = '';
+    this.state.configurations.map(key=>{
+      if(key.setting == 'sitting_1')
+        sitting1Time = key.value;
+    });
+    let sitting2Time: string = '';
+    this.state.configurations.map(key=>{
+      if(key.setting == 'sitting_2')
+        sitting2Time = key.value;
+    });
+
+    //Create an array to save & update booking values
+    let tempList: IBookingDay[] = [];
+
+    this.state.existingBookings.map(currentBooking => {
+      //Get date and time for booking in question
+      let bookingToCheck: IBookingDay;
+      let date = moment(currentBooking.date).format('YYYY-MM-DD');
+      let time = moment(currentBooking.date).format('HH:mm');
+        
+      //Check if current booking date exists in our temporary booking array, if not set values to empty
+      bookingToCheck = tempList.find(bookingDay => bookingDay.bookedDate === date) || {
+        bookedDate: '',
+        sittings: {
+          sitting1: 0,
+          sitting2: 0
+        }
+      };
+
+      //If bookingToCheck date does not exist in our temp list, 
+      //set the booking to check value  to current booking values
+      let bookingIsNew = false;
+      if(bookingToCheck.bookedDate === '') {
+        bookingIsNew = true;
+        bookingToCheck.bookedDate = date;
+      }
+
+      if(time === sitting1Time){
+        if(currentBooking.guest_nr < 7)
+          bookingToCheck.sittings.sitting1++;
+        else
+          bookingToCheck.sittings.sitting1 += 2;
+          
+      } else if(time === sitting2Time) {
+        if(currentBooking.guest_nr < 7)
+          bookingToCheck.sittings.sitting1++;
+        else
+          bookingToCheck.sittings.sitting1 += 2;
+        }
+       
+        if(bookingIsNew) {
+          tempList.push(bookingToCheck);
+        }
+  });  
+
+  this.setState({
+    daysWithBooking: tempList,
+  }, ()=> console.log(this.state.daysWithBooking));
+}
+
   fetchBookedTables(){
-    // this.getDatesWithBookings();
-  
-    // this.state.daysWithBooking.map(day => {
-    //   console.log("Party",day); 
-    // })
+    this.getDatesWithBookings();
 
-    // let sittingOne = 0;
-    // let sittingTwo = 0;
+    let disabledDays: Date[] = [];
+    this.state.daysWithBooking.map(day => {
 
-    // let sitting1Time: string = '';
-    // this.state.configurations.map(key=>{
-    //   if(key.setting == 'sitting_1')
-    //     sitting1Time = key.value;
-    // });
-    // let sitting2Time: string = '';
-    // this.state.configurations.map(key=>{
-    //   if(key.setting == 'sitting_2')
-    //     sitting2Time = key.value;
-    // });
+      if(day.sittings.sitting1 === 15 && day.sittings.sitting2 === 15)
+        disabledDays.push(new Date(day.bookedDate));
+      
+    });
 
-    // this.state.existingBookings.map(currentBooking => {
-    //   let time = moment(currentBooking.date).format('HH:mm');
-    //   if(this.state.daysWithBooking.includes(currentBooking.date) && sitting1Time === time){
-    //     console.log("hakuna matata");
-    //     let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
-    //     sittingOne += tables;
-    //   }
-     
-    //       if(sitting1Time === time){
-    //        let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
-    //         sittingOne += tables;
-    //       } else if (sitting2Time === time) {
-    //         let tables =  currentBooking.guest_nr < 7 ? 1 : 2;
-    //         sittingTwo += tables;
-    //       }      
-    //     });
-    //     console.log("at 1800 u have ", sittingOne,"nr of tables" );  
-    //     console.log("at 2100 u have ", sittingTwo,"nr of tables" );
+    this.setState({
+      disabledDays: disabledDays
+    });
 }
-
-disableDates(){
-  // this.state.existingBookings.map(currentBooking => {
-  //   const dayWithBooking = currentBooking.date;
-  //   this.setState(prevState =>({
-  //     disabledDays:[...prevState.disabledDays, dayWithBooking]
-  //   }));
-
-  // });
-
-  // console.log("Those days have a booking " + this.state.disabledDays);
-}
-    
 
   handleDayClick = (day: Date) => {
     let booking = this.props.theBooking;
