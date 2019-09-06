@@ -4,7 +4,7 @@ import { IBooking } from '../Booking/Booking';
 
 export interface IAddTimeProps{
     theBooking: IBooking;
-    onclick(updatedBooking: IBooking): void,
+		onclick(updatedBooking: IBooking): void,
 }
 
 class Time extends React.Component <IAddTimeProps,{}> {
