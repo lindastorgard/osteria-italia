@@ -29,7 +29,7 @@ interface IBookingState {
 class Booking extends Component <{}, IBookingState> {
 	constructor(props:any){
     super(props);
-
+    
       // set booking state
       this.state = {
 
