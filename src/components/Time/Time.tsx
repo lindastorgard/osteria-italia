@@ -1,59 +1,119 @@
-import React, { Component } from 'react';
-import './Time.scss';
+import React from 'react';
 import { IBooking } from '../Booking/Booking';
+import { IExistingBoooking } from '../Calender/Calender';
+import moment from 'moment/moment.js' 
+import './Time.scss';
 
-export interface IAddTimeProps{
-    theBooking: IBooking;
-		onclick(updatedBooking: IBooking): void,
+const axios = require ('axios');
+
+export interface IBookedUpTime{
+  earlyBooking: boolean,
+  lateBooking: boolean,
 }
 
-class Time extends React.Component <IAddTimeProps,{}> {
-    constructor(props:any){
-        super(props);
-        
-        this.handleInput = this.handleInput.bind(this);
-        this.handleView = this.handleView.bind(this);
-    }
+export interface ITimeState{
+	bookedTimes: IBookedUpTime;
+	existingBookings: IExistingBoooking[],
+}
 
-    handleInput = (event: any) => { 
-        let booking = this.props.theBooking;
-        booking.time = event.target.value;
-        booking.view = this.props.theBooking.view + 1;
+export interface IAddTimeProps{
+  theBooking: IBooking;
+	onclick(updatedBooking: IBooking): void,
+}
 
-        this.props.onclick(booking);
-    }
+class Time extends React.Component <IAddTimeProps, ITimeState> {
+  constructor(props:any){
+		super(props);
+		this.state = {
+			bookedTimes: {
+				earlyBooking: false,
+				lateBooking : true,  
+			},
+			existingBookings: [],
+		}
+		 
+		this.disableBookedUpTimes = this.disableBookedUpTimes.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+		this.handleView = this.handleView.bind(this);
+		this.getData = this.getData.bind(this);
+	}
 
-    handleView = (event: any) => {
-      let booking = this.props.theBooking;
-      booking.view = parseInt(event.target.value);
+	componentDidMount() {
+		this.getData();
+		this.disableBookedUpTimes();
+  }
 
-      this.props.onclick(booking);
-    }
+  getData(){
+    axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
+      .then((response:any) => {
+        this.setState({
+          existingBookings: response.data.data 
+        });
+      console.log("Existing from state: ", this.state.existingBookings);
+    })
+  }
+		
+	disableBookedUpTimes(){
+		let selectedDate = moment(this.props.theBooking.date).format('YYYY-MM-DD')
+		
+		console.log("This is the day for current booking", selectedDate);
+		this.state.existingBookings.map(currentBooking => {
+			console.log(currentBooking.date)
+		})
+		 
+	// 		this.getDatesWithBookings();
+	// 		this.state.daysWithBooking.map(day => {
+	// 			if(day.sittings.sitting1 === 15 && !(day.sittings.sitting2 === 15)){
+	// 				console.log("you cannot booke table at 18 00 on ", day.bookedDate);
+	// 				this.setState({
+	// 					bookedTimes:{
+	// 						earlyBooking: true,
+	// 						lateBooking: false
+	// 					}
+	// 				})
+	// 			} else if(day.sittings.sitting2 === 15 && !(day.sittings.sitting1 === 15))
+	// 				console.log("you cannot booke table at 18 00 on ", day.bookedDate);
+	// 				this.setState({
+	// 					bookedTimes:{
+	// 						earlyBooking: false,
+	// 						lateBooking: true
+	// 					}
+	// 				})
+	// 		})  
+	}
+
+  handleInput = (event: any) => { 
+  	let booking = this.props.theBooking;
+  	booking.time = event.target.value;
+  	booking.view = this.props.theBooking.view + 1;
+
+  	this.props.onclick(booking);
+  }
+
+  handleView = (event: any) => {
+  	let booking = this.props.theBooking;
+  	booking.view = parseInt(event.target.value);
+
+  	this.props.onclick(booking);
+  }
 
     render() {
 
       if(this.props.theBooking.time){
         return (
           <main className="timePageContainer">
-              <section className="timeParentTopSection">
-                  <div className="timeChildTopSection">
-                          <button className="timeTopSection" onClick={this.handleView} value="1">Guests</button>
-                          <button className="timeTopSection">{this.props.theBooking.guests}</button>
-                      </div>
+            <section className="timeParentTopSection">
+              <div className="timeChildTopSection">
+                <button className="timeTopSection" onClick={this.handleView} value="1">Guests</button>
+                <button className="timeTopSection">{this.props.theBooking.guests}</button>
+              </div>
 
-                  {/* Open for date when ready - change all values!!!! */}
-                  {/* <div className="timeChildTopSection">
-                    <button className="timeTopSection" onClick={this.handleView} value="2">Date</button>
-                        <button className="timeTopSection">{this.props.theBooking.date}</button>
-                  </div> */}
+							<div className="timeChildTopSection">
+                <button className="timeTopSection" onClick={this.handleInput} value="2">Date</button>
+                <button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
+              </div>
 
-                  <div className="timeChildTopSection">
-                    <button className="timeTopSection" onClick={this.handleView} value="2">Time</button>
-                      <button className="timeTopSection">{this.props.theBooking.time}</button>
-                  </div>
-
-                      
-              </section>
+            </section>
               <div className="timeParent">
               <h1>Select time</h1>
               <section className="timeChild">
@@ -74,13 +134,8 @@ class Time extends React.Component <IAddTimeProps,{}> {
                         </div>
 
                         <div className="timeChildTopSection">
-                        <button className="timeTopSection" onClick={this.handleInput} value="2">Date</button>
-                            <button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
-                        </div>
-
-                        <div className="timeChildTopSection">
-                        <button className="timeTopSection" onClick={this.handleInput} value="3">Time</button>
-                            <button className="timeTopSection">{this.props.theBooking.time}</button>
+                        	<button className="timeTopSection" onClick={this.handleInput} value="2">Date</button>
+                          <button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
                         </div>
                     </section>
                 </div>

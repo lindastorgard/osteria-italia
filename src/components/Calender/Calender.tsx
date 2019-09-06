@@ -5,15 +5,9 @@ import moment from 'moment/moment.js'
 
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
-import { stripTrailingSlash } from 'history/PathUtils';
-import { tsImportEqualsDeclaration } from '@babel/types';
 
 const axios = require ('axios');
 
-export interface IBookedUpTime{
-  earlyBooking: boolean,
-  lateBooking: boolean,
-}
 
 export interface IExistingBoooking {
   id: number,
@@ -43,7 +37,6 @@ export interface ICalenderState{
   existingBookings: IExistingBoooking[],
   configurations: IConfig[],
   disabledDays: Date[],
-  bookedTimes: IBookedUpTime;
 }
 
 interface ICalenderProps{
@@ -66,10 +59,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
       disabledDays: [],
       daysWithBooking: [],
       configurations: [],
-      bookedTimes: {
-        earlyBooking: false,
-        lateBooking : true,  
-      }
     } 
 
     this.handleDayClick = this.handleDayClick.bind(this);
@@ -77,7 +66,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.getData = this.getData.bind(this);
     this.disableBookedUpDays = this.disableBookedUpDays.bind(this);
     this.getDatesWithBookings = this.getDatesWithBookings.bind(this);
-    this.disableBookedUpTimes = this.disableBookedUpTimes.bind(this);
   }
 
   componentDidMount() {
@@ -102,7 +90,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
           configurations: response.data.data 
         });
         // console.log("values from my config table ",this.state.configurations);
-        this.disableBookedUpDays();
+      this.disableBookedUpDays();
     })
   }
 
@@ -176,28 +164,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.setState({
       disabledDays: disabledDays
     });
-}
-
-  disableBookedUpTimes(){
-    this.getDatesWithBookings();
-    this.state.daysWithBooking.map(day => {
-      if(day.sittings.sitting1 === 15 && !(day.sittings.sitting2 === 15)){
-        console.log("you cannot booke table at 18 00 on ", day.bookedDate);
-        this.setState({
-          bookedTimes:{
-            earlyBooking: true,
-            lateBooking: false
-          }
-        })
-      } else if(day.sittings.sitting2 === 15 && !(day.sittings.sitting1 === 15))
-        console.log("you cannot booke table at 18 00 on ", day.bookedDate);
-        this.setState({
-          bookedTimes:{
-            earlyBooking: false,
-            lateBooking: true
-          }
-        })
-    })  
   }
 
   handleDayClick = (day: Date) => {
@@ -208,7 +174,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
   }
 
   render() {
-
     return (
       <div className="page-container">
         <section>
