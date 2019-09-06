@@ -5,8 +5,6 @@ import moment from 'moment/moment.js'
 
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
-import { stripTrailingSlash } from 'history/PathUtils';
-import { tsImportEqualsDeclaration } from '@babel/types';
 
 const axios = require ('axios');
 

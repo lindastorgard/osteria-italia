@@ -156,11 +156,10 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
                             <button className="profileTopSection">{this.props.theBooking.guests}</button>
                         </div>
 
-                        {/* Open for date when ready - change all values!!!! */}
-                        {/* <div className="timeChildTopSection">
+                        <div className="profileChildTopSection">
                         <button className="timeTopSection" onClick={this.handleView} value="2">Date</button>
-                            <button className="timeTopSection">{this.props.theBooking.date}</button>
-                        </div> */}
+												<button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
+                        </div>
 
                         <div className="profileChildTopSection">
                         <button className="profileTopSection" onClick={this.handleView} value="2">Time</button>
