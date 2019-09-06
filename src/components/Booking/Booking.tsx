@@ -104,7 +104,7 @@ class Booking extends Component <{}, IBookingState> {
         case 4:
                 return(
                     <div>
-                      <Profile onsubmit={this.updateState} theBooking={this.state.booking}/>
+                      <Profile onsubmit={this.updateState} onclick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
 
