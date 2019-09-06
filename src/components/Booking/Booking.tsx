@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-
-import { bool } from 'prop-types';
+import { bool, string } from 'prop-types';
 import Calender from '../Calender/Calender';
 import Summary from '../Summary/Summary';
+import axios from 'axios';
+
 import Confirmation from '../Confirmation/Confirmation';
 import Profile, { IAddProfileState } from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
-
 
 export interface IBooking{
     view: number,
@@ -24,7 +24,6 @@ interface IBookingState {
 }
 
 class Booking extends Component <{}, IBookingState> {
-
     constructor(props:any){
         super(props);
 
@@ -40,12 +39,22 @@ class Booking extends Component <{}, IBookingState> {
                     firstName:'',
                     lastName: '',
                     email: '',
-                    phone: ''
+                    phone: '',
+                    firstNameError: '',
+                    lastNameError: '',
+                    emailError: '',
+                    phoneError: '',
+                    showFirstNameError: false,
+                    showLastNameError: false,
+                    showEmailError: false,
+                    showPhoneError: false
                 }
+                
             }
 
         };
         this.updateState = this.updateState.bind(this);
+        this.makeBooking = this.makeBooking.bind(this);
 
     }
 
@@ -56,14 +65,27 @@ class Booking extends Component <{}, IBookingState> {
         });
     }
 
+    // make booking
+    makeBooking = () => {
+      axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
+        customer_id: 5,
+        guest_nr: this.state.booking.guests,
+        date: "2019-08-05 18.00.00"
+      })
+          .then(response => {
+                  console.log(response.data.message);
+          })
+          .catch(error => console.log(error.data.message));
+  };
+
   render() {
     switch(this.state.booking.view){
-        case 1:
-                return(
-                    <div>
-                        <Guests onclick={this.updateState} theBooking={this.state.booking}/>
-                    </div>
-                )
+      case 1:
+        return(
+          <div>
+            <Guests onclick={this.updateState} theBooking={this.state.booking}/>
+          </div>
+        )
 
         case 2:
                 return(
@@ -75,23 +97,23 @@ class Booking extends Component <{}, IBookingState> {
         case 3:
                 return(
                     <div>
-                        <Time onclick={this.updateState} theBooking={this.state.booking}/>
+                      <Time onclick={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
 
         case 4:
                 return(
                     <div>
-                        <Profile onsubmit={this.updateState} theBooking={this.state.booking}/>
+                      <Profile onsubmit={this.updateState} theBooking={this.state.booking}/>
                     </div>
                 )
 
         case 5:
-                return(
-                    <div>
-                        <Summary onclick={this.updateState} theBooking={this.state.booking}/>
-                    </div>
-                )
+          return(
+            <div>
+              <Summary onclick={this.updateState} makesubmit={this.makeBooking} theBooking={this.state.booking}/>
+            </div>
+          )
 
     }
   }
