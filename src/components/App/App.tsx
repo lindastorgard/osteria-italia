@@ -6,10 +6,6 @@ import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
 import 'bootstrap/scss/bootstrap.scss';
 import './App.scss';
-import SimpleGDPR from 'simple-gdpr';
-import 'simple-gdpr/dist/simplegdpr.min.css';
- 
-const notice = new SimpleGDPR();
 
 class App extends Component<{}, {}> {
   constructor(props: any) {

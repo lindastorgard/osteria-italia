@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './Profile.scss';
 import { IBooking } from '../Booking/Booking';
+import SimpleGDPR from 'simple-gdpr';
+import 'simple-gdpr/dist/simplegdpr.min.css';
 
+const notice = new SimpleGDPR()
 
 export interface IAddProfileState{
     firstName: string;
@@ -208,5 +211,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
             </main>
         )
     }
+   
 }
+
 export default Profile;
