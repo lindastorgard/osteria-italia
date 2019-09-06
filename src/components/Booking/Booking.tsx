@@ -10,16 +10,20 @@ import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
 
+
+
 export interface IBooking{
   view: number,
   guests: number,
   date: Date,
   time: string,
+  customerId: number,
   profile: IAddProfileState
 }
 
 interface IBookingState {
-	booking: IBooking;
+
+  booking: IBooking;
 }
 
 class Booking extends Component <{}, IBookingState> {
@@ -34,6 +38,7 @@ class Booking extends Component <{}, IBookingState> {
           guests: 0,
           date: new Date(),
           time: '',
+          customerId: 0,
           profile: {
             firstName:'',
             lastName: '',
@@ -46,15 +51,30 @@ class Booking extends Component <{}, IBookingState> {
             showFirstNameError: false,
             showLastNameError: false,
             showEmailError: false,
-            showPhoneError: false
+            showPhoneError: false,
+            myBookings: [{
+            id: 0, 
+            customer_id: 0,
+            guest_nr: 0, 
+            date: '', 
+            firstname: '', 
+            lastname: '', 
+            email: '', 
+            phone: ''}],
+          myCustomers: [{
+            id: 0,
+            firstName: '',
+            lastname: '',
+            email: '',
+            phone: ''}]
           }        
         }
 			};
 			
       this.updateState = this.updateState.bind(this);
       this.makeBooking = this.makeBooking.bind(this);
+  }
 
-    }
 
     // Handle fields change
     updateState(updatedBooking: IBooking) {
@@ -66,9 +86,9 @@ class Booking extends Component <{}, IBookingState> {
     // make booking
     makeBooking = () => {
       axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
-      	customer_id: 5,
+      	customer_id: this.state.booking.customerId,
       	guest_nr: this.state.booking.guests,
-      	date: "2019-08-05 18.00.00"
+      	date: this.state.booking.date
       })
         .then(response => {
           console.log(response.data.message);
@@ -105,6 +125,7 @@ class Booking extends Component <{}, IBookingState> {
               <Profile onsubmit={this.updateState} onclick={this.updateState} theBooking={this.state.booking}/>
             </div>
           )
+
 
         case 5:
           return(
