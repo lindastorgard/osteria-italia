@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Guests.scss';
 import Booking, { IBooking } from '../Booking/Booking';
 
