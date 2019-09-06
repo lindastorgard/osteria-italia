@@ -2,18 +2,56 @@ import React, { Component } from 'react';
 import './Time.scss';
 import { IBooking } from '../Booking/Booking';
 
-export interface IAddTimeProps{
-    theBooking: IBooking;
-		onclick(updatedBooking: IBooking): void,
+export interface IBookedUpTime{
+  earlyBooking: boolean,
+  lateBooking: boolean,
 }
 
-class Time extends React.Component <IAddTimeProps,{}> {
-    constructor(props:any){
-        super(props);
-        
-        this.handleInput = this.handleInput.bind(this);
-        this.handleView = this.handleView.bind(this);
-    }
+export interface ITimeState{
+	bookedTimes: IBookedUpTime;
+}
+
+export interface IAddTimeProps{
+  theBooking: IBooking;
+	onclick(updatedBooking: IBooking): void,
+}
+
+class Time extends React.Component <IAddTimeProps, ITimeState> {
+  constructor(props:any){
+		super(props);
+		this.state = {
+			bookedTimes: {
+				earlyBooking: false,
+				lateBooking : true,  
+			}
+		}
+		 
+		this.disableBookedUpTimes = this.disableBookedUpTimes.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleView = this.handleView.bind(this);
+	}
+		
+	disableBookedUpTimes(){
+			this.getDatesWithBookings();
+			this.state.daysWithBooking.map(day => {
+				if(day.sittings.sitting1 === 15 && !(day.sittings.sitting2 === 15)){
+					console.log("you cannot booke table at 18 00 on ", day.bookedDate);
+					this.setState({
+						bookedTimes:{
+							earlyBooking: true,
+							lateBooking: false
+						}
+					})
+				} else if(day.sittings.sitting2 === 15 && !(day.sittings.sitting1 === 15))
+					console.log("you cannot booke table at 18 00 on ", day.bookedDate);
+					this.setState({
+						bookedTimes:{
+							earlyBooking: false,
+							lateBooking: true
+						}
+					})
+			})  
+		}
 
     handleInput = (event: any) => { 
         let booking = this.props.theBooking;
