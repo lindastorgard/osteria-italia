@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { bool, string } from 'prop-types';
+import Calender from '../Calender/Calender';
+import Summary from '../Summary/Summary';
 import axios from 'axios';
-import Date from '../Date/Date'
-import Summary from '../Summary/Summary'
+
 import Confirmation from '../Confirmation/Confirmation';
 import Profile, { IAddProfileState } from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
+
 
 
 export interface IBooking{
@@ -26,6 +28,7 @@ interface IBookingState {
 class Booking extends Component <{}, IBookingState> {
   constructor(props:any){
     super(props);
+
 
     // set booking state
     this.state = { 
@@ -103,35 +106,35 @@ class Booking extends Component <{}, IBookingState> {
           </div>
         )
 
-      // Open when date is done
-      // case 2:
-      //         return(
-      //             <div>
-      //                 <Date/>
-      //                 {/* <Date onclick={this.updateState} theBooking={this.state.booking}/> */}
-      //             </div>
-      //         )
 
-      case 2:
-        return(
-          <div>
-            <Time onclick={this.updateState} theBooking={this.state.booking}/>
-              </div>
+        case 2:
+                return(
+                    <div>
+                        <Calender onDayClick={this.updateState} theBooking={this.state.booking}/>
+                    </div>
+                )
+
+        case 3:
+                return(
+                    <div>
+                      <Time onclick={this.updateState} theBooking={this.state.booking}/>
+                    </div>
+                )
+
+        case 4:
+                return(
+                    <div>
+                      <Profile onsubmit={this.updateState} onclick={this.updateState} theBooking={this.state.booking}/>
+                    </div>
+                )
+
+
+        case 5:
+          return(
+            <div>
+              <Summary onclick={this.updateState} makesubmit={this.makeBooking} theBooking={this.state.booking}/>
+            </div>
           )
-        
-      case 3:
-        return(
-          <div>
-            <Profile onsubmit={this.updateState} onclick={this.updateState} theBooking={this.state.booking}/>
-          </div>
-        )
-        
-      case 4:
-        return(
-          <div>
-            <Summary onclick={this.updateState} makesubmit={this.makeBooking} theBooking={this.state.booking}/> 
-          </div>
-        )
 
     }
   }
