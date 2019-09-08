@@ -6,6 +6,7 @@ import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
 import 'bootstrap/scss/bootstrap.scss';
 import './App.scss';
+import Footer from '../Footer/Footer';
 
 class App extends Component<{}, {}> {
   constructor(props: any) {
@@ -24,6 +25,7 @@ class App extends Component<{}, {}> {
               <Route exact path='/booking' component={ Booking } /> 
               <Route exact path='/menu' component={ Menu } />
             </Switch>
+            <Footer />  
           </div>
         </Router>
     );

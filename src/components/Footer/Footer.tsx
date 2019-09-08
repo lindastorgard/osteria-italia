@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import './Footer.scss';
 
 class Footer extends Component <{}, {}> {
     render() {
         return (
-            <div>
-                <p>Hello Footer World!</p>
+            <body>
+                <div className='footer'>
+                <div className='footerSocial'>Facebook</div>
+                <div className='footerSocial'>Instagram</div>
+                <div className='footerInfo'>Piazza Italiano 5, 55599, Italia</div>
             </div>
+            </body>
         )
     }
 }
