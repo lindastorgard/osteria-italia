@@ -6,8 +6,8 @@ class Footer extends Component <{}, {}> {
         return (
             <body>
                 <div className='footer'>
-                <div className='footerSocial'>Facebook</div>
-                <div className='footerSocial'>Instagram</div>
+                <div className='footerSocial'><a href="#">Facebook</a></div>
+                <div className='footerSocial'><a href="#">Instagram</a></div>
                 <div className='footerInfo'>Piazza Italiano 5, 55599, Italia</div>
             </div>
             </body>
