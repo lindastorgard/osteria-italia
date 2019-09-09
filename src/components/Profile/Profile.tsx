@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
 import './Profile.scss';
-import Booking, {IBooking} from '../Booking/Booking';
+import { IBooking } from '../Booking/Booking';
 import axios from 'axios';
-import {string} from 'prop-types';
-import {throwStatement} from '@babel/types';
+import { string } from 'prop-types';
+import { throwStatement } from '@babel/types';
+import SimpleGDPR from 'simple-gdpr';
+import 'simple-gdpr/dist/simplegdpr.min.css';
 
-interface ICustomerData {
-    id: number,
-    customer_id: number,
-    guest_nr: number,
-    date: string,
-    firstname: string,
-    lastname: string,
-    email: string,
-    phone: string
+const notice = new SimpleGDPR()
 
+interface ICustomerData{
+  id: number, 
+  customer_id: number, 
+  guest_nr: number, 
+  date: string, 
+  firstname: string, 
+  lastname: string, 
+  email: string, 
+  phone: string
 }
 
 interface ICustomer {
@@ -303,6 +306,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
             </main>
         )
     }
+   
 }
 
 export default Profile;
