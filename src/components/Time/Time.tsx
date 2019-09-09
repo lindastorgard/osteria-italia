@@ -49,10 +49,22 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
         this.setState({
           existingBookings: response.data.data
         });
-        this.disableBookedUpTimes();
-        console.log("Existing from state: ", this.state.existingBookings);
+
+        if (this.state.existingBookings == undefined){
+          console.log('got ya');
+          this.setState({
+            bookedTimes: {
+              earlyBooking: 15,
+              lateBooking: 15
+            }
+          })
+          return
+        }else{
+          console.log("Existing from state: ", this.state.existingBookings);
+          this.disableBookedUpTimes();
+        }
       })
-  }
+    }
 
   disableBookedUpTimes() {
     // Iterate over the reservations and compare the date from the database with the chosen date
