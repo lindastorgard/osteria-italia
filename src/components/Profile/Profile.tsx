@@ -6,15 +6,15 @@ import { string } from 'prop-types';
 import { throwStatement } from '@babel/types';
 
 interface ICustomerData{
-  id: number, 
-  customer_id: number, 
-  guest_nr: number, 
-  date: string, 
-  firstname: string, 
-  lastname: string, 
-  email: string, 
+  id: number,
+  customer_id: number,
+  guest_nr: number,
+  date: string,
+  firstname: string,
+  lastname: string,
+  email: string,
   phone: string
-  
+
 }
 
 interface ICustomer{
@@ -53,7 +53,7 @@ export interface IAddProfileProps{
 }
 
 class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
-    
+
   constructor(props:any){
   super(props);
 
@@ -71,13 +71,13 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
     showEmailError: false,
     showPhoneError: false,
     myBookings: [{
-      id: 0, 
+      id: 0,
       customer_id: 0,
-      guest_nr: 0, 
-      date: '', 
-      firstname: '', 
-      lastname: '', 
-      email: '', 
+      guest_nr: 0,
+      date: '',
+      firstname: '',
+      lastname: '',
+      email: '',
       phone: ''}],
     myCustomers: [{
       id: 0,
@@ -86,7 +86,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
       email: '',
       phone: ''}]
     };
-        
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleView = this.handleView.bind(this);
@@ -98,10 +98,10 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
+    axios.get('http://localhost:8888/booking_api/api/customers/read.php')
       .then(response => {
         console.log('Got response from server');
-        this.setState({ myBookings: response.data.data })
+        this.setState({ myCustomers: response.data.data })
       })
         .catch(error => console.log(error));
   }
@@ -109,17 +109,17 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
   handleCustomerEmail(){
     for (let index = 0; index < this.state.myCustomers.length; index++) {
       let newCustomerEmail = this.props.theBooking.profile.email;
-      
+
       if(newCustomerEmail === this.state.myCustomers[index].email){
         let old_customer_id = this.state.myCustomers[index].id;
 
         let booking = this.props.theBooking;
-        booking.customerId = old_customer_id;  
+        booking.customerId = old_customer_id;
       }
     }
   }
 
-  
+
   handleEmail(){
     for (let index = 0; index < this.state.myBookings.length; index++) {
       let newEmail = this.props.theBooking.profile.email;
@@ -128,14 +128,14 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
         let old_customer_id = this.state.myBookings[index].customer_id;
 
         let booking = this.props.theBooking;
-        booking.customerId = old_customer_id;  
+        booking.customerId = old_customer_id;
         return true;
       }
     }
   }
 
   handelNewCustomer(booking: IBooking){
-    this.postCustomer(booking);  
+    this.postCustomer(booking);
   }
 
   postCustomer(booking: IBooking){
@@ -155,22 +155,22 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
     axios.get('http://localhost:8888/booking_api/api/customers/readCustomers.php')
       .then(response => {
         console.log('Got response from server');
-        this.setState({ myCustomers: response.data.data }, () => { 
+        this.setState({ myCustomers: response.data.data }, () => {
         this.handleCustomerEmail();
         this.props.onsubmit(booking);
         });
       })
       .catch(error => console.log(error));
   }
-    
 
-  handleSubmit = (event: any) => { 
+
+  handleSubmit = (event: any) => {
     event.preventDefault();
     let booking = this.props.theBooking;
     booking.profile = this.state;
-  
+
     const isValid = this.validate();
-        
+
     if (isValid) {
       booking.view = this.props.theBooking.view + 1;
 
@@ -179,19 +179,19 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
       } else {
         this.props.onsubmit(booking);
       }
-    } 
-        
+    }
+
   };
 
   handleInputChange(event:any) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-        
+
     this.setState({
       [name]: value
     } as any);
-      
+
   }
 
   handleView = (event: any) => {
@@ -214,20 +214,20 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
 
     if (this.props.theBooking.profile.lastName.length < 2 ) {
       showlastNameError = true;
-    } 
+    }
 
     if (!this.props.theBooking.profile.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       showemailError = true;
-    } 
-           
+    }
+
     if (this.props.theBooking.profile.phone.length < 5) {
       showphoneError = true;
-    }  
+    }
 
     if (showfirstNameError || showlastNameError || showemailError || showphoneError) {
       this.setState({ showFirstNameError: showfirstNameError, showLastNameError: showlastNameError,showEmailError: showemailError, showPhoneError: showphoneError });
       return false;
-    } 
+    }
 
     return true;
   }
@@ -239,7 +239,7 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
     if(!this.state.showFirstNameError) {
       firstNameError = (<div></div>);
     }
-        
+
     let lastNameError: JSX.Element = (<div className="errorMessage">{this.state.lastNameError}</div>);
     if(!this.state.showLastNameError) {
       lastNameError = (<div></div>);
@@ -279,33 +279,33 @@ class Profile extends React.Component <IAddProfileProps,IAddProfileState> {
             <div className="profileParent">
               <h1>Your details</h1>
               <form onSubmit={this.handleSubmit} className="profileChild">
-                <input 
-                  name="firstName" 
-                  className="profilebox" 
-                  type="name" 
-                  placeholder="Firstname" 
+                <input
+                  name="firstName"
+                  className="profilebox"
+                  type="name"
+                  placeholder="Firstname"
                   onChange={this.handleInputChange}></input>
-                    
+
                   {firstNameError}
-                <input 
-                  name="lastName" 
-                  className="profilebox" 
-                  type="lastname" 
-                  placeholder="Lastname" 
+                <input
+                  name="lastName"
+                  className="profilebox"
+                  type="lastname"
+                  placeholder="Lastname"
                   onChange={this.handleInputChange}/>
                   {lastNameError}
-                <input 
-                  name="email" 
-                  className="profilebox" 
-                  type="text" 
-                  placeholder="Email" 
+                <input
+                  name="email"
+                  className="profilebox"
+                  type="text"
+                  placeholder="Email"
                   onChange={this.handleInputChange}/>
                   {emailError}
-                <input 
-                  name="phone" 
-                  className="profilebox" 
-                  type="phone" 
-                  placeholder="Phone" 
+                <input
+                  name="phone"
+                  className="profilebox"
+                  type="phone"
+                  placeholder="Phone"
                   onChange={this.handleInputChange}/>
                   {phoneError}
                 <button type="submit" value="Submit" className="btn btn-primary">
