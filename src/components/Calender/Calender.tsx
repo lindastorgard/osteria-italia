@@ -80,7 +80,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         this.setState({
           existingBookings: response.data.data 
         });
-      console.log("Existing from state: ", this.state.existingBookings);
       this.getConfigData();
     })
   }
@@ -91,7 +90,6 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         this.setState({
           configurations: response.data.data 
         });
-        // console.log("values from my config table ",this.state.configurations);
       this.disableBookedUpDays();
     })
   }
@@ -111,8 +109,8 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
 
     //Create an array to save & update booking values
     let tempList: IBookingDay[] = [];
-
-    this.state.existingBookings.map(currentBooking => {
+    
+     this.state.existingBookings.map(currentBooking => {
       //Get date and time for booking in question
       let bookingToCheck: IBookingDay;
       let date = moment(currentBooking.date).format('YYYY-MM-DD');
@@ -154,18 +152,25 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
 
 
   disableBookedUpDays(){
-    this.getDatesWithBookings();
+    if (this.state.existingBookings == undefined){
+      console.log('got ya');
+      return
+    }else{
+      console.log(this.state.existingBookings);
+      this.getDatesWithBookings();
 
-    let disabledDays: Date[] = [];
-    this.state.daysWithBooking.map(day => {
-
-      if(day.sittings.sitting1 === 15 && day.sittings.sitting2 === 15)
-        disabledDays.push(new Date(day.bookedDate));
-    });
-
-    this.setState({
-      disabledDays: disabledDays
-    });
+      console.log("Im looking for this",this.state.daysWithBooking);
+      let disabledDays: Date[] = [];
+      this.state.daysWithBooking.map(day => {
+  
+        if(day.sittings.sitting1 === 15 && day.sittings.sitting2 === 15)
+          disabledDays.push(new Date(day.bookedDate));
+      });
+  
+      this.setState({
+        disabledDays: disabledDays
+      });
+    }
   }
 
   handleDayClick = (day: Date) => {
