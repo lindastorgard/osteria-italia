@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Confirmation extends Component <{}, {}> {
   render() {
     return (
-      <main className="pageContainer">
+      <main className="page-container">
         <div className="parent">
           <h1>Confirmation</h1>
           <section className="child">

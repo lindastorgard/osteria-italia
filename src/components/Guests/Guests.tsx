@@ -25,7 +25,7 @@ class Guests extends React.Component <IAddGuestProps,{}> {
   render() {
 
     return (
-      <main className="pageContainer">
+      <main className="page-container">
         <div className="parent">
           <h1>Select guests</h1>
           <section className="child">

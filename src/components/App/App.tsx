@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
 import 'bootstrap/scss/bootstrap.scss';
+import Nav from '../Nav/Nav';
 import Booking from '../Booking/Booking';
 import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
-import LandingPage from '../LandingPage/LandingPage';
-import Nav from '../Nav/Nav';
+import './App.scss';
+
 import Footer from '../Footer/Footer';
 import './App.scss';
 

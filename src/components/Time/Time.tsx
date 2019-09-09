@@ -124,20 +124,20 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
   render() {
 
     return (
-      <main className="timePageContainer">
-        <section className="profileParentTopSection">
-          <div className="profileChildTopSection">
-            <button className="profileTopSection" onClick={this.handleView} value="1">Guests</button>
-            <button className="profileTopSection">{this.props.theBooking.guests}</button>
+      <main className="page-container">
+        <section className="parent-top-section">
+          <div className="child-top-section">
+            <button className="top-section-black" onClick={this.handleView} value="1">Guests</button>
+            <button className="top-section">{this.props.theBooking.guests}</button>
           </div>
-          <div className="profileChildTopSection">
-            <button className="timeTopSection" onClick={this.handleView} value="2">Date</button>
-            <button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
+          <div className="child-top-section">
+            <button className="top-section-black" onClick={this.handleView} value="2">Date</button>
+            <button className="top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
           </div>
         </section>
-        <div className="timeParent">
+        <div className="time-parent">
           <h1>Select time</h1>
-          <section className="timeChild">
+          <section className="time-child">
             <button
               onClick={this.handleInput}
               disabled={this.hasNoAvailableTimes(this.state.bookedTimes.earlyBooking)}

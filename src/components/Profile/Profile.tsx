@@ -246,21 +246,22 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       }
 
       return (
-        <main className="profilePageContainer">
+        <main className="page-container">
+        
           <div className="panel panel-default">
             </div>
-              <section className="profileParentTopSection">
-                <div className="profileChildTopSection">
-                  <button className="profileTopSection" onClick={this.handleView} value="1">Guests</button>
-                  <button className="profileTopSection">{this.props.theBooking.guests}</button>
+              <section className="parent-top-section">
+                <div className="child-top-section">
+                  <button className="top-section-black" onClick={this.handleView} value="1">Guests</button>
+                  <button className="top-section">{this.props.theBooking.guests}</button>
                 </div>
-                <div className="profileChildTopSection">
-                  <button className="timeTopSection" onClick={this.handleView} value="2">Date</button>
-                  <button className="timeTopSection">{this.props.theBooking.date.toLocaleDateString()}</button>
+                <div className="child-top-section">
+                  <button className="top-section-black" onClick={this.handleView} value="2">Date</button>
+                  <button className="top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
                 </div>
-                <div className="profileChildTopSection">
-                  <button className="profileTopSection" onClick={this.handleView} value="3">Time</button>
-                  <button className="profileTopSection">{this.props.theBooking.time}</button>
+                <div className="child-top-section">
+                  <button className="top-section-black" onClick={this.handleView} value="3">Time</button>
+                  <button className="top-section">{this.props.theBooking.time}</button>
                 </div>
               </section>
                 <div className="profileParent">
