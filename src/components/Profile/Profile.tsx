@@ -133,13 +133,16 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
                 email: this.props.theBooking.profile.email,
                 phone: this.props.theBooking.profile.phone
             },
+            // https://stackoverflow.com/questions/48255545/axios-getting-two-requests-options-post
+            // Important to not remove this header due to ajax making cross domain reqs which will break our integration
             {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'text/plain'
                 }
             })
             .then(response => {
                 let newCustomerId = response.data.id;
+                console.log('Created new customer with id ' + newCustomerId);
                 this.props.theBooking.customerId = newCustomerId;
             })
             .catch(error => console.log(error.data.message));
@@ -156,9 +159,9 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
             if (!this.isCustomerInDatabase()) {
                 this.handelNewCustomer(booking);
             }
-            this.props.onsubmit(booking);
-            // Go to the next view
+
             booking.view = this.props.theBooking.view + 1;
+            this.props.onsubmit(booking);
         }
     };
 

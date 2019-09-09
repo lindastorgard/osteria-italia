@@ -9,6 +9,7 @@ import Profile, { IAddProfileState } from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
+import moment from "moment";
 
 
 
@@ -29,7 +30,7 @@ interface IBookingState {
 class Booking extends Component <{}, IBookingState> {
 	constructor(props:any){
     super(props);
-    
+
       // set booking state
       this.state = {
 
@@ -53,13 +54,13 @@ class Booking extends Component <{}, IBookingState> {
             showEmailError: false,
             showPhoneError: false,
             myBookings: [{
-            id: 0, 
+            id: 0,
             customer_id: 0,
-            guest_nr: 0, 
-            date: '', 
-            firstname: '', 
-            lastname: '', 
-            email: '', 
+            guest_nr: 0,
+            date: '',
+            firstname: '',
+            lastname: '',
+            email: '',
             phone: ''}],
           myCustomers: [{
             id: 0,
@@ -67,10 +68,10 @@ class Booking extends Component <{}, IBookingState> {
             lastname: '',
             email: '',
             phone: ''}]
-          }        
+          }
         }
 			};
-			
+
       this.updateState = this.updateState.bind(this);
       this.makeBooking = this.makeBooking.bind(this);
   }
@@ -86,10 +87,17 @@ class Booking extends Component <{}, IBookingState> {
     // make booking
     makeBooking = () => {
       axios.post('http://localhost:8888/booking_api/api/bookings/createBooking.php', {
-      	customer_id: this.state.booking.customerId,
+      	customer_id: parseInt(this.state.booking.customerId.toString()),
       	guest_nr: this.state.booking.guests,
-      	date: this.state.booking.date
-      })
+      	date: moment(this.state.booking.date).format('YYYY-MM-DD') + ' ' + this.state.booking.time
+      },
+          // https://stackoverflow.com/questions/48255545/axios-getting-two-requests-options-post
+          // Important to not remove this header due to ajax making cross domain reqs which will break our integration
+          {
+              headers: {
+                  'Content-Type': 'text/plain'
+              }
+          })
         .then(response => {
           console.log(response.data.message);
       	})
