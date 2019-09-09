@@ -6,6 +6,11 @@
 @import '../../sass/layout/navigation';
 @import '../../sass/layout/footer';
 
+.content {
+  min-height: calc(100vh - 70px);
+}
+
+
 
 
 

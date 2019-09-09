@@ -1,19 +1,36 @@
-body {   
-    height: 100%; 
-    display: flex;   
-    flex-direction: column; 
-    flex: 1 0 auto; 
+@import '../../sass/abstracts/variables';
+@import'../../sass/base/typography';
+
+footer {   
+    height: 100px; 
+    width: 100%;
+    text-align: center;
+  
   } 
    
   .footer {   
-    color: white;
-    flex-shrink: 0; 
+    color: $dark-color;
+    // flex-shrink: 0; 
     padding: 10px;
-    background-color: black;
+    // background-color: blue;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
+    font-family: $text-font;
+    letter-spacing: 0.1rem;
+    font-weight: 300;
+  }
+
+  .socialContainer{
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-icon{
+    height: 40px;
+    margin: 10px;
   }
 
   .footer a{
-      color: white;
+      color: $dark-color;
   }
