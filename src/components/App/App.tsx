@@ -5,6 +5,7 @@ import Nav from '../Nav/Nav';
 import Booking from '../Booking/Booking';
 import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
+import LandingPage from '../LandingPage/LandingPage';
 import './App.scss';
 
 import Footer from '../Footer/Footer';
@@ -26,8 +27,8 @@ class App extends Component<{}, {}> {
               <Route exact path='/admin' component={ Admin } />
               <Route exact path='/booking' component={ Booking } /> 
               <Route exact path='/menu' component={ Menu } />
+              <Route exact path='/' component={ LandingPage } />
             </Switch>
-            <LandingPage />
             <Footer />  
           </div>
         </Router>
