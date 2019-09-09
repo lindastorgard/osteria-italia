@@ -1,6 +1,7 @@
 import React, { MouseEvent } from 'react';
 import './Summary.scss';
 import Booking, { IBooking } from '../Booking/Booking';
+import moment from "moment";
 
 export interface ISummaryProps{
     theBooking: IBooking;
@@ -33,7 +34,7 @@ class Summary extends React.Component <ISummaryProps, {}>{
                   <div className="summaryTopSection">{this.props.theBooking.profile.phone}</div>
                 </div>
                 <div className="summaryChildTopSection">
-                  <div className="summaryTopSection">{this.props.theBooking.date} {this.props.theBooking.time}</div>
+                  <div className="summaryTopSection">{moment(this.props.theBooking.date).format('YYYY-MM-DD')} {this.props.theBooking.time}</div>
                   <div className="summaryTopSection">{this.props.theBooking.guests}</div>
                 </div>
               </section>
