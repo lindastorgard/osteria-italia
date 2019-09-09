@@ -1,5 +1,14 @@
 @import '../../sass/abstracts/variables';
 
+@mixin parallax-setting{
+  min-height: 700px; 
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 // @mixin container-setting{
 //   display: flex;
 //   width: 100%;
