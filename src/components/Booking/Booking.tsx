@@ -3,15 +3,12 @@ import { bool, string } from 'prop-types';
 import Calender from '../Calender/Calender';
 import Summary from '../Summary/Summary';
 import axios from 'axios';
-
 import Confirmation from '../Confirmation/Confirmation';
 import Profile, { IAddProfileState } from '../Profile/Profile'
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
 import moment from "moment";
-
-
 
 export interface IBooking{
   view: number,
@@ -74,6 +71,7 @@ class Booking extends Component <{}, IBookingState> {
 
       this.updateState = this.updateState.bind(this);
       this.makeBooking = this.makeBooking.bind(this);
+      this.handleView = this.handleView.bind(this);
   }
 
 
@@ -94,15 +92,33 @@ class Booking extends Component <{}, IBookingState> {
           // https://stackoverflow.com/questions/48255545/axios-getting-two-requests-options-post
           // Important to not remove this header due to ajax making cross domain reqs which will break our integration
           {
-              headers: {
-                  'Content-Type': 'text/plain'
-              }
+            headers: {
+              'Content-Type': 'text/plain'
+            }
           })
         .then(response => {
           console.log(response.data.message);
+          this.handleView();
+          
       	})
         	.catch(error => console.log(error.data.message));
-  	};
+    };
+
+    handleView(){
+      let booking = this.state.booking;
+      booking.view = this.state.booking.view + 1;
+      // this.props.onclick(booking);
+      // let lastView = this.state.booking.view +1;
+      console.log(booking.view);
+      this.updateState(booking);
+    }
+
+    // handleView = (event: any) => {
+    //   let booking = this.props.theBooking;
+    //   booking.view = parseInt(event.target.value);
+    // this.state.booking.view + 1;
+    //   this.props.onclick(booking);
+    // }
 
   	render() {
     	switch(this.state.booking.view){
@@ -116,7 +132,7 @@ class Booking extends Component <{}, IBookingState> {
         case 2:
           return(
             <div>
-              <Calender onDayClick={this.updateState} theBooking={this.state.booking}/>
+              <Calender onDayClick={this.updateState} onclick={this.updateState} theBooking={this.state.booking}/>
             </div>
           )
 
@@ -138,7 +154,15 @@ class Booking extends Component <{}, IBookingState> {
         case 5:
           return(
             <div>
-              <Summary onclick={this.updateState} makesubmit={this.makeBooking} theBooking={this.state.booking}/>
+              <Summary makesubmit={this.makeBooking} theBooking={this.state.booking}/>
+              {/* onclick={this.updateState} */}
+            </div>
+          )
+        
+        case 6:
+          return(
+            <div>
+              <Confirmation/>
             </div>
           )
     	}

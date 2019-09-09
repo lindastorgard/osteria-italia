@@ -42,6 +42,7 @@ export interface ICalenderState{
 interface ICalenderProps{
   theBooking: IBooking,
   onDayClick(updatedBooking: IBooking): void;
+  onclick(updatedBooking: IBooking): void,
 }
 
 class Calender extends React.Component <ICalenderProps, ICalenderState> {
@@ -66,6 +67,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.getData = this.getData.bind(this);
     this.disableBookedUpDays = this.disableBookedUpDays.bind(this);
     this.getDatesWithBookings = this.getDatesWithBookings.bind(this);
+    this.handleView = this.handleView.bind(this);
   }
 
   componentDidMount() {
@@ -173,12 +175,19 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.props.onDayClick(booking);
   }
 
+  handleView = (event: any) => {
+    let booking = this.props.theBooking;
+    booking.view = parseInt(event.target.value);
+
+    this.props.onclick(booking);
+  }
+
   render() {
     return (
       <div className="page-container">
-        <section>
+        <section className="timeParentTopSection">
           <div className="timeChildTopSection">
-            <button className="timeTopSection" onClick={()=>this.handleDayClick} value="1">Guests</button>
+            <button className="timeTopSection" onClick={this.handleView} value="1">Guests</button>
             <button className="timeTopSection">{this.props.theBooking.guests}</button>
           </div>
         </section>
