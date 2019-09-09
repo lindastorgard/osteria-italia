@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Nav from '../Nav/Nav';
+
+import 'bootstrap/scss/bootstrap.scss';
 import Booking from '../Booking/Booking';
 import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
-import 'bootstrap/scss/bootstrap.scss';
-import './App.scss';
+import LandingPage from '../LandingPage/LandingPage';
+import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import './App.scss';
 
 class App extends Component<{}, {}> {
   constructor(props: any) {
@@ -18,13 +20,14 @@ class App extends Component<{}, {}> {
   render() {
     return (
         <Router>
-          <div className="container">
+          <div>
             <Nav />
             <Switch>
               <Route exact path='/admin' component={ Admin } />
               <Route exact path='/booking' component={ Booking } /> 
               <Route exact path='/menu' component={ Menu } />
             </Switch>
+            <LandingPage />
             <Footer />  
           </div>
         </Router>

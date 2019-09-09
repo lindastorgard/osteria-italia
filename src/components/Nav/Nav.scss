@@ -1,15 +1,18 @@
-nav{
-  background-color: black;
-}
+@import '../../sass/abstracts/variables';
+@import'../../sass/base/typography';
 
-.navbar{
-  display: flex;
+.navbar {
+  background-color: $dark-color;
+  padding: 1rem;
   justify-content: center;
 }
 
-.navbar-brand{
-  align-self: center;
+.navbar-brand:link {
+  margin: auto;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 2rem;
 }
+
 
 //Toggler
 
@@ -17,6 +20,11 @@ nav{
   width: 60px;
   height: 45px;
   position: relative;
+  cursor: pointer;
+}
+
+.navbar-toggler:focus{
+  outline: none;
   cursor: pointer;
 }
 
