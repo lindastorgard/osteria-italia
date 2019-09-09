@@ -63,16 +63,22 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
         let availableLateTimes = 15;
 
         this.state.existingBookings.map(booking => {
-            let dbDate = new Date(booking.date);
+						let dbDate = new Date(booking.date);
+						let guestNr = booking.guest_nr;
             if (dbDate.toDateString() === this.props.theBooking.date.toDateString()) {
                 // Format the date from the database to only show the chosen time for the reservation
                 let dbTime = moment(dbDate).format('HH:mm');
                 if (earlyTime === dbTime) {
-                    availableEarlyTimes -= 1;
+									console.log("Early");
+									//Check if booking contains more than 7 guests, if yes deduct 2 tables for that booking
+									(guestNr < 7 ? availableEarlyTimes-= 1 : availableEarlyTimes -= 2);
+									console.log("nr of available table ",availableEarlyTimes)
                 }
 
                 if (lateTime === dbTime) {
-                    availableLateTimes -= 1;
+									console.log("late");
+									(guestNr < 7 ? availableEarlyTimes-= 1 : availableEarlyTimes -= 2);
+									console.log("nr of available table ",availableLateTimes)
                 }
             }
         });
