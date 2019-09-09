@@ -198,10 +198,11 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         </section>
         <h1>Select date</h1>
         <DayPicker
+          fromMonth={new Date()}
           initialMonth={new Date(2019, 8)}
-          disabledDays={this.state.disabledDays.map(currentDate => {
+          
+          disabledDays= {this.state.disabledDays.map(currentDate => {
             let asMoment = moment(currentDate);
-
             return new Date(asMoment.year(), asMoment.month(), asMoment.date());
           })}
           onDayClick={this.handleDayClick}
