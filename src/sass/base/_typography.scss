@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display&display=swap');
+@import '../../sass/abstracts/variables';
+
+
+a, a:link{
+  color: white;
+}
+
+a:hover{
+  color: $detail-color;
+}
