@@ -1,36 +1,39 @@
-.summaryPageContainer{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-}
+@import '../../sass/base/reservationpage';
+@import '../../sass/abstracts/variables';
+
+// .summaryPageContainer{
+//     display: flex;
+//     width: 100%;
+//     flex-direction: column;
+//     align-items: center;
+// }
 
 h1{
     padding-top: 1em;
     padding-bottom: 0.5em;
 }
 
-.summaryParentTopSection{
-    width: 305px;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 3rem 1rem 1em 1em;
+// .summaryParentTopSection{
+//     width: 305px;
+//     display: flex;
+//     flex-wrap: wrap;
+//     padding: 3rem 1rem 1em 1em;
 
-    .summaryChildTopSection{
-        display: flex;
-        width: 303px;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-between;
-        border-bottom: 0.5px solid rgb(117, 85, 85);
+//     .summaryChildTopSection{
+//         display: flex;
+//         width: 303px;
+//         flex-wrap: wrap;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         border-bottom: 0.5px solid rgb(117, 85, 85);
 
-        .summaryTopSection{
-            display: flex;
-            color: burlywood;
-            background-color: white;
-            border: none;
-            margin: 0.8rem 0rem 0.8rem 0rem;
-            padding-left: 0;
-        }
-    }
-}
+//         .summaryTopSection{
+//             display: flex;
+//             color: burlywood;
+//             background-color: white;
+//             border: none;
+//             margin: 0.8rem 0rem 0.8rem 0rem;
+//             padding-left: 0;
+//         }
+//     }
+// }

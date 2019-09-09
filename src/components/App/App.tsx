@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import 'bootstrap/scss/bootstrap.scss';
 import Nav from '../Nav/Nav';
 import Booking from '../Booking/Booking';
 import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
-import 'bootstrap/scss/bootstrap.scss';
 import './App.scss';
 import Footer from '../Footer/Footer';
 

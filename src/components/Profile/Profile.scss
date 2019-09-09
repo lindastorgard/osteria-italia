@@ -1,4 +1,7 @@
-.profilePageContainer{
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.pageContainer{
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -21,6 +24,7 @@ h1{
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
+        width: 305px;
         
     
         .profilebox{
@@ -42,30 +46,30 @@ h1{
     }
 }
 
-.profileParentTopSection{
-    width: 305px;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 3rem 1rem 1em 1em;
-    // border: 1px solid green;
+// .profileParentTopSection{
+//     width: 305px;
+//     display: flex;
+//     flex-wrap: wrap;
+//     padding: 3rem 1rem 1em 1em;
+//     // border: 1px solid green;
 
-    .profileChildTopSection{
-        display: flex;
-        width: 303px;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-between;
-        border-bottom: 0.5px solid lightgray;
-        // border: 1px solid green;
+//     .profileChildTopSection{
+//         display: flex;
+//         width: 303px;
+//         flex-wrap: wrap;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         border-bottom: 0.5px solid lightgray;
+//         // border: 1px solid green;
 
-        .profileTopSection{
-            display: flex;
-            color: burlywood;
-            background-color: white;
-            border: none;
-            color: burlywood;
-            margin: 0.8rem 0rem 0.8rem 0rem;
-            padding-left: 0;
-        }
-    }
-}
+//         .profileTopSection{
+//             display: flex;
+//             color: burlywood;
+//             background-color: white;
+//             border: none;
+//             color: burlywood;
+//             margin: 0.8rem 0rem 0.8rem 0rem;
+//             padding-left: 0;
+//         }
+//     }
+// }

@@ -1,0 +1,41 @@
+// @mixin container-setting{
+//   display: flex;
+//   width: 100%;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+// @mixin parent-setting{
+//   width: 305px;
+//   display: flex;
+//   flex-wrap: wrap;
+//   padding-right: 1em;
+//   padding-left: 1em;
+// }
+
+// @mixin child-setting{
+//   display: flex;
+//   width: 303px;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+// }
+
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+// @mixin media-breakpoint-576{
+  
+// }
+
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px){ }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) {}
+

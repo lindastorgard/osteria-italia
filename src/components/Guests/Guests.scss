@@ -1,75 +1,19 @@
-.pageContainer{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    // border: 1px solid black;
-}
+@import '../../sass/abstracts/variables';
+// @import '../../sass/abstracts/mixins';
+@import '../../sass/base/reservationpage';
+
+
+
 
 h1{
     padding-top: 1em;
     padding-bottom: 0.5em;
 }
 
-.parent{
-    width: 305px;
-    display: flex;
-    flex-wrap: wrap;
-    padding-right: 1em;
-    padding-left: 1em;
-    // border: 1px solid green;
-
     p{
         padding-top: 2em;
     }
 
-    .child{
-        display: flex;
-        width: 303px;
-        flex-wrap: wrap;
-        flex-direction: row;
     
-        .guestbox{
-            display: flex;
-            width: 54px;
-            height: 54px;
-            border: 0.5px solid lightgrey;
-            justify-content: center;
-            background-color: white;
-
-            .guestboxNumber{
-                align-self: center;
-            }
-        }
-    }
-}
-
-.parentTopSection{
-    width: 305px;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 3rem 1rem 1em 1em;
-    // border: 1px solid green;
-
-    .childTopSection{
-        display: flex;
-        width: 303px;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-between;
-        border-bottom: 0.5px solid lightgray;
-        // border: 1px solid green;
-
-        .topSection{
-            display: flex;
-            color: burlywood;
-            background-color: white;
-            border: none;
-            color: burlywood;
-            margin: 0.8rem 0rem 0.8rem 0rem;
-            padding-left: 0;
-        }
-    }
-}
-
+    
 

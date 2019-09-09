@@ -1,28 +1,27 @@
-.timePageContainer{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-}
+// .timePageContainer{
+//     display: flex;
+//     width: 100%;
+//     flex-direction: column;
+//     align-items: center;
+// }
 
 h1{
     padding-top: 1em;
     padding-bottom: 0.5em;
 }
 
-.timeParent{
+.time-parent{
     width: 305px;
     display: flex;
     flex-wrap: wrap;
     padding-right: 1em;
     padding-left: 1em;
-    // border: 1px solid green;
 
     p{
         padding-top: 2em;
     }
 
-    .timeChild{
+    .time-child{
         display: flex;
         width: 303px;
         flex-wrap: wrap;
@@ -44,28 +43,28 @@ h1{
     }
 }
 
-.timeParentTopSection{
-    width: 305px;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 3rem 1rem 1em 1em;
+// .timeParentTopSection{
+//     width: 305px;
+//     display: flex;
+//     flex-wrap: wrap;
+//     padding: 3rem 1rem 1em 1em;
 
-    .timeChildTopSection{
-        display: flex;
-        width: 303px;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-between;
-        border-bottom: 0.5px solid lightgray;
+//     .timeChildTopSection{
+//         display: flex;
+//         width: 303px;
+//         flex-wrap: wrap;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         border-bottom: 0.5px solid lightgray;
 
-        .timeTopSection{
-            display: flex;
-            color: burlywood;
-            background-color: white;
-            border: none;
-            color: burlywood;
-            margin: 0.8rem 0rem 0.8rem 0rem;
-            padding-left: 0;
-        }
-    }
-}
+//         .timeTopSection{
+//             display: flex;
+//             color: burlywood;
+//             background-color: white;
+//             border: none;
+//             color: burlywood;
+//             margin: 0.8rem 0rem 0.8rem 0rem;
+//             padding-left: 0;
+//         }
+//     }
+// }
