@@ -16,14 +16,14 @@ class LandingPage extends Component <{}, {}>{
           </div>
         </div>
         <section className="text-container">
-          <h3>taste the difference</h3>
+          <h3 className="section-title">taste the difference</h3>
           <p>Osteria Italia, a three-Michelin-star restaurant based in Rome, Italy.</p>
           <p>Italian hospitality is in the details, the ironed tablecloths and the polished silver.
             It is an ensemble of gestures that define a way of life. The table is where the journey begins</p>
         </section>
         <div className="parallax-two"></div>
         <section className="text-container">
-          <h3>italian culinary traditions</h3>
+          <h3 className="section-title">italian culinary traditions</h3>
           <p>Our kitchen is not a list of ingredients or demonstration of technical abilities. It is a narration of the Italian landscape and our passions.
             Cooking is a collision of ideas, techniques, and cultures. It is not mathematical. It is emotional.
           </p>
@@ -35,7 +35,7 @@ class LandingPage extends Component <{}, {}>{
         </section>
         <div className="parallax-three"></div>
         <section className="text-container">
-          <h3>ARTWORK IS A LANDSCAPE OF IDEAS</h3>
+          <h3 className="section-title">ARTWORK IS A LANDSCAPE OF IDEAS</h3>
           <p>Every object reveals a layer of meaning. Contemporary art is an inspiration, a guide and a muse.
               From Maurizio Cattelan to Damien Hirst to Duane Hanson, art is an invitation to discover.
           </p>
