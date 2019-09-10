@@ -5,8 +5,11 @@ import Nav from '../Nav/Nav';
 import Booking from '../Booking/Booking';
 import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
+import LandingPage from '../LandingPage/LandingPage';
 import './App.scss';
+
 import Footer from '../Footer/Footer';
+import './App.scss';
 
 class App extends Component<{}, {}> {
   constructor(props: any) {
@@ -18,13 +21,23 @@ class App extends Component<{}, {}> {
   render() {
     return (
         <Router>
-          <div className="container">
+          <div>
             <Nav />
+            <div className="content">
             <Switch>
               <Route exact path='/admin' component={ Admin } />
               <Route exact path='/booking' component={ Booking } /> 
               <Route exact path='/menu' component={ Menu } />
+              <Route exact path='/' component={ LandingPage } />
             </Switch>
+
+            </div>
+            {/* <Switch>
+              <Route exact path='/admin' component={ Admin } />
+              <Route exact path='/booking' component={ Booking } /> 
+              <Route exact path='/menu' component={ Menu } />
+              <Route exact path='/' component={ LandingPage } />
+            </Switch> */}
             <Footer />  
           </div>
         </Router>

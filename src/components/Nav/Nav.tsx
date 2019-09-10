@@ -1,9 +1,6 @@
 import React from 'react';
-import 'jquery/dist/jquery';
-import 'popper.js/dist/popper';
-import 'bootstrap/dist/js/bootstrap.js';
+import { Link } from 'react-router-dom';
 import './Nav.scss';
-import { BrowserRouter as Router,  Link } from 'react-router-dom';
 
 class Nav extends React.Component {
     render() {

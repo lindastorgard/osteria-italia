@@ -4,10 +4,10 @@ import { IBooking } from '../Booking/Booking';
 import axios from 'axios';
 import { string } from 'prop-types';
 import { throwStatement } from '@babel/types';
-import SimpleGDPR from 'simple-gdpr';
-import 'simple-gdpr/dist/simplegdpr.min.css';
+// import SimpleGDPR from 'simple-gdpr';
+// import 'simple-gdpr/dist/simplegdpr.min.css';
 
-const notice = new SimpleGDPR()
+// const notice = new SimpleGDPR()
 
 interface ICustomerData{
   id: number, 

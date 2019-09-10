@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+import {Table, Button, Row, Col, Container} from 'reactstrap';
+import axios from "axios";
+import {ModifyBooking} from "../ModifyBooking/ModifyBooking";
 
 interface IAdminState {
     bookings: any;
@@ -7,7 +9,6 @@ interface IAdminState {
 }
 
 class Admin extends React.Component<{}, IAdminState> {
-
     state = {
         bookings: [],
         selectedBooking: {
@@ -17,120 +18,112 @@ class Admin extends React.Component<{}, IAdminState> {
         }
     };
 
-    constructor(props: any) {
-        super(props);
+    componentDidMount(): void {
         this.getBookings();
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    deleteItemFromState = (id: number) => {
+        const updatedBookings = this.state.bookings.filter((booking: any) => booking.id !== id);
+        this.setState({bookings: updatedBookings})
+    };
+    deleteItem = (id: number) => {
+        let confirmDelete = window.confirm('Delete booking?');
+        if (confirmDelete) {
+            console.log('Removing booking with id ' + id);
+            axios.delete('http://localhost:8888/booking_api/api/bookings/deleteBooking.php', {
+                "data": {
+                    "id": id
+                }
+            })
+                .then(response => {
+                    console.log(response.data);
+                    this.deleteItemFromState(id);
+                })
+                .catch(error => console.error(error));
+        }
+    };
+    updateState = (booking: any) => {
+        const itemIndex = this.state.bookings.findIndex((data: any) => data.id === booking.id);
+        const newArray = [
+            // destructure all items from beginning to the indexed booking
+            ...this.state.bookings.slice(0, itemIndex),
+            // add the updated booking to the array
+            booking,
+            // add the rest of the items to the array from the index after the replaced booking
+            ...this.state.bookings.slice(itemIndex + 1)
+        ];
+        this.setState({bookings: newArray})
+    };
     getBookings = () => {
         axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
             .then(response => {
-                    console.log('Got response from server');
-                    console.log(response.data);
-                    this.setState({ bookings: response.data.data })
+                console.log('Got response from server');
+                console.log(response.data);
+                this.setState({bookings: response.data.data})
             })
             .catch(error => console.log(error));
     };
 
-    deleteBooking = (id: number) => {
-        console.log('Removing booking with id ' + id)
-        axios.delete('http://localhost:8888/booking_api/api/bookings/deleteBooking.php', {
-           "data": {
-               "id": id
-           }
-        })
-            .then(response => {
-                window.location.reload();
-                console.log(response.data);
-            })
-            .catch(error => console.error('Something went wrong'))
-    }
-
-    selectBooking = (booking: any) => {
-        this.setState({
-            bookings: this.state.bookings,
-            selectedBooking: booking
-        })
-    }
-
-    editBooking = (booking: any) => {
-        axios.put('http://localhost:8888/booking_api/api/bookings/updateBooking.php', {
-            "data": {
-                "customer_id": booking.customer_id,
-                "guest_nr": booking.guest_nr,
-                "date": booking.date,
-                "id": booking.id
-            }
-        })
-            .then(response => {
-                console.log('Reservation successfully updated');
-            })
-            .catch( error => console.log('Something went wrong'))
-    }
-
-    handleInputChange = (event: any) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            selectedBooking: {
-                [name]: value
-            }
-        });
-    }
-
-    handleSubmit = (event: any) => {
-        // code goes here
-    }
-
-    listBookings = () => {
-        return this.state.bookings.map( (booking: any) => {
-        return (
-            <li key={"booking_" + booking.id }>Reservation made by {booking.name} on {booking.date} for {booking.guest_nr} guests
-                <button onClick={(event) => this.deleteBooking(booking.id)}>Delete</button>
-                <button onClick={(event) => this.selectBooking(booking)}>Modify</button>
-            </li>
-        )
-        });
-    };
-
     render() {
+        const bookings = this.state.bookings.map((booking: any) => {
+            return (
+                <tr key={booking.id}>
+                    <th scope="row">{booking.id}</th>
+                    <td>{booking.name}</td>
+                    <td>{booking.lastname}</td>
+                    <td>{booking.email}</td>
+                    <td>{booking.phone}</td>
+                    <td>{booking.guest_nr}</td>
+                    <td>{booking.date}</td>
+                    <td>
+                        <div style={{width: "130px"}}>
+                            <ModifyBooking
+                                booking={booking}
+                                updateState={this.updateState}/>
+                            {' '}
+                            <Button color="danger" onClick={() => this.deleteItem(booking.id)}>Del</Button>
+                        </div>
+                    </td>
+                </tr>
+            )
+        });
+
+        function BookingsTable() {
+            return (
+                <Table responsive hover>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First</th>
+                        <th>Last</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Guests</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {bookings}
+                    </tbody>
+                </Table>
+            );
+        }
+
         return (
-            <section>
-             <div>
-                <ul>
-                    {this.listBookings()}
-                </ul>
-             </div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Email</label>
-                    <input
-                        name="email"
-                        type="text"
-                        value={this.state.selectedBooking.email}
-                        onChange={this.handleInputChange}/>
-                    <label>Number of guests</label>
-                    <input
-                        name="numberOfGuests"
-                        type="number"
-                        value={this.state.selectedBooking.guest_nr}
-                        onChange={this.handleInputChange}
-                    />
-                    <label>Date and time</label>
-                    <input
-                        name="date"
-                        type="date"
-                        value={this.state.selectedBooking.date}
-                        onChange={this.handleInputChange}
-                    />
-                    <button type="submit">Submit changes</button>
-                </form>
-            </section>
-        )
+            <Container className="App" style={{marginTop: "50px"}}>
+                <Row>
+                    <Col>
+                        <h1 style={{margin: "20px 0"}}>Bookings Admin</h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <BookingsTable/>
+                    </Col>
+                </Row>
+            </Container>);
     }
 }
+
 export default Admin;

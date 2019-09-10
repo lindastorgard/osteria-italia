@@ -1,15 +1,29 @@
-nav{
-  background-color: black;
-}
+@import '../../sass/abstracts/variables';
+@import'../../sass/base/typography';
 
-.navbar{
-  display: flex;
+.navbar {
+  background-color: $dark-color;
+  padding: 1rem;
   justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
 }
 
-.navbar-brand{
-  align-self: center;
+.navbar-brand:link {
+  margin: auto;
+  font-family: 'Playfair Display SC', serif;
+  font-size: 2rem;
+  letter-spacing: 0.3rem;
+  text-transform: capitalize;
 }
+
+.navbar-brand:hover {
+  color:white;
+}
+
 
 //Toggler
 
@@ -17,6 +31,11 @@ nav{
   width: 60px;
   height: 45px;
   position: relative;
+  cursor: pointer;
+}
+
+.navbar-toggler:focus{
+  outline: none;
   cursor: pointer;
 }
 

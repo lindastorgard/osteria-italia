@@ -97,13 +97,13 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
   getDatesWithBookings(){
     //get configuration from DB
     let sitting1Time: string = '';
-    this.state.configurations.map(key=>{
-      if(key.setting == 'sitting_1')
+    this.state.configurations.map(key=> {
+      if(key.setting === 'sitting_1')
         sitting1Time = key.value;
     });
     let sitting2Time: string = '';
-    this.state.configurations.map(key=>{
-      if(key.setting == 'sitting_2')
+    this.state.configurations.map(key=> {
+      if(key.setting === 'sitting_2')
         sitting2Time = key.value;
     });
 
@@ -152,7 +152,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
 
 
   disableBookedUpDays(){
-    if (this.state.existingBookings == undefined){
+    if (this.state.existingBookings === undefined){
       console.log('got ya');
       return
     }else{
@@ -199,10 +199,11 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         </section>
         <h1>Select date</h1>
         <DayPicker
+          fromMonth={new Date()}
           initialMonth={new Date(2019, 8)}
-          disabledDays={this.state.disabledDays.map(currentDate => {
+          
+          disabledDays= {this.state.disabledDays.map(currentDate => {
             let asMoment = moment(currentDate);
-
             return new Date(asMoment.year(), asMoment.month(), asMoment.date());
           })}
           onDayClick={this.handleDayClick}

@@ -1,5 +1,14 @@
 @import '../../sass/abstracts/variables';
 
+@mixin parallax-setting{
+  min-height: 700px; 
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 @mixin container-setting{
   display: flex;
   width: 100%;
@@ -57,7 +66,6 @@
   }
 }
 
-
 @mixin top-parent-setting{
   width: 305px;
   display: flex;
@@ -99,23 +107,4 @@
 }
 
 
-
-
-// Extra small devices (portrait phones, less than 576px)
-// No media query for `xs` since this is the default in Bootstrap
-
-// Small devices (landscape phones, 576px and up)
-// @mixin media-breakpoint-576{
-  
-// }
-
-
-// // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px){ }
-
-// // Large devices (desktops, 992px and up)
-// @media (min-width: 992px) { }
-
-// // Extra large devices (large desktops, 1200px and up)
-// @media (min-width: 1200px) {}
 
