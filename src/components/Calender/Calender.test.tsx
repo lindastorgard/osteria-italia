@@ -10,27 +10,47 @@ configure({ adapter: new Adapter() });
 
 const props = {
   theBooking:{
+    view: 2,
+    guests: 4,
+    date: new Date(),
+    time: '18:00',
+    customerId: 5,
+    profile: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
 
-  }
+      firstNameError: '',
+      lastNameError: '',
+      emailError: '',
+      phoneError: '',
 
-onDayClick: jest.fn(),
-  
-  onclick: 
-}
+      showFirstNameError: true,
+      showLastNameError: true,
+      showEmailError: true,
+      showPhoneError: true,
 
-const mockFunction = jest.fn();
-it('should call mockFunction on button click', () => {
-  const component = mount(
-    <MyComponent onClickFunction={mockFunction} />
-  );
-  component.find('button#ok-btn').simulate('click');
-  expect(mockFunction).toHaveBeenCalled();
-  
-  component.unmount();
-});
-
-let wrapper = shallow(<Calender  {...props}/>)
+      myBookings: [],
+      myCustomers: []
+    }
+  },
+    onDayClick: jest.fn(),
+    onclick: jest.fn()
+};
 
 it('renders without crashing', () => {
-  // let wrapper = shallow(<Calender />);
+  let wrapper = shallow(<Calender {...props}/>);
 });
+
+it('can change date', () => {
+  //let spy = spyOn(Calender.prototype, 'this.props.onDayClick');
+  let wrapper = shallow<Calender>(<Calender {...props}/>);
+
+  let newDate = new Date(2019, 10, 6);
+
+  wrapper.instance().handleDayClick(newDate);
+  wrapper.update();
+
+  expect(props.onDayClick).toHaveBeenCalled();
+})
