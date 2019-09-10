@@ -151,7 +151,7 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
         </div>
       </main>
     )
-
+            }
 
 }
 
