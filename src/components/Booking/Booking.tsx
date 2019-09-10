@@ -77,6 +77,11 @@ class Booking extends Component <{}, IBookingState> {
       this.handleView = this.handleView.bind(this);
   }
 
+  // scroll to the top of the page when clicked to through link
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
 
     // Handle fields change
     updateState(updatedBooking: IBooking) {

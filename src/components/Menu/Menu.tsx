@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Menu extends Component <{}, {}>{
+
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
  
   render() {
     return (
@@ -23,10 +27,6 @@ class Menu extends Component <{}, {}>{
           <p>Our kitchen is not a list of ingredients or demonstration of technical abilities. It is a narration of the Italian landscape and our passions.
             Cooking is a collision of ideas, techniques, and cultures. It is not mathematical. It is emotional.
           </p>
-          
-          <Link to={'/menu'} className="nav-link">
-            <button className="primary-btn">menu</button>
-          </Link>
         </section>
         <div className="parallax-three"></div>
         <section className="text-container">
