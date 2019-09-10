@@ -1,11 +1,14 @@
 @import '../../sass/abstracts/variables';
 @import '../../sass/abstracts/mixins';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display&display=swap');
+
 
 .page-container{
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
+  color: $text-color;
   }
 
   .parent{
