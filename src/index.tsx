@@ -4,6 +4,9 @@ import './index.scss';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import 'jquery/dist/jquery';
+import 'popper.js/dist/popper';
+import 'bootstrap/dist/js/bootstrap.js';
 
 ReactDOM.render(
     <BrowserRouter>
