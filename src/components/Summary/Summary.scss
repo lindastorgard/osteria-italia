@@ -1,39 +1,46 @@
-@import '../../sass/base/reservationpage';
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
-// .summaryPageContainer{
-//     display: flex;
-//     width: 100%;
-//     flex-direction: column;
-//     align-items: center;
-// }
-
-h1{
-    padding-top: 1em;
-    padding-bottom: 0.5em;
+.sum-page-container{
+  @include container-setting;
 }
 
-// .summaryParentTopSection{
-//     width: 305px;
-//     display: flex;
-//     flex-wrap: wrap;
-//     padding: 3rem 1rem 1em 1em;
+h1{
+    @include header-setting;
+}
 
-//     .summaryChildTopSection{
-//         display: flex;
-//         width: 303px;
-//         flex-wrap: wrap;
-//         flex-direction: row;
-//         justify-content: space-between;
-//         border-bottom: 0.5px solid rgb(117, 85, 85);
+p{
+  padding-top: 2em;
+}
 
-//         .summaryTopSection{
-//             display: flex;
-//             color: burlywood;
-//             background-color: white;
-//             border: none;
-//             margin: 0.8rem 0rem 0.8rem 0rem;
-//             padding-left: 0;
-//         }
-//     }
-// }
+.sum-parent-top-section{
+  @include top-parent-setting;
+}
+
+.sum-child-top-section{
+  @include top-child-setting;
+}
+
+.sum-top-section-black{
+  @include top-black-setting;
+}
+
+.sum-top-section{
+  @include top-setting;
+}
+
+.primary-btn{
+  color: $text-color;
+  border-color: $text-color;
+  text-transform: uppercase; 
+  letter-spacing: 0.1rem;
+  height: 38px;
+  line-height: 38px;
+  padding: 0 16px;
+  margin-top: 1.5rem;
+}
+.primary-btn:hover{
+  color: white;
+  border-color: $text-color;
+  background-color: $text-color;  
+}

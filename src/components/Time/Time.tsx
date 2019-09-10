@@ -114,45 +114,45 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
         this.props.onclick(booking);
     }
 
-    handleView = (event: any) => {
-        let booking = this.props.theBooking;
-        booking.view = parseInt(event.target.value);
+  handleView = (event: any) => {
+    let booking = this.props.theBooking;
+    booking.view = parseInt(event.target.value);
 
-        this.props.onclick(booking);
-    }
+    this.props.onclick(booking);
+  }
 
     render() {
+            return (
+      <main className="time-page-container">
+        <section className="time-parent-top-section">
+          <div className="time-child-top-section">
+            <button className="time-top-section-black" onClick={this.handleView} value="1">Guests</button>
+            <button className="time-top-section">{this.props.theBooking.guests}</button>
+          </div>
+          <div className="time-child-top-section">
+            <button className="time-top-section-black" onClick={this.handleView} value="2">Date</button>
+            <button className="time-top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
+          </div>
+        </section>
+        <div className="time-parent">
+          <h1>Select time</h1>
+          <section className="time-child">
+            <button
+              onClick={this.handleInput}
+              disabled={this.hasNoAvailableTimes(this.state.bookedTimes.earlyBooking)}
+              className="timebox" value="18:00">18:00
+            </button>
+            <button
+              onClick={this.handleInput}
+              disabled={this.hasNoAvailableTimes(this.state.bookedTimes.lateBooking)}
+              className="timebox" value="21:00">21:00
+            </button>
+          </section>
+        </div>
+      </main>
+    )
 
-        return (
-            <main className="page-container">
-                <section className="parent-top-section">
-                    <div className="child-top-section">
-                        <button className="top-section-black" onClick={this.handleView} value="1">Guests</button>
-                        <button className="top-section">{this.props.theBooking.guests}</button>
-                    </div>
-                    <div className="child-top-section">
-                        <button className="top-section-black" onClick={this.handleView} value="2">Date</button>
-                        <button className="top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
-                    </div>
-                </section>
-                <div className="time-parent">
-                    <h1>Select time</h1>
-                    <section className="time-child">
-                        <button
-                            onClick={this.handleInput}
-                            disabled={this.hasNoAvailableTimes(this.state.bookedTimes.earlyBooking)}
-                            className="timebox" value="18:00">18:00
-                        </button>
-                        <button
-                            onClick={this.handleInput}
-                            disabled={this.hasNoAvailableTimes(this.state.bookedTimes.lateBooking)}
-                            className="timebox" value="21:00">21:00
-                        </button>
-                    </section>
-                </div>
-            </main>
-        )
-    }
+
 }
 
 export default Time;

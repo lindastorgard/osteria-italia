@@ -9,47 +9,102 @@
   background-size: cover;
 }
 
-// @mixin container-setting{
-//   display: flex;
-//   width: 100%;
-//   flex-direction: column;
-//   align-items: center;
-// }
+@mixin container-setting{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
 
-// @mixin parent-setting{
-//   width: 305px;
-//   display: flex;
-//   flex-wrap: wrap;
-//   padding-right: 1em;
-//   padding-left: 1em;
-// }
+@mixin parent-setting{
+  width: 305px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 1em;
+  padding-left: 1em;
+  color: $text-color;
+  font-family: $text-font;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    width: 455px;
+  }
+}
 
-// @mixin child-setting{
-//   display: flex;
-//   width: 303px;
-//   flex-wrap: wrap;
-//   flex-direction: row;
-// }
+@mixin child-setting{
+  display: flex;
+  width: 303px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  @media (min-width: $break-large){
+    width: 453px;
+  }
+}
 
+@mixin header-setting{
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    margin-top: 5rem;
+  }
+}
 
-// Extra small devices (portrait phones, less than 576px)
-// No media query for `xs` since this is the default in Bootstrap
+@mixin guestbox-setting{
+  display: flex;
+  width: 52px;
+  height: 52px;
+  border: 0.1px solid lightgrey;
+  justify-content: center;
+  background-color: white;
+  font-family: $text-font;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    width: 80px;
+    height: 80px;
+  }
+}
 
-// Small devices (landscape phones, 576px and up)
-// @mixin media-breakpoint-576{
-  
-// }
+@mixin top-parent-setting{
+  width: 305px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3rem 1rem 1em 1em;
+  @media (min-width: $break-large){
+    width: 455px;
+  }
+}
 
+@mixin top-child-setting{
+  display: flex;
+  width: 303px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 0.5px solid lightgray;
+  @media (min-width: $break-large){
+    width: 453px;
+  }
+}
 
-// // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px){ }
+@mixin top-setting{
+  display: flex;
+  color: $detail-color;
+  background-color: white;
+  border: none;
+  margin: 0.8rem 0rem 0.8rem 0rem;
+  padding-left: 0;
+}
 
-// // Large devices (desktops, 992px and up)
-// @media (min-width: 992px) { }
-
-// // Extra large devices (large desktops, 1200px and up)
-// @media (min-width: 1200px) {}
-
+@mixin top-black-setting{
+  color: black;
+  display: flex;
+  background-color: white;
+  border: none;
+  margin: 0.8rem 0rem 0.8rem 0rem;
+  padding-left: 0;
+}
 
 
 

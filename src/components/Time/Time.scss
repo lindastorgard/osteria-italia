@@ -1,70 +1,58 @@
-// .timePageContainer{
-//     display: flex;
-//     width: 100%;
-//     flex-direction: column;
-//     align-items: center;
-// }
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
-h1{
-    padding-top: 1em;
-    padding-bottom: 0.5em;
+.time-page-container{
+  @include container-setting;
 }
 
 .time-parent{
-    width: 305px;
-    display: flex;
-    flex-wrap: wrap;
-    padding-right: 1em;
-    padding-left: 1em;
-
-    p{
-        padding-top: 2em;
-    }
-
-    .time-child{
-        display: flex;
-        width: 303px;
-        flex-wrap: wrap;
-        flex-direction: column;
-    
-        .timebox{
-            display: flex;
-            width: 54px;
-            height: 54px;
-            border: 0.5px solid lightgrey;
-            justify-content: center;
-            background-color: white;
-            margin: 5px;
-
-            .timeboxNumber{
-                align-self: center;
-            }
-        }
-    }
+  @include parent-setting;
 }
 
-// .timeParentTopSection{
-//     width: 305px;
-//     display: flex;
-//     flex-wrap: wrap;
-//     padding: 3rem 1rem 1em 1em;
+.time-child{
+  display: flex;
+  width: 303px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  @media (min-width: $break-large){
+    width: 453px;
+  }
 
-//     .timeChildTopSection{
-//         display: flex;
-//         width: 303px;
-//         flex-wrap: wrap;
-//         flex-direction: row;
-//         justify-content: space-between;
-//         border-bottom: 0.5px solid lightgray;
+  .timebox{
+    display: flex;
+    width: 54px;
+    height: 54px;
+    border: 0.5px solid lightgrey;
+    justify-content: center;
+    background-color: white;
+    margin: 5px;
+  
+    .timeboxNumber{
+        align-self: center;
+    }
+  }
+}
 
-//         .timeTopSection{
-//             display: flex;
-//             color: burlywood;
-//             background-color: white;
-//             border: none;
-//             color: burlywood;
-//             margin: 0.8rem 0rem 0.8rem 0rem;
-//             padding-left: 0;
-//         }
-//     }
-// }
+h1{
+    @include header-setting;
+}
+
+p{
+  padding-top: 2em;
+}
+
+.time-parent-top-section{
+  @include top-parent-setting;
+}
+
+.time-child-top-section{
+  @include top-child-setting;
+}
+
+.time-top-section-black{
+  @include top-black-setting;
+}
+
+.time-top-section{
+  @include top-setting;
+}
