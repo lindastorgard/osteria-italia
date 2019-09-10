@@ -2,27 +2,33 @@
 @import '../../sass/abstracts/mixins';
 
 .parallax-one {
-  /* The image used */
   background-image: url("/Images/white-plate.png");
   @include parallax-setting;
 }
 
 .parallax-two {
-  /* The image used */
   background-image: url("/Images/veal.jpg");
   @include parallax-setting;
 }
 
 .parallax-three {
-  /* The image used */
   background-image: url("/Images/meat.png");
   @include parallax-setting;
 }
 .parallax-four{
- 
   background-image: url("/Images/steak.jpg");
   @include parallax-setting;
 }
+
+.parallax-five{
+  background-image: url("/Images/geranium.png");
+  @include parallax-setting;
+} 
+
+.parallax-six{
+  background-image: url("/Images/omlet.png");
+  @include parallax-setting;
+} 
 
 .caption-container{
   position: absolute;
@@ -37,7 +43,6 @@
 }
 .caption{
   background-color: rgba(255,255,255,0.6);
-  padding: 10px 20px;
   border-radius: 1px;
   @include for-phone-only {  
     display: none;
