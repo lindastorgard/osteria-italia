@@ -3,30 +3,8 @@ import { Link } from 'react-router-dom';
 import './LandingPage.scss';
 
 
-interface ILandingPageState{
-  offset: number;
-}
-
-class LandingPage extends Component <{}, ILandingPageState>{
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      offset: 0
-    };
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.parallaxShift);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.parallaxShift);
-  }
-  parallaxShift = () => {
-    this.setState({
-      offset: window.pageYOffset
-    });
-  };
-
+class LandingPage extends Component <{}, {}>{
+ 
   render() {
     return (
       <div>
