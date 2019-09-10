@@ -1,0 +1,112 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display&display=swap');
+
+
+.page-container{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  color: $text-color;
+  }
+
+  .parent{
+    width: 305px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 1em;
+    padding-left: 1em;
+
+    .child{
+      display: flex;
+      width: 303px;
+      flex-wrap: wrap;
+      flex-direction: row;
+      
+      .guestbox{
+        display: flex;
+        width: 52px;
+        height: 52px;
+        border: 0.5px solid lightgrey;
+        justify-content: center;
+        background-color: white;
+      }
+      .guestboxNumber{
+        align-self: center;
+      }
+    }
+  }
+
+
+.parent-top-section{
+  width: 305px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3rem 1rem 1em 1em;
+
+  .child-top-section{
+      display: flex;
+      width: 303px;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      border-bottom: 0.5px solid lightgray;
+
+      .top-section{
+        display: flex;
+        color: $detail-color;
+        background-color: white;
+        border: none;
+        margin: 0.8rem 0rem 0.8rem 0rem;
+        padding-left: 0;
+      }
+
+      .top-section-black{
+        color: black;
+        display: flex;
+        background-color: white;
+        border: none;
+        margin: 0.8rem 0rem 0.8rem 0rem;
+        padding-left: 0;
+      }
+  }
+
+  .child-top-section-summary{
+    display: flex;
+    width: 303px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .top-section-summary{
+      color: grey;
+      display: flex;
+      background-color: white;
+      border: none;
+      margin: 0.8rem 0rem 0.8rem 0rem;
+      padding-left: 0;
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: $break-large){ 
+
+  .page-container{
+    
+    .parent{
+      width: 455px;
+  
+      .child{
+        width: 453px;
+
+        .guestbox{
+          width: 80px;
+          height: 80px;
+        }
+      }
+    }
+  }
+
+}
