@@ -14,6 +14,10 @@ class Guests extends React.Component <IAddGuestProps,{}> {
     this.handleInput = this.handleInput.bind(this);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   handleInput = (event: any) => { 
     let booking = this.props.theBooking;
     booking.guests = parseInt(event.target.value);

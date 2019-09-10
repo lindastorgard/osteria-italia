@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './Confirmation.scss';
 
 class Confirmation extends Component <{}, {}> {
+
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+  
   render() {
     return (
       <main className="conf-page-container">

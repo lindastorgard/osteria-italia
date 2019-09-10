@@ -41,8 +41,10 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
     }
 
     componentDidMount() {
-        this.getData();
+      window.scrollTo(0, 0)
+      this.getData();
     }
+   
 
     getData() {
         axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
