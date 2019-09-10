@@ -124,15 +124,15 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
   render() {
 
     return (
-      <main className="page-container">
-        <section className="parent-top-section">
-          <div className="child-top-section">
-            <button className="top-section-black" onClick={this.handleView} value="1">Guests</button>
-            <button className="top-section">{this.props.theBooking.guests}</button>
+      <main className="time-page-container">
+        <section className="time-parent-top-section">
+          <div className="time-child-top-section">
+            <button className="time-top-section-black" onClick={this.handleView} value="1">Guests</button>
+            <button className="time-top-section">{this.props.theBooking.guests}</button>
           </div>
-          <div className="child-top-section">
-            <button className="top-section-black" onClick={this.handleView} value="2">Date</button>
-            <button className="top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
+          <div className="time-child-top-section">
+            <button className="time-top-section-black" onClick={this.handleView} value="2">Date</button>
+            <button className="time-top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
           </div>
         </section>
         <div className="time-parent">

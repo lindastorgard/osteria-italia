@@ -1,5 +1,14 @@
+//common colors
+// $dark-color: #384660;
+$dark-color:black;
 $detail-color: burlywood;
+$dark-detail-color: rgb(100, 92, 84);
+$text-color: lighten($dark-detail-color, 20%);
 
-// $break-small: 320px;
+//fonts
+$title-font:'Playfair Display', sans-serif;
+$text-font: 'Open Sans', sans-serif;
+
 // media queries
+// $break-small: 320px;
 $break-large: 768px;

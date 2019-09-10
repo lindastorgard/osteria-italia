@@ -25,20 +25,20 @@ class Guests extends React.Component <IAddGuestProps,{}> {
   render() {
 
     return (
-      <main className="page-container">
-        <div className="parent">
+      <main className="guest-page-container">
+        <div className="guest-parent">
           <h1>Select guests</h1>
-          <section className="child">
-            <button onClick={this.handleInput} className="guestbox" value="1">1</button>
-            <button onClick={this.handleInput} className="guestbox" value="2">2</button>
-            <button onClick={this.handleInput} className="guestbox" value="3">3</button>
-            <button onClick={this.handleInput} className="guestbox" value="4">4</button>
-            <button onClick={this.handleInput} className="guestbox" value="5">5</button>
-            <button onClick={this.handleInput} className="guestbox" value="6">6</button>
-            <button onClick={this.handleInput} className="guestbox" value="7">7</button>
-            <button onClick={this.handleInput} className="guestbox" value="8">8</button>
-            <button onClick={this.handleInput} className="guestbox" value="9">9</button>
-            <button onClick={this.handleInput} className="guestbox" value="10">10</button>    
+          <section className="guest-child">
+            <button onClick={this.handleInput} className="guest-guestbox" value="1">1</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="2">2</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="3">3</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="4">4</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="5">5</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="6">6</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="7">7</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="8">8</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="9">9</button>
+            <button onClick={this.handleInput} className="guest-guestbox" value="10">10</button>    
           </section>
           <p>Donut chocolate cake I love jelly marzipan gummi bears I love ice cream. Chocolate cake pie toffee chocolate cake topping candy canes apple pie. I love pie powder.</p>
         </div>

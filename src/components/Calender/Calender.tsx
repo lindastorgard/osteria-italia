@@ -189,11 +189,12 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
 
   render() {
     return (
-      <main className="page-container">
-        <section className="parent-top-section"> 
-          <div className="child-top-section">
-            <button className="top-section-black" onClick={this.handleView} value="1">Guests</button>
-            <button className="top-section">{this.props.theBooking.guests}</button>
+      <main className="cal-page-container">
+        <div className="cal-parent">
+        <section className="cal-parent-top-section"> 
+          <div className="cal-child-top-section">
+            <button className="cal-top-section-black" onClick={this.handleView} value="1">Guests</button>
+            <button className="cal-top-section">{this.props.theBooking.guests}</button>
           </div>
         </section>
         <h1>Select date</h1>
@@ -206,6 +207,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
           })}
           onDayClick={this.handleDayClick}
         />
+        </div>
       </main> 
     )
   }

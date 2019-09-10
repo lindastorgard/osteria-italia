@@ -1,19 +1,33 @@
 @import '../../sass/abstracts/variables';
-// @import '../../sass/abstracts/mixins';
-@import '../../sass/base/reservationpage';
+@import '../../sass/abstracts/mixins';
 
+.guest-page-container{
+  @include container-setting;
 
+  .guest-parent{
+    @include parent-setting;
 
+    .guest-child{
+      @include child-setting;
 
-h1{
-    padding-top: 1em;
-    padding-bottom: 0.5em;
+      .guest-guestbox{
+        @include guestbox-setting;
+
+        .guestboxNumber{
+          align-self: center;
+        }
+      }
+    }
+  }
 }
 
-    p{
-        padding-top: 2em;
-    }
+h1{
+  @include header-setting;
+}
 
-    
-    
-
+p{
+  margin-top: 2rem;
+  font-family: $text-font;
+  font-weight: 100;
+  font-size: 0.8rem;
+}

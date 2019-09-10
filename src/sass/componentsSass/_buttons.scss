@@ -1,0 +1,15 @@
+.primary-btn{
+  color: $text-color;
+  border-color: $text-color;
+  text-transform: uppercase; 
+  letter-spacing: 0.1rem;
+  height: 38px;
+  line-height: 38px;
+  padding: 0 16px;
+  margin-top: 1.5rem;
+}
+.primary-btn:hover{
+  color: white;
+  border-color: $text-color;
+  background-color: $text-color;  
+}

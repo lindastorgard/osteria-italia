@@ -38,11 +38,15 @@ export interface IAddProfileState {
   lastNameError: string;
   emailError: string;
   phoneError: string;
+  checkboxError: string;
 
   showFirstNameError: boolean;
   showLastNameError: boolean;
   showEmailError: boolean;
   showPhoneError: boolean;
+  showCheckboxError: boolean;
+
+  isDisabled: string,
 
   myBookings: ICustomerData[];
   myCustomers: ICustomer[];
@@ -70,11 +74,14 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
         firstNameError: 'Must be 2 letters or more',
         lastNameError: 'Must be 2 letters or more',
         emailError: 'Invalid Email',
-        phoneError: 'Phonenumber is Too short',
+        phoneError: 'Phone number is too short',
+        checkboxError: 'Please check box to confirm GDPR',
         showFirstNameError: false,
         showLastNameError: false,
         showEmailError: false,
         showPhoneError: false,
+        showCheckboxError: false,
+        isDisabled: '',
         myBookings: [{
           id: 0,
           customer_id: 0,
@@ -98,6 +105,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleView = this.handleView.bind(this);
       this.handelNewCustomer = this.handelNewCustomer.bind(this);
+      // this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
   componentDidMount() {
@@ -187,11 +195,22 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
   };
 
 
+  // handleCheckbox = (event: any) => {
+  //   let booking = this.props.theBooking;
+  //   booking.profile.isDisabled = event.target.value;
+
+  //   this.props.onclick(booking);
+  //   return true;
+  // };
+
+
   validate() {
     let showfirstNameError = false;
     let showlastNameError = false;
     let showemailError = false;
     let showphoneError = false;
+    let showcheckboxError = false;
+    
 
     if (this.state.firstName.length < 2) {
       showfirstNameError = true;
@@ -209,12 +228,18 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       showphoneError = true;
     }
 
-    if (showfirstNameError || showlastNameError || showemailError || showphoneError) {
+    if (this.state.isDisabled.length <= 0) {
+      showcheckboxError = true;
+    }
+
+
+    if (showfirstNameError || showlastNameError || showemailError || showphoneError || showcheckboxError) {
       this.setState({
       showFirstNameError: showfirstNameError,
       showLastNameError: showlastNameError,
       showEmailError: showemailError,
-      showPhoneError: showphoneError
+      showPhoneError: showphoneError,
+      showCheckboxError: showcheckboxError,
       });
       return false;
     }
@@ -245,35 +270,41 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
           phoneError = (<div></div>);
       }
 
+      let checkboxError: JSX.Element = (<div className="errorMessage">{this.state.checkboxError}</div>);
+      if (!this.state.showCheckboxError) {
+          checkboxError = (<div></div>);
+      }
+
+
       return (
-        <main className="page-container">
+        <main className="prof-page-container">
         
           <div className="panel panel-default">
             </div>
-              <section className="parent-top-section">
-                <div className="child-top-section">
-                  <button className="top-section-black" onClick={this.handleView} value="1">Guests</button>
-                  <button className="top-section">{this.props.theBooking.guests}</button>
+              <section className="prof-parent-top-section">
+                <div className="prof-child-top-section">
+                  <button className="prof-top-section-black" onClick={this.handleView} value="1">Guests</button>
+                  <button className="prof-top-section">{this.props.theBooking.guests}</button>
                 </div>
-                <div className="child-top-section">
-                  <button className="top-section-black" onClick={this.handleView} value="2">Date</button>
-                  <button className="top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
+                <div className="prof-child-top-section">
+                  <button className="prof-top-section-black" onClick={this.handleView} value="2">Date</button>
+                  <button className="prof-top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
                 </div>
-                <div className="child-top-section">
-                  <button className="top-section-black" onClick={this.handleView} value="3">Time</button>
-                  <button className="top-section">{this.props.theBooking.time}</button>
+                <div className="prof-child-top-section">
+                  <button className="prof-top-section-black" onClick={this.handleView} value="3">Time</button>
+                  <button className="prof-top-section">{this.props.theBooking.time}</button>
                 </div>
               </section>
-                <div className="profileParent">
+                <div className="prof-parent">
                   <h1>Your details</h1>
-                  <form onSubmit={this.handleSubmit} className="profileChild">
+                  
+                  <form onSubmit={this.handleSubmit} className="prof-child">
                     <input
                       name="firstName"
                       className="profilebox"
                       type="name"
                       placeholder="Firstname"
                       onChange={this.handleInputChange}></input>
-
                       {firstNameError}
                     <input
                       name="lastName"
@@ -296,7 +327,16 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
                       placeholder="Phone"
                       onChange={this.handleInputChange}/>
                       {phoneError}
-                  <button type="submit" value="Submit" className="btn btn-primary">Submit</button>
+                    <input 
+                      name= "isDisabled"
+                      type="checkbox"
+                      className="checkbox"
+                      // placeholder="Phone"
+                      onChange={this.handleInputChange}/>  * I consent to having this website store my information in accordance to GDPR regulations.
+                      {checkboxError}
+                      
+                      {/* <p>I agree and confirm</p> */}
+                  <button type="submit" value="Submit" className="primary-btn" >Submit</button>
                 </form>
               </div>
             </main>
