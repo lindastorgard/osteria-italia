@@ -40,7 +40,8 @@ class Guests extends React.Component <IAddGuestProps,{}> {
             <button onClick={this.handleInput} className="guest-guestbox" value="9">9</button>
             <button onClick={this.handleInput} className="guest-guestbox" value="10">10</button>    
           </section>
-          <p>Donut chocolate cake I love jelly marzipan gummi bears I love ice cream. Chocolate cake pie toffee chocolate cake topping candy canes apple pie. I love pie powder.</p>
+          <p className="paragraph-one">Please select amount of guests.</p>
+          <p className="paragraph-two">If you wish to book a table for more than 10 people, please contact us @ 123-123456.</p>
         </div>
       </main>
     )

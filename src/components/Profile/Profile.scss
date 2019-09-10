@@ -34,18 +34,33 @@
   display: flex;
   width: 100%;
   height: 54px;
-  border: 0.5px solid lightgrey;
+  border: none;
+  border-bottom: 1px solid lightgrey;
   justify-content: center;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
+.profilebox-small{
+  height: 15px;
   background-color: white;
-  margin: 5px;
+  font-size: 0.8rem;
 }
 
-h1{
-  @include header-setting;
+.gdpr-consent{
+  font-size: 0.8rem;
+  padding-top: 1rem;
+
 }
 
-p{
-  padding-top: 2em;
+.profile-heading{
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    margin-top: 5rem;
+  }
 }
 
 .primary-btn{
@@ -66,17 +81,20 @@ p{
 }
 
 input, .checkbox{
-  // margin-top: 2rem;
   margin-right: 0.5rem;
   margin-left: 0.3rem;
 }
+
 .checkbox{
   margin-top: 5rem;
+  color: $detail-color;
 }
 
 .errorMessage{
-  color: $text-color;
+  color: $detail-color;
   font-family: $text-font;
+  font-size: 0.8rem;
   font-weight: 100;
   padding-left: 0.3rem;
+  // border: 1px solid green;
 }

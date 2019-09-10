@@ -135,23 +135,23 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
           </div>
         </section>
         <div className="time-parent">
-          <h1>Select time</h1>
+          <h1 className="time-heading">Select time</h1>
           <section className="time-child">
             <button
               onClick={this.handleInput}
               disabled={this.hasNoAvailableTimes(this.state.bookedTimes.earlyBooking)}
-              className="timebox" value="18:00">18:00
+              className="timebox" value="18:00">18:00 PM
             </button>
             <button
               onClick={this.handleInput}
               disabled={this.hasNoAvailableTimes(this.state.bookedTimes.lateBooking)}
-              className="timebox" value="21:00">21:00
+              className="timebox" value="21:00">21:00 PM
             </button>
           </section>
         </div>
       </main>
     )
-            }
+  }
 
 }
 
