@@ -23,12 +23,21 @@ class App extends Component<{}, {}> {
         <Router>
           <div>
             <Nav />
+            <div className="content">
             <Switch>
               <Route exact path='/admin' component={ Admin } />
               <Route exact path='/booking' component={ Booking } /> 
               <Route exact path='/menu' component={ Menu } />
               <Route exact path='/' component={ LandingPage } />
             </Switch>
+
+            </div>
+            {/* <Switch>
+              <Route exact path='/admin' component={ Admin } />
+              <Route exact path='/booking' component={ Booking } /> 
+              <Route exact path='/menu' component={ Menu } />
+              <Route exact path='/' component={ LandingPage } />
+            </Switch> */}
             <Footer />  
           </div>
         </Router>

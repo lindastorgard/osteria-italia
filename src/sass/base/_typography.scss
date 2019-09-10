@@ -9,3 +9,21 @@ a, a:link{
 a:hover{
   color: $detail-color;
 }
+
+h3, .caption{
+  color: $dark-detail-color;
+  font-family: $title-font;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  font-size: 1.8rem;
+}
+
+h3{
+  color: $detail-color;
+}
+
+p{
+  font-family: $text-font;
+  color: $text-color;
+  letter-spacing: 0.1rem;
+}

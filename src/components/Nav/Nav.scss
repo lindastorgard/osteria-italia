@@ -5,12 +5,23 @@
   background-color: $dark-color;
   padding: 1rem;
   justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
 }
 
 .navbar-brand:link {
   margin: auto;
   font-family: 'Playfair Display SC', serif;
   font-size: 2rem;
+  letter-spacing: 0.3rem;
+  text-transform: capitalize;
+}
+
+.navbar-brand:hover {
+  color:white;
 }
 
 
