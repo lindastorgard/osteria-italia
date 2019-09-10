@@ -2,11 +2,13 @@
 
 @mixin parallax-setting{
   min-height: 700px; 
-
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  @include for-large-devices{
+    min-height: 1000px; 
+  }
 }
 
 @mixin container-setting{
@@ -104,6 +106,32 @@
   border: none;
   margin: 0.8rem 0rem 0.8rem 0rem;
   padding-left: 0;
+}
+
+//media queries
+
+// Extra small devices (portrait phones, less than 576px)
+@mixin for-phone-only {
+  @media (max-width: 575px) { @content; }
+}
+
+@mixin for-small-devices {
+  @media (min-width: 576px) and (max-width: 767px) { @content; }
+}
+
+//// Medium devices (tablets, 768px and up)
+@mixin for-medium-devices {
+  @media (min-width: 767px) and (max-width: 991px) { @content; }
+}
+
+// Large devices (desktops, 992px and up)
+@mixin for-large-devices {
+  @media (min-width: 992px) and (max-width: 1199px) { @content; }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@mixin for-extra-large-devices {
+  @media (min-width: 1200px) { @content; }
 }
 
 

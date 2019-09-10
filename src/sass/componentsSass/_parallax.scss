@@ -18,18 +18,29 @@
   background-image: url("/Images/meat.png");
   @include parallax-setting;
 }
+.parallax-four{
+ 
+  background-image: url("/Images/steak.jpg");
+  @include parallax-setting;
+}
 
 .caption-container{
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 40%;
   width: 100%;
   text-align: center;
-  font-size: 2rem;
+  @include for-extra-large-devices  {  
+    top: 50%; 
+  }
+  
 }
 .caption{
   background-color: rgba(255,255,255,0.6);
   padding: 10px 20px;
   border-radius: 1px;
+  @include for-phone-only {  
+    display: none;
+  }
 }
 

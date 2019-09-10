@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display&display=swap');
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
 
 a, a:link{
   color: white;
+  font-family: $text-font;
+  letter-spacing: 0.2rem;
+  font-size: 1.2rem;
 }
 
 a:hover{
@@ -14,8 +18,22 @@ h3, .caption{
   color: $dark-detail-color;
   font-family: $title-font;
   text-transform: uppercase;
-  letter-spacing: 0.5rem;
-  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  font-size: 1.2rem;
+  line-height: 2rem;
+    
+    @include for-medium-devices{
+      font-size: 1.5rem;
+      letter-spacing: 0.3rem;
+    }
+    @include for-large-devices{
+      letter-spacing: 0.5rem;
+      font-size: 1.8rem;
+    }
+    @include for-extra-large-devices {
+      letter-spacing: 0.5rem;
+      font-size: 1.8rem;
+    }
 }
 
 h3{
@@ -26,4 +44,6 @@ p{
   font-family: $text-font;
   color: $text-color;
   letter-spacing: 0.1rem;
+  font-size: 1rem;
+  padding: 0
 }

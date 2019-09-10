@@ -1,7 +1,13 @@
+@import '../../sass/abstracts/mixins';
 
 .text-container{
   padding: 4rem 2rem;
   text-align: center;
   width: 80%;
   margin: auto;
+    @include for-phone-only {  
+      padding: 2rem 2rem;
+      text-align: center;
+      width: 100%;
+  }
 }

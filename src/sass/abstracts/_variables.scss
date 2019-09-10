@@ -1,6 +1,6 @@
 //common colors
 // $dark-color: #384660;
-$dark-color:black;
+$dark-color:rgb(39, 36, 36);
 $detail-color: burlywood;
 $dark-detail-color: rgb(100, 92, 84);
 $text-color: lighten($dark-detail-color, 20%);
@@ -14,4 +14,6 @@ $text-color: #595653;
 // media queries
 // $break-small: 320px;
 $break-large: 768px;
+
+
 
