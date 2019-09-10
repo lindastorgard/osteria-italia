@@ -53,10 +53,8 @@ it('can set state of booking', () => {
         email: '',
         phone: ''}]
       }
-    }
-    
+    }  
   });
-
 
   // // wrapper.instance().handleDayClick(newDate);
   // // wrapper.update();
