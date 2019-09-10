@@ -37,6 +37,7 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
         this.handleInput = this.handleInput.bind(this);
         this.handleView = this.handleView.bind(this);
         this.getData = this.getData.bind(this);
+        this.handleBackStep = this.handleBackStep.bind(this);
     }
 
     componentDidMount() {
@@ -121,10 +122,18 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
     this.props.onclick(booking);
   }
 
+  handleBackStep(){
+    let booking = this.props.theBooking;
+    booking.view = this.props.theBooking.view - 1;
+
+    this.props.onclick(booking);
+  }
+
     render() {
             return (
       <main className="time-page-container">
         <section className="time-parent-top-section">
+        <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
           <div className="time-child-top-section">
             <button className="time-top-section-black" onClick={this.handleView} value="1">Guests</button>
             <button className="time-top-section">{this.props.theBooking.guests}</button>

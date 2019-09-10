@@ -68,6 +68,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.disableBookedUpDays = this.disableBookedUpDays.bind(this);
     this.getDatesWithBookings = this.getDatesWithBookings.bind(this);
     this.handleView = this.handleView.bind(this);
+    this.handleBackStep = this.handleBackStep.bind(this);
   }
 
   componentDidMount() {
@@ -187,10 +188,18 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     this.props.onclick(booking);
   }
 
+  handleBackStep(){
+    let booking = this.props.theBooking;
+    booking.view = this.props.theBooking.view - 1;
+
+    this.props.onclick(booking);
+  }
+
   render() {
     return (
       <main className="cal-page-container">
         <section className="cal-parent-top-section"> 
+        <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
           <div className="cal-child-top-section">
             <button className="cal-top-section-black" onClick={this.handleView} value="1">Guests</button>
             <button className="cal-top-section">{this.props.theBooking.guests}</button>

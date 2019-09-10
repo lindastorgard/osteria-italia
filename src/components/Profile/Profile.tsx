@@ -105,7 +105,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleView = this.handleView.bind(this);
       this.handelNewCustomer = this.handelNewCustomer.bind(this);
-      // this.handleCheckbox = this.handleCheckbox.bind(this);
+      this.handleBackStep = this.handleBackStep.bind(this);
   }
 
   componentDidMount() {
@@ -194,15 +194,12 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
     this.props.onclick(booking);
   };
 
+  handleBackStep(){
+    let booking = this.props.theBooking;
+    booking.view = this.props.theBooking.view - 1;
 
-  // handleCheckbox = (event: any) => {
-  //   let booking = this.props.theBooking;
-  //   booking.profile.isDisabled = event.target.value;
-
-  //   this.props.onclick(booking);
-  //   return true;
-  // };
-
+    this.props.onclick(booking);
+  }
 
   validate() {
     let showfirstNameError = false;
@@ -282,6 +279,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
           <div className="panel panel-default">
             </div>
               <section className="prof-parent-top-section">
+              <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
                 <div className="prof-child-top-section">
                   <button className="prof-top-section-black" onClick={this.handleView} value="1">Guests</button>
                   <button className="prof-top-section">{this.props.theBooking.guests}</button>

@@ -60,3 +60,15 @@
 .time-top-section{
   @include top-setting;
 }
+
+.back-button{
+  background-color: none;
+  border: none;
+  color: white;
+  padding: 0;
+
+  .back-icon{
+    height: 35px;
+    margin-bottom: 2rem;
+  }
+}
