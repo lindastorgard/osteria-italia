@@ -4,7 +4,7 @@ import Calender from '../Calender/Calender';
 import Summary from '../Summary/Summary';
 import axios from 'axios';
 import Confirmation from '../Confirmation/Confirmation';
-import Profile, { IAddProfileState } from '../Profile/Profile'
+import Profile, { IAddProfileState } from '../Profile/Profile';
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
 import { any } from 'prop-types';
