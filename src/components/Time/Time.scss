@@ -20,7 +20,7 @@
 
   .timebox{
     display: flex;
-    width: 54px;
+    width: 94px;
     height: 54px;
     border: 0.5px solid lightgrey;
     justify-content: center;
@@ -33,13 +33,17 @@
   }
 }
 
-h1{
-    @include header-setting;
+.time-heading{
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    margin-top: 5rem;
+  }
 }
 
-p{
-  padding-top: 2em;
-}
 
 .time-parent-top-section{
   @include top-parent-setting;
@@ -55,4 +59,16 @@ p{
 
 .time-top-section{
   @include top-setting;
+}
+
+.back-button{
+  background-color: none;
+  border: none;
+  color: white;
+  padding: 0;
+
+  .back-icon{
+    height: 35px;
+    margin-bottom: 2rem;
+  }
 }

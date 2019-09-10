@@ -75,7 +75,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
         lastNameError: 'Must be 2 letters or more',
         emailError: 'Invalid Email',
         phoneError: 'Phone number is too short',
-        checkboxError: 'Please check box to confirm GDPR',
+        checkboxError: 'Check box to confirm',
         showFirstNameError: false,
         showLastNameError: false,
         showEmailError: false,
@@ -105,7 +105,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleView = this.handleView.bind(this);
       this.handelNewCustomer = this.handelNewCustomer.bind(this);
-      // this.handleCheckbox = this.handleCheckbox.bind(this);
+      this.handleBackStep = this.handleBackStep.bind(this);
   }
 
   componentDidMount() {
@@ -194,15 +194,12 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
     this.props.onclick(booking);
   };
 
+  handleBackStep(){
+    let booking = this.props.theBooking;
+    booking.view = this.props.theBooking.view - 1;
 
-  // handleCheckbox = (event: any) => {
-  //   let booking = this.props.theBooking;
-  //   booking.profile.isDisabled = event.target.value;
-
-  //   this.props.onclick(booking);
-  //   return true;
-  // };
-
+    this.props.onclick(booking);
+  }
 
   validate() {
     let showfirstNameError = false;
@@ -282,6 +279,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
           <div className="panel panel-default">
             </div>
               <section className="prof-parent-top-section">
+              <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
                 <div className="prof-child-top-section">
                   <button className="prof-top-section-black" onClick={this.handleView} value="1">Guests</button>
                   <button className="prof-top-section">{this.props.theBooking.guests}</button>
@@ -292,11 +290,11 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
                 </div>
                 <div className="prof-child-top-section">
                   <button className="prof-top-section-black" onClick={this.handleView} value="3">Time</button>
-                  <button className="prof-top-section">{this.props.theBooking.time}</button>
+                  <button className="prof-top-section">{this.props.theBooking.time} PM</button>
                 </div>
               </section>
                 <div className="prof-parent">
-                  <h1>Your details</h1>
+                  <h1 className="profile-heading">Your details</h1>
                   
                   <form onSubmit={this.handleSubmit} className="prof-child">
                     <input
@@ -327,15 +325,14 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
                       placeholder="Phone"
                       onChange={this.handleInputChange}/>
                       {phoneError}
+                      <p className="gdpr-consent">I consent to the processing of my data according to the Privacy Policy disclosure *.</p>  
                     <input 
                       name= "isDisabled"
                       type="checkbox"
-                      className="checkbox"
+                      className="profilebox-small"
                       // placeholder="Phone"
-                      onChange={this.handleInputChange}/>  * I consent to having this website store my information in accordance to GDPR regulations.
+                      onChange={this.handleInputChange}/>
                       {checkboxError}
-                      
-                      {/* <p>I agree and confirm</p> */}
                   <button type="submit" value="Submit" className="primary-btn" >Submit</button>
                 </form>
               </div>
