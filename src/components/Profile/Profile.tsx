@@ -260,94 +260,91 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
         firstNameError = (<div></div>);
       }
 
-      let lastNameError: JSX.Element = (<div className="errorMessage">{this.state.lastNameError}</div>);
-      if (!this.state.showLastNameError) {
-        lastNameError = (<div></div>);
-      }
-
-      let emailError: JSX.Element = (<div className="errorMessage">{this.state.emailError}</div>);
-      if (!this.state.showEmailError) {
-          emailError = (<div></div>);
-      }
-
-      let phoneError: JSX.Element = (<div className="errorMessage">{this.state.phoneError}</div>);
-      if (!this.state.showPhoneError) {
-          phoneError = (<div></div>);
-      }
-
-      let checkboxError: JSX.Element = (<div className="errorMessage">{this.state.checkboxError}</div>);
-      if (!this.state.showCheckboxError) {
-          checkboxError = (<div></div>);
-      }
-
-
-      return (
-        <main className="prof-page-container">
-        
-          <div className="panel panel-default">
-            </div>
-              <section className="prof-parent-top-section">
-              <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
-                <div className="prof-child-top-section">
-                  <button className="prof-top-section-black" onClick={this.handleView} value="1">Guests</button>
-                  <button className="prof-top-section">{this.props.theBooking.guests}</button>
-                </div>
-                <div className="prof-child-top-section">
-                  <button className="prof-top-section-black" onClick={this.handleView} value="2">Date</button>
-                  <button className="prof-top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
-                </div>
-                <div className="prof-child-top-section">
-                  <button className="prof-top-section-black" onClick={this.handleView} value="3">Time</button>
-                  <button className="prof-top-section">{this.props.theBooking.time} PM</button>
-                </div>
-              </section>
-                <div className="prof-parent">
-                  <h1 className="profile-heading">Your details</h1>
-                  
-                  <form onSubmit={this.handleSubmit} className="prof-child">
-                    <input
-                      name="firstName"
-                      className="profilebox"
-                      type="name"
-                      placeholder="Firstname"
-                      onChange={this.handleInputChange}></input>
-                      {firstNameError}
-                    <input
-                      name="lastName"
-                      className="profilebox"
-                      type="lastname"
-                      placeholder="Lastname"
-                      onChange={this.handleInputChange}/>
-                      {lastNameError}
-                    <input
-                      name="email"
-                      className="profilebox"
-                      type="text"
-                      placeholder="Email"
-                      onChange={this.handleInputChange}/>
-                      {emailError}
-                    <input
-                      name="phone"
-                      className="profilebox"
-                      type="phone"
-                      placeholder="Phone"
-                      onChange={this.handleInputChange}/>
-                      {phoneError}
-                      <p className="gdpr-consent">I consent to the processing of my data according to the Privacy Policy disclosure *.</p>  
-                    <input 
-                      name= "checkbox"
-                      type="checkbox"
-                      className="profilebox-small"
-                      onChange={this.handleCheckbox}/>
-                      {checkboxError}
-                      
-                  <button type="submit" value="Submit" className="primary-btn" >Submit</button>
-                </form>
-              </div>
-            </main>
-        )
+    let lastNameError: JSX.Element = (<div className="errorMessage">{this.state.lastNameError}</div>);
+    if (!this.state.showLastNameError) {
+      lastNameError = (<div></div>);
     }
-   
+
+    let emailError: JSX.Element = (<div className="errorMessage">{this.state.emailError}</div>);
+    if (!this.state.showEmailError) {
+      emailError = (<div></div>);
+    }
+
+    let phoneError: JSX.Element = (<div className="errorMessage">{this.state.phoneError}</div>);
+    if (!this.state.showPhoneError) {
+      phoneError = (<div></div>);
+    }
+
+    let checkboxError: JSX.Element = (<div className="errorMessage">{this.state.checkboxError}</div>);
+    if (!this.state.showCheckboxError) {
+      checkboxError = (<div></div>);
+    }
+
+
+    return (
+      <main className="prof-page-container">
+        <div className="panel panel-default">
+          </div>
+            <section className="prof-parent-top-section">
+            <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
+            <div className="prof-child-top-section">
+              <button className="prof-top-section-black" onClick={this.handleView} value="1">Guests</button>
+              <button className="prof-top-section">{this.props.theBooking.guests}</button>
+            </div>
+            <div className="prof-child-top-section">
+              <button className="prof-top-section-black" onClick={this.handleView} value="2">Date</button>
+              <button className="prof-top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
+            </div>
+            <div className="prof-child-top-section">
+              <button className="prof-top-section-black" onClick={this.handleView} value="3">Time</button>
+              <button className="prof-top-section">{this.props.theBooking.time} PM</button>
+            </div>
+            </section>
+            <div className="prof-parent">
+              <h1 className="profile-heading">Your details</h1>
+              <form onSubmit={this.handleSubmit} className="prof-child">
+                <input
+                  name="firstName"
+                  className="profilebox"
+                  type="name"
+                  placeholder="Firstname"
+                  onChange={this.handleInputChange}></input>
+                  {firstNameError}
+                <input
+                  name="lastName"
+                  className="profilebox"
+                  type="lastname"
+                  placeholder="Lastname"
+                  onChange={this.handleInputChange}/>
+                  {lastNameError}
+                <input
+                  name="email"
+                  className="profilebox"
+                  type="text"
+                  placeholder="Email"
+                  onChange={this.handleInputChange}/>
+                  {emailError}
+                <input
+                  name="phone"
+                  className="profilebox"
+                  type="phone"
+                  placeholder="Phone"
+                  onChange={this.handleInputChange}/>
+                  {phoneError}
+                  <p className="gdpr-consent">I consent to the processing of my data according to the Privacy Policy disclosure *.</p>  
+                <input 
+                  name= "checkbox"
+                  type="checkbox"
+                  className="profilebox-small"
+                  onChange={this.handleCheckbox}/>
+                  {checkboxError}
+              <button type="submit" value="Submit" className="primary-btn" >Submit</button>
+            </form>
+        </div>
+      </main>
+    )
+  }
+
 }
 
 export default Profile;
