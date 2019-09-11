@@ -46,7 +46,7 @@ export interface IAddProfileState {
   showPhoneError: boolean;
   showCheckboxError: boolean;
 
-  isDisabled: string,
+  checked: boolean,
 
   myBookings: ICustomerData[];
   myCustomers: ICustomer[];
@@ -81,7 +81,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
         showEmailError: false,
         showPhoneError: false,
         showCheckboxError: false,
-        isDisabled: '',
+        checked: false,
         myBookings: [{
           id: 0,
           customer_id: 0,
@@ -106,6 +106,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       this.handleView = this.handleView.bind(this);
       this.handelNewCustomer = this.handelNewCustomer.bind(this);
       this.handleBackStep = this.handleBackStep.bind(this);
+      this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
   componentDidMount() {
@@ -188,6 +189,12 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
 
   }
 
+  handleCheckbox =() => {
+      this.setState((prevState: any) => ({
+          checked: !prevState.checked
+      }))
+  };
+
   handleView = (event: any) => {
     let booking = this.props.theBooking;
     booking.view = parseInt(event.target.value);
@@ -226,7 +233,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       showphoneError = true;
     }
 
-    if (this.state.isDisabled.length <= 0) {
+    if (!this.state.checked) {
       showcheckboxError = true;
     }
 
@@ -242,7 +249,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       return false;
     }
 
-      return true;
+    return true;
   }
 
 
@@ -328,12 +335,12 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
                       {phoneError}
                       <p className="gdpr-consent">I consent to the processing of my data according to the Privacy Policy disclosure *.</p>  
                     <input 
-                      name= "isDisabled"
+                      name= "checkbox"
                       type="checkbox"
                       className="profilebox-small"
-                      // placeholder="Phone"
-                      onChange={this.handleInputChange}/>
+                      onChange={this.handleCheckbox}/>
                       {checkboxError}
+                      
                   <button type="submit" value="Submit" className="primary-btn" >Submit</button>
                 </form>
               </div>

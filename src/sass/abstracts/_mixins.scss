@@ -26,7 +26,7 @@
   padding: 0rem 1rem 0rem 1rem;
   color: $text-color;
   font-family: $text-font;
-  font-weight: 100;
+  font-weight: 200;
   @media (min-width: $break-large){
     width: 455px;
   }
@@ -47,7 +47,8 @@
   margin-bottom: 2.5rem;
   color: black;
   font-size: 1.5rem;
-  font-weight: 100;
+  font-family: $text-font;
+  font-weight: 200;
   @media (min-width: $break-large){
     margin-top: 5rem;
   }
@@ -61,7 +62,8 @@
   justify-content: center;
   background-color: white;
   font-family: $text-font;
-  font-weight: 100;
+  font-weight: 200;
+  outline: 0 !important;
   @media (min-width: $break-large){
     width: 80px;
     height: 80px;
@@ -93,19 +95,25 @@
 @mixin top-setting{
   display: flex;
   color: $detail-color;
+  font-family: $text-font;
+  font-weight: 200;
   background-color: white;
   border: none;
   margin: 0.8rem 0rem 0.8rem 0rem;
   padding-left: 0;
+  outline: 0 !important;
 }
 
 @mixin top-black-setting{
   color: black;
+  font-family: $text-font;
+  font-weight: 200;
   display: flex;
   background-color: white;
   border: none;
   margin: 0.8rem 0rem 0.8rem 0rem;
   padding-left: 0;
+  outline: 0 !important;
 }
 
 //media queries

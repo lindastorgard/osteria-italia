@@ -9,18 +9,23 @@
   padding: 0 20px;
   margin-top: 1.5rem;
   cursor: pointer;
+  outline: 0 !important;
 }
 .primary-btn:hover, .primary-btn:active{
   color: white;
   border-color: $text-color;
-  background-color: $text-color;  
+  background-color: $text-color; 
+  outline: 0 !important; 
 }
 
 .back-button{
   background-color: none;
+  background: none;
   border: none;
   color: white;
   padding: 0;
+  outline: 0 !important;
+
 
   .back-icon{
     height: 35px;

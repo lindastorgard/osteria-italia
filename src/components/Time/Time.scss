@@ -26,6 +26,7 @@
     justify-content: center;
     background-color: white;
     margin: 5px;
+    outline: 0 !important;
   
     .timeboxNumber{
         align-self: center;
@@ -59,16 +60,4 @@
 
 .time-top-section{
   @include top-setting;
-}
-
-.back-button{
-  background-color: none;
-  border: none;
-  color: white;
-  padding: 0;
-
-  .back-icon{
-    height: 35px;
-    margin-bottom: 2rem;
-  }
 }

@@ -38,17 +38,23 @@
   border-bottom: 1px solid lightgrey;
   justify-content: center;
   margin: 0.5rem 0rem 0.5rem 0rem;
+  outline: 0 !important;
 }
 
 .profilebox-small{
   height: 15px;
+  width: 100%;
   background-color: white;
   font-size: 0.8rem;
+  outline: 0 !important;
+  margin-bottom: 1rem;
+  margin-left: 0;
 }
 
 .gdpr-consent{
   font-size: 0.8rem;
   padding-top: 1rem;
+  padding-bottom: 0.5rem;
 
 }
 
@@ -63,31 +69,9 @@
   }
 }
 
-.primary-btn{
-  color: $text-color;
-  border-color: $text-color;
-  text-transform: uppercase; 
-  letter-spacing: 0.1rem;
-  height: 38px;
-  line-height: 38px;
-  padding: 0 16px;
-  margin-top: 1.5rem;
-  margin: 0 auto;
-}
-.primary-btn:hover{
-  color: white;
-  border-color: $text-color;
-  background-color: $text-color;  
-}
-
 input, .checkbox{
   margin-right: 0.5rem;
   margin-left: 0.3rem;
-}
-
-.checkbox{
-  margin-top: 5rem;
-  color: $detail-color;
 }
 
 .errorMessage{
@@ -98,14 +82,7 @@ input, .checkbox{
   padding-left: 0.3rem;
 }
 
-.back-button{
-  background-color: none;
-  border: none;
-  color: white;
-  padding: 0;
-
-  .back-icon{
-    height: 35px;
-    margin-bottom: 2rem;
-  }
+.primary-btn{
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
