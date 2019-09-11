@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito|Playfair+Display&display=swap');
 @import '../../sass/abstracts/variables';
 @import '../../sass/abstracts/mixins';
 
@@ -14,13 +14,14 @@ a:hover{
   color: $detail-color;
 }
 
-h3, .caption{
-  color: $dark-detail-color;
+h3{
+  color: $detail-color;
   font-family: $title-font;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 2rem;
+  padding: 0;
     
     @include for-medium-devices{
       font-size: 1.5rem;
@@ -36,14 +37,32 @@ h3, .caption{
     }
 }
 
-h3{
-  color: $detail-color;
+h4{
+  color: $dark-detail-color;
+  font-size: 1.2rem;
+  @extend h3;
+}
+
+.caption {
+  color: $dark-detail-color;
+  padding: 1rem 2rem;
+  @extend h3;
+}
+
+.ingress{
+  text-transform: none;
+  letter-spacing: 0.2rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  @extend h4;
 }
 
 p{
   font-family: $text-font;
+  font-weight: 300;
   color: $text-color;
   letter-spacing: 0.1rem;
   font-size: 1rem;
-  padding: 0
+  padding: 0;
+  margin: 0;
 }

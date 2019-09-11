@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bool, string } from 'prop-types';
 import Calender from '../Calender/Calender';
 import Summary from '../Summary/Summary';
 import axios from 'axios';
@@ -7,7 +6,6 @@ import Confirmation from '../Confirmation/Confirmation';
 import Profile, { IAddProfileState } from '../Profile/Profile';
 import Guests from '../Guests/Guests'
 import Time from '../Time/Time';
-import { any } from 'prop-types';
 import moment from "moment";
 
 export interface IBooking{
@@ -81,7 +79,6 @@ class Booking extends Component <{}, IBookingState> {
   componentDidMount() {
     window.scrollTo(0, 0)
   }
-
 
     // Handle fields change
     updateState(updatedBooking: IBooking) {

@@ -109,6 +109,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0)
     axios.get('http://localhost:8888/booking_api/api/customers/read.php')
       .then(response => {
         console.log('Got response from server');

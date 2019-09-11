@@ -13,6 +13,9 @@ class Summary extends React.Component <ISummaryProps, {}>{
     super(props);
 
   }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
 
   render() {
     return (
