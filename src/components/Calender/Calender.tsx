@@ -1,7 +1,7 @@
 import React from 'react';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import moment from 'moment/moment.js' 
+import moment from 'moment/moment.js'
 
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
@@ -54,13 +54,13 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         sittings: {
           sitting1: 0,
           sitting2: 0
-        }  
+        }
       },
       existingBookings : [],
       disabledDays: [],
       daysWithBooking: [],
       configurations: [],
-    } 
+    }
 
     this.handleDayClick = this.handleDayClick.bind(this);
     this.getConfigData = this.getConfigData.bind(this);
@@ -80,7 +80,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
       .then((response:any) => {
         this.setState({
-          existingBookings: response.data.data 
+          existingBookings: response.data.data
         });
       this.getConfigData();
     })
@@ -90,7 +90,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     axios.get('http://localhost:8888/booking_api/api/configs/readConfig.php')
       .then((response:any) => {
         this.setState({
-          configurations: response.data.data 
+          configurations: response.data.data
         });
       this.disableBookedUpDays();
     })
@@ -111,13 +111,13 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
 
     //Create an array to save & update booking values
     let tempList: IBookingDay[] = [];
-    
+
      this.state.existingBookings.map(currentBooking => {
       //Get date and time for booking in question
       let bookingToCheck: IBookingDay;
       let date = moment(currentBooking.date).format('YYYY-MM-DD');
       let time = moment(currentBooking.date).format('HH:mm');
-        
+
       //Check if current booking date exists in our temporary booking array, if not set values to empty
       bookingToCheck = tempList.find(bookingDay => bookingDay.bookedDate === date) || {
         bookedDate: '',
@@ -127,7 +127,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         }
       };
 
-      //If bookingToCheck date does not exist in our temp list, 
+      //If bookingToCheck date does not exist in our temp list,
       //set the booking to check value  to current booking values
       let bookingIsNew = false;
       if(bookingToCheck.bookedDate === '') {
@@ -137,15 +137,15 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
 
       if(time === sitting1Time){
         (currentBooking.guest_nr < 7 ? bookingToCheck.sittings.sitting1++ :bookingToCheck.sittings.sitting1 += 2)
-          
+
       }else if(time === sitting2Time) {
         (currentBooking.guest_nr < 7 ? bookingToCheck.sittings.sitting2++ :bookingToCheck.sittings.sitting2 += 2)
       }
-       
+
       if(bookingIsNew) {
         tempList.push(bookingToCheck);
       }
-    });  
+    });
 
     this.setState({
       daysWithBooking: tempList,
@@ -164,18 +164,21 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
       console.log("Im looking for this",this.state.daysWithBooking);
       let disabledDays: Date[] = [];
       this.state.daysWithBooking.map(day => {
-  
+
         if(day.sittings.sitting1 === 15 && day.sittings.sitting2 === 15)
           disabledDays.push(new Date(day.bookedDate));
       });
-  
+
       this.setState({
         disabledDays: disabledDays
       });
     }
   }
 
-  handleDayClick = (day: Date) => {
+  handleDayClick = (day: Date, modifiers: any = {}) => {
+    if (modifiers.disabled) {
+        return;
+    }
     let booking = this.props.theBooking;
     booking.date = day;
     booking.view = this.props.theBooking.view + 1;
@@ -197,29 +200,31 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
   }
 
   render() {
+
+    const past = {
+        before: new Date(),
+    }
+
     return (
       <main className="cal-page-container">
-        <section className="cal-parent-top-section"> 
+        <section className="cal-parent-top-section">
         <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
           <div className="cal-child-top-section">
             <button className="cal-top-section-black" onClick={this.handleView} value="1">Guests</button>
             <button className="cal-top-section">{this.props.theBooking.guests}</button>
           </div>
-          
+
         </section>
         <div className="cal-parent">
-          <div className="cal-child"> 
+          <div className="cal-child">
           <h1 className="cal-heading">Select date</h1>
-        
-        
+
+
         <DayPicker
           fromMonth={new Date()}
           initialMonth={new Date(2019, 8)}
-          
-          disabledDays= {this.state.disabledDays.map(currentDate => {
-            let asMoment = moment(currentDate);
-            return new Date(asMoment.year(), asMoment.month(), asMoment.date());
-          })}
+
+          disabledDays= { past }
           onDayClick={this.handleDayClick}
         />
         </div>
