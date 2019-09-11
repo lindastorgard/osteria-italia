@@ -30,6 +30,16 @@
   @include parallax-setting;
 } 
 
+.parallax-seven{
+  background-image: url("/Images/minibar.jpg");
+  @include parallax-setting;
+}
+
+.parallax-eight{
+  background-image: url("/Images/dishes.png");
+  @include parallax-setting;
+}
+
 .caption-container{
   position: absolute;
   left: 0;
@@ -47,5 +57,12 @@
   @include for-phone-only {  
     display: none;
   }
+}
+
+.about-caption{
+  display: block;
+  width: 90%;
+  margin: auto;
+  @extend .caption
 }
 

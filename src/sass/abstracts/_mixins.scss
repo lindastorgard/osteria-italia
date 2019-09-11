@@ -115,10 +115,6 @@
   @media (max-width: 575px) { @content; }
 }
 
-@mixin for-small-devices {
-  @media (min-width: 576px) and (max-width: 767px) { @content; }
-}
-
 //// Medium devices (tablets, 768px and up)
 @mixin for-medium-devices {
   @media (min-width: 767px) and (max-width: 991px) { @content; }

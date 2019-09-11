@@ -208,7 +208,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
     }
 
     return (
-      <main className="cal-page-container">
+      <div className="cal-page-container">
         <section className="cal-parent-top-section">
         <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
           <div className="cal-child-top-section">
@@ -234,7 +234,7 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
         />
         </div>
         </div>
-      </main> 
+      </div> 
     )
   }
 }

@@ -17,6 +17,7 @@ class Nav extends React.Component {
 							<ul className="navbar-nav mr-auto">
 								<li className="nav-item"><Link to={'/menu'} className="nav-link">Menu</Link></li>
 								<li className="nav-item"><Link to={'/booking'} className="nav-link">Reservations</Link></li>
+								<li className="nav-item"><Link to={'/about'} className="nav-link">About</Link></li>
 							</ul>
 					</div>
 				</nav>

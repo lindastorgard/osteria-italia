@@ -19,9 +19,7 @@ class Footer extends Component <{}, {}> {
 							</a>
 						</div>
 					</div>
-					
-				
-          
+
           <div className='footerInfo'>Piazza Italiano 5, 55599, Italia</div>
 					<div className='footerInfo'>www.osteriaitalia.com</div>
         </div>
