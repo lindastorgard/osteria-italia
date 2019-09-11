@@ -43,6 +43,17 @@ const props = {
 
 describe('Profile ', () => {
     it('renders without crashing', () => {
-      shallow(<Profile {...props} />);
+      let wrapper = shallow(<Profile {...props} />);
     });
+
+    it('should call onsubmit when submit', () => {
+      const form = mount<Profile>(<Profile {...props} />).find('form');
+
+      const event = {
+        preventdefault: jest.fn()
+      }
+      form.simulate('submit', event);
+
+      expect(props.onsubmit).toHaveBeenCalled();
+  });
 });
