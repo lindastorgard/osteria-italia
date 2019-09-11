@@ -59,7 +59,11 @@ class Admin extends React.Component<{}, IAdminState> {
             .then(response => {
                 console.log('Got response from server');
                 console.log(response.data);
-                this.setState({bookings: response.data.data})
+                if (response.data.data) {
+                    this.setState({bookings: response.data.data})
+                } else {
+                    this.setState({bookings: []})
+                }
             })
             .catch(error => console.log(error));
     };
@@ -89,32 +93,32 @@ class Admin extends React.Component<{}, IAdminState> {
         });
 
         function BookingsTable() {
-            return (
-                <Table responsive hover>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>First</th>
-                        <th>Last</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Guests</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {bookings}
-                    </tbody>
-                </Table>
-            );
+                return (
+                    <Table responsive hover>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First</th>
+                            <th>Last</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Guests</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {bookings}
+                        </tbody>
+                    </Table>
+                );
         }
 
         return (
             <Container className="App" style={{marginTop: "50px"}}>
                 <Row>
                     <Col>
-                        <h1 style={{margin: "20px 0"}}>Bookings Admin</h1>
+                        <h1 style={{margin: "50px 0"}}>Bookings Admin</h1>
                     </Col>
                 </Row>
                 <Row>
