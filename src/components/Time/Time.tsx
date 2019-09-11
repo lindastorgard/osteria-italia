@@ -83,14 +83,13 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
               // Format the date from the database to only show the chosen time for the reservation
               let dbTime = moment(dbDate).format('HH:mm');
               if (earlyTime === dbTime) {
-                console.log("Early");
                 //Check if booking contains more than 6 guests, if yes deduct 2 tables for that booking
-                (guestNr < 7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2);  
+                (guestNr < 7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2); 
+                (this.props.theBooking.guests<7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2); 
               }
               if (lateTime === dbTime) {
-                console.log("late");
                 (guestNr < 7 ? availableLateTimes -= 1 : availableLateTimes -= 2);
-                console.log("nr of available table ", availableLateTimes)
+                (this.props.theBooking.guests<7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2);
               }
             }
         });
@@ -117,7 +116,6 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
   handleView = (event: any) => {
     let booking = this.props.theBooking;
     booking.view = parseInt(event.target.value);
-
     this.props.onclick(booking);
   }
 
