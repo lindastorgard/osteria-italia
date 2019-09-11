@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
+import { CSSTransition } from "react-transition-group";
 
 export interface INavState{
   showMenu: boolean
@@ -48,22 +49,21 @@ class Nav extends React.Component<{}, INavState> {
 					<span></span>
 					<span></span>
         </button>
-        
-        {
-          this.state.showMenu
-            ? (
-							<div className="menu navbar-collapse">
+        <CSSTransition
+          in={this.state.showMenu}
+          timeout={300}
+          classNames="list-transition"
+          unmountOnExit
+          appear
+        >
+						<div className="menu navbar-collapse">
               <ul className="navbar-nav mr-auto">
 								<li className="nav-item"><Link to={'/menu'} className="nav-link">Menu</Link></li>
 								<li className="nav-item"><Link to={'/booking'} className="nav-link">Reservations</Link></li>
 								<li className="nav-item"><Link to={'/about'} className="nav-link">About</Link></li>
 							</ul>
 						</div>
-            )
-            : (
-              null
-            )
-        }
+            </CSSTransition>
       </nav>
     );
   }
