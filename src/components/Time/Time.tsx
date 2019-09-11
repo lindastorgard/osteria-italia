@@ -45,28 +45,27 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
       this.getData();
     }
    
-
     getData() {
-        axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
-            .then((response: any) => {
-                this.setState({
-                    existingBookings: response.data.data
-                });
+      axios.get('http://localhost:8888/booking_api/api/bookings/read.php')
+        .then((response: any) => {
+          this.setState({
+            existingBookings: response.data.data
+          });
 
-                if (this.state.existingBookings == undefined) {
-                    console.log('got ya');
-                    this.setState({
-                        bookedTimes: {
-                            earlyBooking: 15,
-                            lateBooking: 15
-                        }
-                    })
-                    return
-                } else {
-                    console.log("Existing from state: ", this.state.existingBookings);
-                    this.disableBookedUpTimes();
-                }
-            })
+          if (this.state.existingBookings == undefined) {
+            console.log('got ya');
+            this.setState({
+              bookedTimes: {
+                earlyBooking: 15,
+                lateBooking: 15
+            }
+          })
+            return
+          } else {
+            console.log("Existing from state: ", this.state.existingBookings);
+            this.disableBookedUpTimes();
+        }
+      })
     }
 
     disableBookedUpTimes() {
@@ -81,40 +80,38 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
             let dbDate = new Date(booking.date);
             let guestNr = booking.guest_nr;
             if (dbDate.toDateString() === this.props.theBooking.date.toDateString()) {
-                // Format the date from the database to only show the chosen time for the reservation
-                let dbTime = moment(dbDate).format('HH:mm');
-                if (earlyTime === dbTime) {
-                    console.log("Early");
-                    //Check if booking contains more than 6 guests, if yes deduct 2 tables for that booking
-                    (guestNr < 7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2);
-                    console.log("nr of available table ", availableEarlyTimes)
-                }
-
-                if (lateTime === dbTime) {
-                    console.log("late");
-                    (guestNr < 7 ? availableLateTimes -= 1 : availableLateTimes -= 2);
-                    console.log("nr of available table ", availableLateTimes)
-                }
+              // Format the date from the database to only show the chosen time for the reservation
+              let dbTime = moment(dbDate).format('HH:mm');
+              if (earlyTime === dbTime) {
+                console.log("Early");
+                //Check if booking contains more than 6 guests, if yes deduct 2 tables for that booking
+                (guestNr < 7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2);  
+              }
+              if (lateTime === dbTime) {
+                console.log("late");
+                (guestNr < 7 ? availableLateTimes -= 1 : availableLateTimes -= 2);
+                console.log("nr of available table ", availableLateTimes)
+              }
             }
         });
         this.setState({
-            bookedTimes: {
-                earlyBooking: availableEarlyTimes,
-                lateBooking: availableLateTimes
-            }
+          bookedTimes: {
+              earlyBooking: availableEarlyTimes,
+              lateBooking: availableLateTimes
+          }
         })
     }
 
     hasNoAvailableTimes(time: number) {
-        return time <= 0;
+      return time <= 0;
     }
 
     handleInput = (event: any) => {
-        let booking = this.props.theBooking;
-        booking.time = event.target.value;
-        booking.view = this.props.theBooking.view + 1;
+      let booking = this.props.theBooking;
+      booking.time = event.target.value;
+      booking.view = this.props.theBooking.view + 1;
 
-        this.props.onclick(booking);
+      this.props.onclick(booking);
     }
 
   handleView = (event: any) => {
@@ -132,38 +129,38 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
   }
 
     render() {
-            return (
-      <main className="time-page-container">
-        <section className="time-parent-top-section">
-        <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
-          <div className="time-child-top-section">
-            <button className="time-top-section-black" onClick={this.handleView} value="1">Guests</button>
-            <button className="time-top-section">{this.props.theBooking.guests}</button>
-          </div>
-          <div className="time-child-top-section">
-            <button className="time-top-section-black" onClick={this.handleView} value="2">Date</button>
-            <button className="time-top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
-          </div>
-        </section>
-        <div className="time-parent">
-          <h1 className="time-heading">Select time</h1>
-          <section className="time-child">
-            <button
-              onClick={this.handleInput}
-              disabled={this.hasNoAvailableTimes(this.state.bookedTimes.earlyBooking)}
-              className="timebox" value="18:00">18:00 PM
-            </button>
-            <button
-              onClick={this.handleInput}
-              disabled={this.hasNoAvailableTimes(this.state.bookedTimes.lateBooking)}
-              className="timebox" value="21:00">21:00 PM
-            </button>
+      return (
+        <main className="time-page-container">
+          <section className="time-parent-top-section">
+          <button className="back-button" onClick={this.handleBackStep}><img className="back-icon" src="/Images/back-button.png" alt="previous button"/></button>
+            <div className="time-child-top-section">
+              <button className="time-top-section-black" onClick={this.handleView} value="1">Guests</button>
+              <button className="time-top-section">{this.props.theBooking.guests}</button>
+            </div>
+            <div className="time-child-top-section">
+              <button className="time-top-section-black" onClick={this.handleView} value="2">Date</button>
+              <button className="time-top-section">{this.props.theBooking.date.toLocaleDateString()}</button>
+            </div>
           </section>
-        </div>
-      </main>
-    )
-  }
+          <div className="time-parent">
+            <h1 className="time-heading">Select time</h1>
+            <section className="time-child">
+              <button
+                onClick={this.handleInput}
+                disabled={this.hasNoAvailableTimes(this.state.bookedTimes.earlyBooking)}
+                className="timebox" value="18:00">18:00 PM
+              </button>
+              <button
+                onClick={this.handleInput}
+                disabled={this.hasNoAvailableTimes(this.state.bookedTimes.lateBooking)}
+                className="timebox" value="21:00">21:00 PM
+              </button>
+            </section>
+          </div>
+        </main>
+      )
+    }
 
-}
+  }
 
 export default Time;
