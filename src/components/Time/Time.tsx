@@ -1,6 +1,6 @@
 import React from 'react';
 import {IBooking} from '../Booking/Booking';
-import {IExistingBoooking} from '../Calender/Calender';
+import {IExistingBooking} from '../Calender/Calender';
 import moment from 'moment/moment.js'
 import './Time.scss';
 
@@ -13,7 +13,7 @@ export interface IBookedUpTime {
 
 export interface ITimeState {
     bookedTimes: IBookedUpTime;
-    existingBookings: IExistingBoooking[],
+    existingBookings: IExistingBooking[],
 }
 
 export interface IAddTimeProps {
