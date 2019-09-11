@@ -38,6 +38,7 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
         this.handleView = this.handleView.bind(this);
         this.getData = this.getData.bind(this);
         this.handleBackStep = this.handleBackStep.bind(this);
+        this.hasNoAvailableTableAmount = this.hasNoAvailableTableAmount.bind(this);
     }
 
     componentDidMount() {
@@ -84,12 +85,10 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
               let dbTime = moment(dbDate).format('HH:mm');
               if (earlyTime === dbTime) {
                 //Check if booking contains more than 6 guests, if yes deduct 2 tables for that booking
-                (guestNr < 7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2); 
-                (this.props.theBooking.guests<7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2); 
+                (guestNr < 7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2);  
               }
               if (lateTime === dbTime) {
                 (guestNr < 7 ? availableLateTimes -= 1 : availableLateTimes -= 2);
-                (this.props.theBooking.guests<7 ? availableEarlyTimes -= 1 : availableEarlyTimes -= 2);
               }
             }
         });
@@ -98,11 +97,20 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
               earlyBooking: availableEarlyTimes,
               lateBooking: availableLateTimes
           }
-        })
+        })   
     }
 
     hasNoAvailableTimes(time: number) {
+      // this.hasNoAvailableTableAmount(time);
+      console.log("this is OLD function", time)
       return time <= 0;
+    }
+
+    hasNoAvailableTableAmount(time: number) {
+      this.hasNoAvailableTimes(time);
+      (this.props.theBooking.guests<7 ? time -= 1 : time -= 2);
+      console.log("this is NEW function", time)
+      return time < 0;
     }
 
     handleInput = (event: any) => {
@@ -145,12 +153,12 @@ class Time extends React.Component <IAddTimeProps, ITimeState> {
             <section className="time-child">
               <button
                 onClick={this.handleInput}
-                disabled={this.hasNoAvailableTimes(this.state.bookedTimes.earlyBooking)}
+                disabled={this.hasNoAvailableTableAmount(this.state.bookedTimes.earlyBooking)}
                 className="timebox" value="18:00">18:00 PM
               </button>
               <button
                 onClick={this.handleInput}
-                disabled={this.hasNoAvailableTimes(this.state.bookedTimes.lateBooking)}
+                disabled={this.hasNoAvailableTableAmount(this.state.bookedTimes.lateBooking)}
                 className="timebox" value="21:00">21:00 PM
               </button>
             </section>
