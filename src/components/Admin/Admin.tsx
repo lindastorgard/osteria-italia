@@ -93,25 +93,25 @@ class Admin extends React.Component<{}, IAdminState> {
         });
 
         function BookingsTable() {
-                return (
-                    <Table responsive hover>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>First</th>
-                            <th>Last</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Guests</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {bookings}
-                        </tbody>
-                    </Table>
-                );
+            return (
+                <Table responsive hover>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First</th>
+                        <th>Last</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Guests</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {bookings}
+                    </tbody>
+                </Table>
+            );
         }
 
         return (
