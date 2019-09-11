@@ -14,6 +14,12 @@ a:hover{
   color: $detail-color;
 }
 
+h2{
+  @include for-phone-only{
+    font-size: 1.8rem;
+  }
+}
+
 h3{
   color: $detail-color;
   font-family: $title-font;
@@ -65,4 +71,9 @@ p{
   font-size: 1rem;
   padding: 0;
   margin: 0;
+}
+
+.sub-text{
+  font-size: 0.8rem;
+  font-weight: 300;
 }
