@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './About.scss';
 
-class Menu extends Component <{}, {}>{
+class About extends Component <{}, {}>{
   
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -38,4 +38,4 @@ class Menu extends Component <{}, {}>{
     	)
     }
 	}
-export default Menu;
+export default About;
