@@ -50,7 +50,7 @@ class Booking extends Component <{}, IBookingState> {
             showEmailError: false,
             showPhoneError: false,
             showCheckboxError: false,
-            isDisabled: '',
+            checked: false,
             myBookings: [{
             id: 0,
             customer_id: 0,
