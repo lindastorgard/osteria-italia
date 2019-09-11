@@ -59,7 +59,11 @@ class Admin extends React.Component<{}, IAdminState> {
             .then(response => {
                 console.log('Got response from server');
                 console.log(response.data);
-                this.setState({bookings: response.data.data})
+                if (response.data.data) {
+                    this.setState({bookings: response.data.data})
+                } else {
+                    this.setState({bookings: []})
+                }
             })
             .catch(error => console.log(error));
     };
@@ -114,7 +118,7 @@ class Admin extends React.Component<{}, IAdminState> {
             <Container className="App" style={{marginTop: "50px"}}>
                 <Row>
                     <Col>
-                        <h1 style={{margin: "20px 0"}}>Bookings Admin</h1>
+                        <h1 style={{margin: "50px 0"}}>Bookings Admin</h1>
                     </Col>
                 </Row>
                 <Row>
