@@ -31,10 +31,13 @@ it('can set state of booking', () => {
         lastNameError: '',
         emailError: '',
         phoneError: '',
+        checkboxError: '',
         showFirstNameError: false,
         showLastNameError: false,
         showEmailError: false,
         showPhoneError: false,
+        showCheckboxError: false,
+        checked: false,
         myBookings: [{
         id: 0,
         customer_id: 0,
