@@ -103,7 +103,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
   componentDidMount() {
     axios.get('http://localhost:8888/booking_api/api/customers/read.php')
       .then(response => {
-        console.log('Got response from server');
+        // console.log('Got response from server');
         this.setState({myCustomers: response.data.data})
       })
       .catch(error => console.log(error));

@@ -38,6 +38,9 @@ const props = {
       onclick: jest.fn()
   };
 
+//For test to pass you need to comment out console.log('Got response from server'); 
+//in componentDidMount in Profile.tsx
+
 describe('Profile ', () => {
     it('renders without crashing', () => {
       shallow(<Profile {...props} />);
