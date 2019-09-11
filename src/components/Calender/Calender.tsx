@@ -9,7 +9,7 @@ import './Calender.scss';
 const axios = require ('axios');
 
 
-export interface IExistingBoooking {
+export interface IExistingBooking {
   id: number,
   customer_id: number,
   guest_nr: number,
@@ -34,7 +34,7 @@ export interface IBookingDay {
 export interface ICalenderState{
   dayWithBooking: IBookingDay,
   daysWithBooking: IBookingDay[],
-  existingBookings: IExistingBoooking[],
+  existingBookings: IExistingBooking[],
   configurations: IConfig[],
   disabledDays: Date[],
 }
@@ -165,8 +165,10 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
       let disabledDays: Date[] = [];
       this.state.daysWithBooking.map(day => {
 
-        if(day.sittings.sitting1 === 15 && day.sittings.sitting2 === 15)
-          disabledDays.push(new Date(day.bookedDate));
+        if(day.sittings.sitting1 === 15 && day.sittings.sitting2 === 15) {
+            let fullyBookedDay = moment(day.bookedDate);
+            disabledDays.push(new Date(fullyBookedDay.year(), fullyBookedDay.month(), fullyBookedDay.date()));
+        }
       });
 
       this.setState({
@@ -224,7 +226,10 @@ class Calender extends React.Component <ICalenderProps, ICalenderState> {
           fromMonth={new Date()}
           initialMonth={new Date(2019, 8)}
 
-          disabledDays= { past }
+          disabledDays= {
+              // Add the elements one after another and the modifier at the end
+              [...this.state.disabledDays, past]
+          }
           onDayClick={this.handleDayClick}
         />
         </div>
