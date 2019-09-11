@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import axios from "axios";
+import FormFeedback from "reactstrap/lib/FormFeedback";
 
 interface EditFormProp {
     updateState: any;
@@ -37,6 +38,9 @@ class EditForm extends React.Component<EditFormProp, Partial<IEditFormState>> {
     };
     submitFormEdit = (e: any) => {
         e.preventDefault();
+        if (this.isInvalidNumberOfGuests()) {
+            return;
+        }
         console.log('Editing booking');
         axios.put('http://localhost:8888/booking_api/api/bookings/updateBooking.php', {
                 "customer_id": this.state.customer_id,
@@ -67,6 +71,10 @@ class EditForm extends React.Component<EditFormProp, Partial<IEditFormState>> {
         }
     };
 
+    isInvalidNumberOfGuests() {
+        return this.state.guest_nr < 1 || this.state.guest_nr > 10;
+    }
+
     render() {
         let booking = this.state;
 
@@ -74,8 +82,9 @@ class EditForm extends React.Component<EditFormProp, Partial<IEditFormState>> {
             <Form onSubmit={this.submitFormEdit}>
                 <FormGroup>
                     <Label for="guest_nr">Number of guests</Label>
-                    <Input type="text" name="guest_nr" id="guest_nr" onChange={this.onChange}
+                    <Input type="text" name="guest_nr" id="guest_nr" invalid={this.isInvalidNumberOfGuests()} onChange={this.onChange}
                            value={booking.guest_nr === null ? '' : booking.guest_nr}/>
+                           <FormFeedback invalid>Invalid number of guests. Please choose a number between 1 and 10</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                     <Label for="date">Date</Label>
