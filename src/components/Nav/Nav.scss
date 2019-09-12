@@ -6,7 +6,7 @@
   background-color: $dark-color;
   padding: 1rem;
   justify-content: center;
-  overflow: hidden;
+  // overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
@@ -21,11 +21,11 @@
   font-family: 'Playfair Display SC', serif;
   font-size: 2rem;
   letter-spacing: 0.3rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
     @include for-phone-only {  
       margin: 0;  
-      letter-spacing: 0.2rem;
-      font-size: 1.8rem;
+      letter-spacing: 0.1rem;
+      font-size: 1.6rem;
     }
 }
 
@@ -33,7 +33,7 @@
   color:white;
 }
 
-//Toggler
+// Toggler
 .navbar-toggler{
   width: 60px;
   height: 35px;
@@ -49,7 +49,7 @@
 .navbar-toggler span{
   display: block;
   position: absolute;
-  height: 3px;
+  height: 2px;
   background: white;
   border-radius: 9px;
   opacity: 1;
@@ -73,13 +73,52 @@
 }
 
 .navbar-collapse{
-  margin-top: 50px;
-  padding-bottom: 100px;
+  margin-top: 40px;
+  height: 200px;
   text-align: right;   
     @include for-phone-only{
       text-align: center;
-      padding-bottom: 200px;
+//       padding-bottom: 200px;
     }
 }
 
 
+/* This fires as soon as the element enters the dorm */
+.list-transition-enter,
+.list-transition-appear {
+  /*We give the list the initial dimension of the list button*/
+  top: 0;
+  width: 120px;
+  max-height: 40px;
+  color: transparent;
+
+}
+/* This is where we can add the transition*/
+.list-transition-enter-active,
+.list-transition-appear-active {
+  top: 45px;
+  width: 200px;
+  max-height: 200px;
+
+  transition: all 400ms;
+}
+
+/* This fires as soon as the this.state.showList is false */
+.list-transition-exit {
+  top: 45px;
+  width: 200px;
+  max-height: 200px;
+
+}
+/* fires as element leaves the DOM*/
+.list-transition-exit-active {
+  top: 0;
+  width: 120px;
+  max-height: 40px;
+  color: transparent;
+
+  transition: all 400ms;
+}
+
+
+   

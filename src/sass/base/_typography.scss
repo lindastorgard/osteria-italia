@@ -6,6 +6,8 @@
 a, a:link{
   color: white;
   font-family: $text-font;
+  // text-transform: uppercase;
+  font-weight: 200;
   letter-spacing: 0.2rem;
   font-size: 1.2rem;
 }

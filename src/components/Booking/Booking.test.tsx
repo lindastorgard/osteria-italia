@@ -57,8 +57,8 @@ it('can set state of booking', () => {
     }  
   });
 
-  // // wrapper.instance().handleDayClick(newDate);
-  // // wrapper.update();
+  // wrapper.instance().handleDayClick(newDate);
+  // wrapper.update();
 
-  // expect(props.onDayClick).toHaveBeenCalled();
+  expect(props.onDayClick).toHaveBeenCalled();
 })
