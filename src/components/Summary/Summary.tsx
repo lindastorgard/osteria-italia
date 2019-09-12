@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
 import './Summary.scss';
-import Booking, { IBooking } from '../Booking/Booking';
+import { IBooking } from '../Booking/Booking';
 import moment from "moment";
 
 export interface ISummaryProps{
@@ -11,8 +11,8 @@ export interface ISummaryProps{
 class Summary extends React.Component <ISummaryProps, {}>{
   constructor(props:any){
     super(props);
-
   }
+  
   componentDidMount() {
     window.scrollTo(0, 0)
   }

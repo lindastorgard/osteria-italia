@@ -1,13 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './Profile.scss';
 import { IBooking } from '../Booking/Booking';
 import axios from 'axios';
-import { string } from 'prop-types';
-import { throwStatement } from '@babel/types';
-// import SimpleGDPR from 'simple-gdpr';
-// import 'simple-gdpr/dist/simplegdpr.min.css';
-
-// const notice = new SimpleGDPR()
 
 interface ICustomerData{
   id: number, 
@@ -55,9 +49,7 @@ export interface IAddProfileState {
 
 export interface IAddProfileProps {
   theBooking: IBooking;
-
   onsubmit(updatedBooking: IBooking): void,
-
   onclick(updatedBooking: IBooking): void,
 }
 
@@ -146,8 +138,6 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
       email: this.props.theBooking.profile.email,
       phone: this.props.theBooking.profile.phone
     },
-    // https://stackoverflow.com/questions/48255545/axios-getting-two-requests-options-post
-    // Important to not remove this header due to ajax making cross domain reqs which will break our integration
     {
       headers: {
         'Content-Type': 'text/plain'
