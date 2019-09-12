@@ -146,7 +146,7 @@ class Booking extends Component <{}, IBookingState> {
         case 5:
           return(
             <div>
-              <Summary makesubmit={this.makeBooking} theBooking={this.state.booking}/>
+              <Summary makesubmit={this.makeBooking} onclick={this.updateState} theBooking={this.state.booking}/>
               {/* onclick={this.updateState} */}
             </div>
           )
