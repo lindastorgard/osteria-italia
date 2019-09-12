@@ -19,15 +19,10 @@ h1{
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  // border-bottom: 0.5px solid lightgray;
   @media (min-width: $break-large){
     width: 453px;
   }
 }
-
-// .sum-top-section{
-//   @include top-setting;
-// }
 
 .sum-top-section{
   display: flex;

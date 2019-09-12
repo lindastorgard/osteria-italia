@@ -2,12 +2,10 @@ import React from 'react';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import moment from 'moment/moment.js'
-
 import { IBooking } from '../Booking/Booking';
 import './Calender.scss';
 
 const axios = require ('axios');
-
 
 export interface IExistingBooking {
   id: number,

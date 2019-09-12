@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Booking from './Booking';
 import { shallow } from 'enzyme';
 
@@ -57,8 +56,7 @@ it('can set state of booking', () => {
     }  
   });
 
-  // wrapper.instance().handleDayClick(newDate);
-  // wrapper.update();
+  
 
   expect(props.onDayClick).toHaveBeenCalled();
 })

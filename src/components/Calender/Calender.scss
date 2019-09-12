@@ -2,7 +2,6 @@
 @import '../../sass/abstracts/variables';
 @import '../../sass/abstracts/mixins';
 
-
 .cal-page-container{
   @include container-setting;
 }
@@ -65,7 +64,6 @@
 .DayPicker-Day--today{
   color: $detail-color;
 }
-
 
 .back-button{
   background-color: none;

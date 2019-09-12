@@ -1,8 +1,9 @@
 //common colors
-// $dark-color: #384660;
-$dark-color:rgb(19, 19, 19);
-$detail-color: burlywood;
-$dark-detail-color: rgb(100, 92, 84);
+
+$dark-color:#131313;
+$detail-color: #deb887;
+
+$dark-detail-color: #645c54;
 $text-color: lighten($dark-detail-color, 20%);
 
 //fonts
@@ -10,8 +11,5 @@ $title-font:'Playfair Display', sans-serif;
 $test-font:'Nanum Gothic', sans-serif;
 $text-font: 'Nunito', sans-serif;
 
-$text-color: #595653;
-
 // media queries
-// $break-small: 320px;
 $break-large: 768px;
