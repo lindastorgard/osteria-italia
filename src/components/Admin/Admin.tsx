@@ -2,6 +2,7 @@ import React from 'react';
 import {Table, Button, Row, Col, Container} from 'reactstrap';
 import axios from "axios";
 import {ModifyBooking} from "../ModifyBooking/ModifyBooking";
+import './Admin.scss';
 
 interface IAdminState {
   bookings: any;
@@ -118,7 +119,7 @@ class Admin extends React.Component<{}, IAdminState> {
     <Container className="App" style={{marginTop: "50px"}}>
       <Row>
         <Col>
-          <h1 style={{margin: "50px 0"}}>Bookings Admin</h1>
+          <h1 className="guest-parent">Bookings Admin</h1>
         </Col>
       </Row>
       <Row>

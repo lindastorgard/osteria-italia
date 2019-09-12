@@ -1,0 +1,18 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/variables';
+
+td{
+  font-family: $text-font;
+  font-weight: 200;
+  color: $text-color;
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+th{
+  color: $detail-color;
+  font-weight: bold;
+  @extend td
+}
