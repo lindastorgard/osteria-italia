@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Footer.scss';
 
-
 class Footer extends Component <{}, {}> {
   render() {
     return (
@@ -19,8 +18,8 @@ class Footer extends Component <{}, {}> {
 							</a>
 						</div>
 					</div>
-
-          <div className='footerInfo'>Piazza Italiano 5, 55599, Italia</div>
+          <div className='footerInfo'>Salita dei Crescenzi, 31, 00186 Roma RM, Italy</div>
+					<div className='footerInfo'>+39 059 223912</div>
 					<div className='footerInfo'>www.osteriaitalia.com</div>
         </div>
       </footer>

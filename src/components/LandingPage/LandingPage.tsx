@@ -43,11 +43,11 @@ class LandingPage extends Component <{}, {}>{
           <Link to={'/booking'} className="nav-link">
             <button className="primary-btn">reservations</button>
           </Link>
-        </section>
-        
+        </section>  
      </div>
       
-    	)
-    }
-	}
+    )
+  }
+}
+
 export default LandingPage;

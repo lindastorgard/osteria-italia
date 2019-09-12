@@ -1,6 +1,6 @@
 import React from 'react';
 import './Guests.scss';
-import Booking, { IBooking } from '../Booking/Booking';
+import { IBooking } from '../Booking/Booking';
 
 export interface IAddGuestProps{
   theBooking: IBooking;
@@ -45,7 +45,7 @@ class Guests extends React.Component <IAddGuestProps,{}> {
             <button onClick={this.handleInput} className="guest-guestbox" value="10">10</button>    
           </section>
           <p className="paragraph-one">Please select amount of guests.</p>
-          <p className="paragraph-two">If you wish to book a table for more than 10 people, please contact us @ 123-123456.</p>
+          <p className="paragraph-two">If you wish to book a table for more than 10 people, please contact us at info@osteriaintalia.com</p>
         </div>
       </main>
     )

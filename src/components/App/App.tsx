@@ -7,8 +7,6 @@ import Menu from '../Menu/Menu'
 import Admin from '../Admin/Admin';
 import LandingPage from '../LandingPage/LandingPage';
 import About from '../About/About';
-import './App.scss';
-
 import Footer from '../Footer/Footer';
 import './App.scss';
 

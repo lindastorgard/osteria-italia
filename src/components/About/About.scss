@@ -1,5 +1,3 @@
-
-
 @import '../../sass/abstracts/mixins';
 
 .contact-container{
@@ -7,6 +5,5 @@
 
   @include for-extra-large-devices {  
     margin: 4rem 3rem;
-  }
- 
+  } 
 }

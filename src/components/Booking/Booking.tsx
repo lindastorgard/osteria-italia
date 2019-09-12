@@ -18,7 +18,6 @@ export interface IBooking{
 }
 
 interface IBookingState {
-
   booking: IBooking;
 }
 
@@ -26,9 +25,7 @@ class Booking extends Component <{}, IBookingState> {
 	constructor(props:any){
     super(props);
 
-      // set booking state
       this.state = {
-
         booking: {
           view: 1,
           guests: 0,
@@ -112,18 +109,9 @@ class Booking extends Component <{}, IBookingState> {
     handleView(){
       let booking = this.state.booking;
       booking.view = this.state.booking.view + 1;
-      // this.props.onclick(booking);
-      // let lastView = this.state.booking.view +1;
       console.log(booking.view);
       this.updateState(booking);
     }
-
-    // handleView = (event: any) => {
-    //   let booking = this.props.theBooking;
-    //   booking.view = parseInt(event.target.value);
-    // this.state.booking.view + 1;
-    //   this.props.onclick(booking);
-    // }
 
   	render() {
     	switch(this.state.booking.view){
@@ -154,7 +142,6 @@ class Booking extends Component <{}, IBookingState> {
               <Profile onsubmit={this.updateState} onclick={this.updateState} theBooking={this.state.booking}/>
             </div>
           )
-
 
         case 5:
           return(

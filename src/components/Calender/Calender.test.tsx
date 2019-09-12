@@ -1,8 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Calender from './Calender';
 import { shallow } from 'enzyme';
-
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
