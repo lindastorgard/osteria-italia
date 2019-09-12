@@ -38,7 +38,6 @@
   justify-content: center;
   margin: 0.5rem 0rem 0.5rem 0rem;
   outline: 0 !important;
-  padding-left: 0.1rem;
   background: white;
 }
 
@@ -54,6 +53,7 @@
   font-size: 0.8rem;
   padding-top: 1rem;
   padding-bottom: 0.5rem;
+  color: #722f37;
 }
 
 .profile-heading{
@@ -68,12 +68,11 @@
 }
 
 .errorMessage{
-  color: $detail-color;
+  color: #722f37;
   font-family: $text-font;
   width: 100%;
   font-size: 0.8rem;
   font-weight: 100;
-  padding-left: 0.3rem;
 }
 
 .primary-btn{
