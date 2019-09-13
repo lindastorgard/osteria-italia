@@ -1,0 +1,79 @@
+
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.cal-page-container{
+  @include container-setting;
+}
+
+.cal-parent{
+  @include parent-setting;
+}
+
+.cal-child{
+  @include child-setting;
+}
+
+.cal-parent-top-section{
+  @include top-parent-setting;
+}
+
+.cal-child-top-section{
+  @include top-child-setting;
+}
+
+.cal-top-section-black{
+  @include top-black-setting;
+}
+
+.cal-top-section{
+  @include top-setting;
+}
+
+.cal-heading{
+  // @include header-setting;
+  margin-top: 2rem;
+  margin-bottom: 0rem;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    margin-top: 5rem;
+  }
+}
+
+.DayPicker{
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.DayPicker-Month{
+  width: 90%;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.DayPicker-Months{
+  border: 1px solid darkgrey;
+}
+
+.DayPicker-Day{
+  padding: 1rem 0.5rem;
+}
+
+.DayPicker-Day--today{
+  color: $detail-color;
+}
+
+.back-button{
+  background-color: none;
+  background: none;
+  border: none;
+  color: white;
+  padding: 0;
+
+  .back-icon{
+    height: 35px;
+    margin-bottom: 2rem;
+  }
+}

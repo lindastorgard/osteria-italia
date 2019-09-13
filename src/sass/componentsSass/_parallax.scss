@@ -1,0 +1,65 @@
+
+@import '../../sass/abstracts/mixins';
+
+.parallax-one {
+  background-image: url("/Images/white-plate.png");
+  @include parallax-setting;
+}
+
+.parallax-two {
+  background-image: url("/Images/veal.jpg");
+  @include parallax-setting;
+}
+
+.parallax-three {
+  background-image: url("/Images/meat.png");
+  @include parallax-setting;
+}
+.parallax-four{
+  background-image: url("/Images/steak.jpg");
+  @include parallax-setting;
+}
+
+.parallax-five{
+  background-image: url("/Images/geranium.png");
+  @include parallax-setting;
+} 
+
+.parallax-six{
+  background-image: url("/Images/omlet.png");
+  @include parallax-setting;
+} 
+
+.parallax-seven{
+  background-image: url("/Images/minibar.jpg");
+  @include parallax-setting;
+}
+
+.parallax-eight{
+  background-image: url("/Images/dishes.png");
+  @include parallax-setting;
+}
+
+.caption-container{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;  
+}
+
+.caption{
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 1px;
+  @include for-phone-only {  
+    display: none;
+  }
+}
+
+.about-caption{
+  display: block;
+  width: 90%;
+  margin: auto;
+  @extend .caption
+}
+

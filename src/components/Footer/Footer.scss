@@ -1,0 +1,36 @@
+@import '../../sass/abstracts/variables';
+@import'../../sass/base/typography';
+
+footer {   
+    height: 100px; 
+    width: 100%;
+    text-align: center;
+  } 
+   
+  .footer {   
+    color: $dark-color;
+    // flex-shrink: 0; 
+    padding: 10px;
+    // background-color: blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: $text-font;
+    letter-spacing: 0.1rem;
+    font-weight: 300;
+  }
+
+  .socialContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-icon{
+    height: 40px;
+    margin: 10px;
+  }
+
+  .footer a{
+      color: $dark-color;
+  }

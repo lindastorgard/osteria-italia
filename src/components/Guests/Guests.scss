@@ -1,0 +1,39 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.guest-page-container{
+  @include container-setting;
+
+  .guest-parent{
+    @include parent-setting;
+
+    .guest-child{
+      @include child-setting;
+
+      .guest-guestbox{
+        @include guestbox-setting;
+
+        .guestboxNumber{
+          align-self: center;
+        }
+      }
+    }
+  }
+}
+
+h1{
+  @include header-setting;
+}
+
+.paragraph-one{
+  margin-top: 2rem;
+  font-family: $text-font;
+  font-weight: 100;
+  font-size: 0.8rem;
+}
+
+.paragraph-two{
+  font-family: $text-font;
+  font-weight: 100;
+  font-size: 0.8rem;
+}

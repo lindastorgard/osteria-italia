@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Nunito:200,300|Playfair+Display&display=swap');
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+
+a, a:link{
+  color: white;
+  font-family: $text-font;
+  // text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 0.2rem;
+  font-size: 1.2rem;
+}
+
+a:hover{
+  color: $detail-color;
+}
+
+h2{
+  @include for-phone-only{
+    font-size: 1.8rem;
+  }
+}
+
+h3{
+  color: $detail-color;
+  font-family: $title-font;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  padding: 0;
+    
+    @include for-medium-devices{
+      font-size: 1.5rem;
+      letter-spacing: 0.3rem;
+    }
+    @include for-large-devices{
+      letter-spacing: 0.5rem;
+      font-size: 1.8rem;
+    }
+    @include for-extra-large-devices {
+      letter-spacing: 0.5rem;
+      font-size: 1.8rem;
+    }
+}
+
+h4{
+  color: $dark-detail-color;
+  font-size: 1.2rem;
+  @extend h3;
+}
+
+.caption {
+  color: $dark-detail-color;
+  padding: 1rem 2rem;
+  @extend h3;
+}
+
+.ingress{
+  text-transform: none;
+  letter-spacing: 0.2rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  @extend h4;
+}
+
+p{
+  font-family: $text-font;
+  font-weight: 200;
+  color: $text-color;
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.sub-text{
+  font-size: 0.8rem;
+  font-weight: 300;
+}

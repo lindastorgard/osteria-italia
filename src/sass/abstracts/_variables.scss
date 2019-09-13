@@ -1,1 +1,15 @@
-$base-color: #c6538c;
+//common colors
+
+$dark-color:#131313;
+$detail-color: #deb887;
+
+$dark-detail-color: #645c54;
+$text-color: lighten($dark-detail-color, 20%);
+
+//fonts
+$title-font:'Playfair Display', sans-serif;
+$test-font:'Nanum Gothic', sans-serif;
+$text-font: 'Nunito', sans-serif;
+
+// media queries
+$break-large: 768px;

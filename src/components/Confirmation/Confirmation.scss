@@ -1,0 +1,29 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.conf-page-container{
+  @include container-setting;
+}
+
+.conf-parent{
+  @include parent-setting;
+}
+
+.conf-child{
+  display: flex;
+  width: 303px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  @media (min-width: $break-large){
+    width: 453px;
+  }
+}
+
+h1{
+    @include header-setting;
+}
+
+.conf-text-top{
+  margin-top: 1rem;
+  font-weight: 100;
+}

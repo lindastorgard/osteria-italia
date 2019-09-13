@@ -1,0 +1,63 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.time-page-container{
+  @include container-setting;
+}
+
+.time-parent{
+  @include parent-setting;
+}
+
+.time-child{
+  display: flex;
+  width: 303px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  @media (min-width: $break-large){
+    width: 453px;
+  }
+
+  .timebox{
+    display: flex;
+    width: 94px;
+    height: 54px;
+    border: 0.5px solid lightgrey;
+    justify-content: center;
+    background-color: white;
+    margin: 5px;
+    outline: 0 !important;
+  
+    .timeboxNumber{
+        align-self: center;
+    }
+  }
+}
+
+.time-heading{
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    margin-top: 5rem;
+  }
+}
+
+
+.time-parent-top-section{
+  @include top-parent-setting;
+}
+
+.time-child-top-section{
+  @include top-child-setting;
+}
+
+.time-top-section-black{
+  @include top-black-setting;
+}
+
+.time-top-section{
+  @include top-setting;
+}

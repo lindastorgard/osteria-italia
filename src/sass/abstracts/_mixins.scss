@@ -1,0 +1,142 @@
+@import '../../sass/abstracts/variables';
+
+@mixin parallax-setting{
+  min-height: 700px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include for-large-devices{
+    min-height: 1000px; 
+  }
+}
+
+@mixin container-setting{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 7rem;
+}
+
+@mixin parent-setting{
+  width: 305px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0rem 1rem 0rem 1rem;
+  color: $text-color;
+  font-family: $text-font;
+  font-weight: 200;
+  @media (min-width: $break-large){
+    width: 455px;
+  }
+}
+
+@mixin child-setting{
+  display: flex;
+  width: 303px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  @media (min-width: $break-large){
+    width: 453px;
+  }
+}
+
+@mixin header-setting{
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
+  color: black;
+  font-size: 1.5rem;
+  font-family: $text-font;
+  font-weight: 200;
+  @media (min-width: $break-large){
+    margin-top: 5rem;
+  }
+}
+
+@mixin guestbox-setting{
+  display: flex;
+  width: 52px;
+  height: 52px;
+  border: 0.1px solid lightgrey;
+  justify-content: center;
+  background-color: white;
+  font-family: $text-font;
+  font-weight: 200;
+  outline: 0 !important;
+  @media (min-width: $break-large){
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@mixin top-parent-setting{
+  width: 305px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0rem 1rem 0rem 1rem;
+  @media (min-width: $break-large){
+    width: 455px;
+  }
+}
+
+@mixin top-child-setting{
+  display: flex;
+  width: 303px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 0.5px solid lightgray;
+  @media (min-width: $break-large){
+    width: 453px;
+  }
+}
+
+@mixin top-setting{
+  display: flex;
+  color: $detail-color;
+  font-family: $text-font;
+  font-weight: 200;
+  background-color: white;
+  border: none;
+  margin: 0.8rem 0rem 0.8rem 0rem;
+  padding-left: 0;
+  outline: 0 !important;
+}
+
+@mixin top-black-setting{
+  color: black;
+  font-family: $text-font;
+  font-weight: 200;
+  display: flex;
+  background-color: white;
+  border: none;
+  margin: 0.8rem 0rem 0.8rem 0rem;
+  padding-left: 0;
+  outline: 0 !important;
+}
+
+//media queries
+
+// Extra small devices (portrait phones, less than 576px)
+@mixin for-phone-only {
+  @media (max-width: 575px) { @content; }
+}
+
+//// Medium devices (tablets, 768px and up)
+@mixin for-medium-devices {
+  @media (min-width: 767px) and (max-width: 991px) { @content; }
+}
+
+// Large devices (desktops, 992px and up)
+@mixin for-large-devices {
+  @media (min-width: 992px) and (max-width: 1199px) { @content; }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@mixin for-extra-large-devices {
+  @media (min-width: 1200px) { @content; }
+}
+
+
+

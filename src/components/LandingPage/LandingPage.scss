@@ -1,0 +1,17 @@
+@import '../../sass/abstracts/mixins';
+
+.text-container{
+  padding: 4rem 0;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+    @include for-phone-only {  
+      padding: 2rem 2rem;
+      text-align: center;
+      width: 100%;
+  }
+}
+
+.section-title{
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,81 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.prof-page-container{
+  @include container-setting;
+}
+
+.prof-parent{
+  @include parent-setting;
+}
+
+.prof-child{
+  @include child-setting;
+}
+
+.prof-parent-top-section{
+  @include top-parent-setting;
+}
+
+.prof-child-top-section{
+  @include top-child-setting;
+}
+
+.prof-top-section-black{
+  @include top-black-setting;
+}
+
+.prof-top-section{
+  @include top-setting;
+}
+
+.profilebox{
+  display: flex;
+  width: 100%;
+  height: 54px;
+  border: none;
+  border-bottom: 1px solid lightgrey;
+  justify-content: center;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+  outline: 0 !important;
+  background: white;
+}
+
+.profilebox-small{
+  height: 15px;
+  background-color: white;
+  font-size: 0.8rem;
+  outline: 0 !important;
+  margin-bottom: 1rem;
+}
+
+.gdpr-consent{
+  font-size: 0.8rem;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  color: #722f37;
+}
+
+.profile-heading{
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: 100;
+  @media (min-width: $break-large){
+    margin-top: 5rem;
+  }
+}
+
+.errorMessage{
+  color: #722f37;
+  font-family: $text-font;
+  width: 100%;
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+
+.primary-btn{
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
