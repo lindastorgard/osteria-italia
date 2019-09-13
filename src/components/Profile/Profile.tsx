@@ -152,6 +152,7 @@ class Profile extends React.Component <IAddProfileProps, IAddProfileState> {
   }
 
   handleSubmit = (event: any) => {
+    console.log("Submitting...");
     event.preventDefault();
     let booking = this.props.theBooking;
     booking.profile = this.state;
